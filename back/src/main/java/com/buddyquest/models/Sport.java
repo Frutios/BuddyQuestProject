@@ -15,10 +15,10 @@ public class Sport implements Serializable {
     @Column(name = "name", length = 10, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "sport")
     private Collection<Event> events;
 
-    @OneToMany(mappedBy = "mySport")
+    @OneToMany(mappedBy = "sport")
     private Collection<MySport> mySports;
 
 

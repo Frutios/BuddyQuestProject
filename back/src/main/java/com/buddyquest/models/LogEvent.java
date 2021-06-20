@@ -13,7 +13,7 @@ public class LogEvent implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "event")
+    @JoinColumn(name = "eventId", referencedColumnName = "id")
     private Event event;
 
     @Column(name = "detail", nullable = false)

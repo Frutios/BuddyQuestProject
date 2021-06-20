@@ -30,10 +30,10 @@ public class User implements Serializable {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "localisation")
+    @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "user")
     private Collection<Event> events;
 
     @OneToMany(mappedBy = "message")

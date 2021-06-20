@@ -12,11 +12,11 @@ public class MySport implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "sport")
+    @JoinColumn(name = "sportId", referencedColumnName = "id")
     private Sport sport;
 
     public MySport() {

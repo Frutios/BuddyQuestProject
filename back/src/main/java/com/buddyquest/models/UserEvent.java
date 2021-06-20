@@ -13,11 +13,11 @@ public class UserEvent implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "event")
+    @JoinColumn(name = "eventId", referencedColumnName = "id")
     private Event event;
 
     @Column(name = "inscription", nullable = false)

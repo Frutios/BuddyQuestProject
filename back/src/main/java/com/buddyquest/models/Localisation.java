@@ -25,12 +25,12 @@ public class Localisation implements Serializable {
     @Column(name = "latitude", nullable = false)
     private float latitude;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<User> users;
+    @OneToMany(mappedBy = "localisation")
+    private Collection<User> participants;
 
-    @ManyToOne
-    @JoinColumn(name = "event")
-    private Event event;
+    @OneToMany(mappedBy = "localisation")
+    private Collection<Event> events;
+
 
     public Localisation() {
     }
@@ -75,19 +75,19 @@ public class Localisation implements Serializable {
         this.latitude = latitude;
     }
 
-    public Collection<User> getUsers() {
-        return users;
+    public Collection<User> getParticipants() {
+        return participants;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setParticipants(Collection<User> participants) {
+        this.participants = participants;
     }
 
-    public Event getEvent() {
-        return event;
+    public Collection<Event> getEvents() {
+        return events;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEvents(Collection<Event> events) {
+        this.events = events;
     }
 }
