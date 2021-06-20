@@ -1,11 +1,10 @@
 package com.buddyquest.models;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "mySport")
-public class MySport implements Serializable {
+public class MySport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
