@@ -1,12 +1,11 @@
 package com.buddyquest.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "userEvent")
-public class UserEvent implements Serializable {
+public class UserEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

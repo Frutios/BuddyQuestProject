@@ -1,13 +1,11 @@
 package com.buddyquest.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Collection;
-
+import java.util.List;
 
 @Entity
 @Table(name = "localisation")
-public class Localisation implements Serializable {
+public class Localisation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +24,10 @@ public class Localisation implements Serializable {
     private float latitude;
 
     @OneToMany(mappedBy = "localisation")
-    private Collection<User> participants;
+    private List<User> participants;
 
     @OneToMany(mappedBy = "localisation")
-    private Collection<Event> events;
+    private List<Event> events;
 
 
     public Localisation() {
@@ -75,19 +73,19 @@ public class Localisation implements Serializable {
         this.latitude = latitude;
     }
 
-    public Collection<User> getParticipants() {
+    public List<User> getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Collection<User> participants) {
+    public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
 
-    public Collection<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Collection<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 }
