@@ -111,6 +111,12 @@ This is an example of how to list things you need to use the software and how to
 
 See the [open issues](https://github.com/Frutios/BuddyQuestProject/issues) for a list of proposed features (and known issues).
 
+1. Initialisation du projet
+2. ![image](https://user-images.githubusercontent.com/83876288/122714671-f6dbda80-d267-11eb-83b1-8ce2670488ad.png)
+
+
+2. V1
+
 <!-- LICENSE -->
 
 ## Acknowledgements
