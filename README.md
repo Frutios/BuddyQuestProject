@@ -51,8 +51,6 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
@@ -107,18 +105,7 @@ This is an example of how to list things you need to use the software and how to
 See the [open issues](https://github.com/Frutios/BuddyQuestProject/issues) for a list of proposed features (and known issues).
 
 <!-- LICENSE -->
-## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
-
-Project Link: [https://github.com/Frutios/BuddyQuestProject](https://github.com/Frutios/BuddyQuestProject)
-
-<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 * [Maria Texeira](https://github.com/Mariathr)
