@@ -112,7 +112,8 @@ This is an example of how to list things you need to use the software and how to
 See the [open issues](https://github.com/Frutios/BuddyQuestProject/issues) for a list of proposed features (and known issues).
 
 1. Initialisation du projet
-![MySql DataModel](https://user-images.githubusercontent.com/83876288/122715292-f09a2e00-d268-11eb-979c-765351697634.png)
+
+![MySql DataModel](https://user-images.githubusercontent.com/83876288/122716234-49b69180-d26a-11eb-9c87-2d373a618ca9.png)
 
 ![Project structure](https://user-images.githubusercontent.com/83876288/122714771-2985d300-d268-11eb-9142-f5f6afba9edb.png)
 
