@@ -45,6 +45,7 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
+        <li><a href="#organisation">Project organisation</a></li>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
@@ -78,6 +79,12 @@ Here's a blank template to get started:
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
+
+### Projet organisation
+
+* [Figma Ideas](https://www.figma.com/file/g4y0KGgP8ogmjDqesd1GFB/Id%C3%A9es)
+* [Jira project](https://testcefim2021.atlassian.net/jira/software/projects/BUD/boards/2)
+
 
 ### Prerequisites
 
