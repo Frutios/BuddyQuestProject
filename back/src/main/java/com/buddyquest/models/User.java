@@ -1,14 +1,13 @@
 package com.buddyquest.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.List;
 
 
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,14 +29,14 @@ public class User implements Serializable {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "localisation")
+    @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
-    @OneToMany(mappedBy = "event")
-    private Collection<Event> events;
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
 
     @OneToMany(mappedBy = "message")
-    private Collection<Message> messages;
+    private List<Message> messages;
 
     public User(){
 
@@ -99,19 +98,19 @@ public class User implements Serializable {
         this.localisation = localisation;
     }
 
-    public Collection<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Collection<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 
-    public Collection<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(Collection<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 }

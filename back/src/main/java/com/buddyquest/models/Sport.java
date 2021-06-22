@@ -1,12 +1,11 @@
 package com.buddyquest.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "sport")
-public class Sport implements Serializable {
+public class Sport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,11 +14,11 @@ public class Sport implements Serializable {
     @Column(name = "name", length = 10, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "event")
-    private Collection<Event> events;
+    @OneToMany(mappedBy = "sport")
+    private List<Event> events;
 
-    @OneToMany(mappedBy = "mySport")
-    private Collection<MySport> mySports;
+    @OneToMany(mappedBy = "sport")
+    private List<MySport> mySports;
 
 
     public Sport() {
@@ -41,19 +40,19 @@ public class Sport implements Serializable {
         this.name = name;
     }
 
-    public Collection<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Collection<Event> events) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 
-    public Collection<MySport> getMySports() {
+    public List<MySport> getMySports() {
         return mySports;
     }
 
-    public void setMySports(Collection<MySport> mySports) {
+    public void setMySports(List<MySport> mySports) {
         this.mySports = mySports;
     }
 }

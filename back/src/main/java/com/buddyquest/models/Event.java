@@ -1,13 +1,12 @@
 package com.buddyquest.models;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "event")
-public class Event implements Serializable {
+public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +22,7 @@ public class Event implements Serializable {
     private int nbPartnerMax;
 
     @ManyToOne
-    @JoinColumn(name = "sport")
+    @JoinColumn(name = "sportId", referencedColumnName = "id")
     private Sport sport;
 
     @Column(name = "startTime", nullable = false)
@@ -45,8 +44,8 @@ public class Event implements Serializable {
     private byte ageMin;
 
     @ManyToOne
-    @JoinColumn(name = "user")
-    private User creator;
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -54,14 +53,15 @@ public class Event implements Serializable {
     @Column(name = "state", nullable = false)
     private byte state;
 
-    @OneToMany(mappedBy = "localisation")
-    private Collection<Localisation> localisations;
+    @ManyToOne
+    @JoinColumn(name = "localisationId", referencedColumnName = "id")
+    private Localisation localisation;
 
-    @OneToMany(mappedBy = "logEvent")
-    private Collection<LogEvent> logEvents;
+    @OneToMany(mappedBy = "event")
+    private List<LogEvent> logEvents;
 
-    @OneToMany(mappedBy = "message")
-    private Collection<Message> messages;
+    @OneToMany(mappedBy = "event")
+    private List<Message> messages;
 
     public Event() {
     }
@@ -154,12 +154,12 @@ public class Event implements Serializable {
         this.ageMin = ageMin;
     }
 
-    public User getCreator() {
-        return creator;
+    public User getUser() {
+        return user;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {
@@ -178,27 +178,27 @@ public class Event implements Serializable {
         this.state = state;
     }
 
-    public Collection<Localisation> getLocalisations() {
-        return localisations;
+    public Localisation getLocalisation() {
+        return localisation;
     }
 
-    public void setLocalisations(Collection<Localisation> localisations) {
-        this.localisations = localisations;
+    public void setLocalisation(Localisation localisation) {
+        this.localisation = localisation;
     }
 
-    public Collection<LogEvent> getLogEvents() {
+    public List<LogEvent> getLogEvents() {
         return logEvents;
     }
 
-    public void setLogEvents(Collection<LogEvent> logEvents) {
+    public void setLogEvents(List<LogEvent> logEvents) {
         this.logEvents = logEvents;
     }
 
-    public Collection<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(Collection<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
 }

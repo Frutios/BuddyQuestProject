@@ -1,19 +1,18 @@
 package com.buddyquest.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "logEvent")
-public class LogEvent implements Serializable {
+public class LogEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "event")
+    @JoinColumn(name = "eventId", referencedColumnName = "id")
     private Event event;
 
     @Column(name = "detail", nullable = false)
