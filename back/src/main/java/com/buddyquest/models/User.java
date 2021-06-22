@@ -25,6 +25,13 @@ public class User {
     @Column(name = "email", length = 30, nullable = false)
     private String email;
 
+    @Column(name = "password", length = 30, nullable = false)
+    private String password;
+
+    @Column(name = "pseudonym", length = 30, nullable = false)
+    private String pseudonym;
+
+
     @Column(name = "phone", length = 10)
     private String phone;
 
@@ -40,6 +47,17 @@ public class User {
 
     public User(){
 
+    }
+
+    public User(String firstName, String lastName, LocalDate inscriptionDate, String email, String password, String pseudonym, String phone, Localisation localisation) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.inscriptionDate = inscriptionDate;
+        this.email = email;
+        this.password = password;
+        this.pseudonym = pseudonym;
+        this.phone = phone;
+        this.localisation = localisation;
     }
 
     public Long getId() {
@@ -88,6 +106,22 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPseudonym() {
+        return pseudonym;
+    }
+
+    public void setPseudonym(String pseudonym) {
+        this.pseudonym = pseudonym;
     }
 
     public Localisation getLocalisation() {
