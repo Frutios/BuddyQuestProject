@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl implements BaseService<Event, Long> {
     private EventRepository eventRepository;
 
     @Autowired
@@ -17,17 +17,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(Event event) {
+    public void create(Event event) {
         eventRepository.save(event);
     }
 
     @Override
-    public void removeEvent(Long id) {
+    public void remove(Long id) {
         eventRepository.deleteById(id);
     }
 
     @Override
-    public void updateEvent(Event event) {
+    public void update(Event event) {
         eventRepository.save(event);
     }
 
@@ -37,7 +37,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event findEvent(Long id) {
+    public Event findById(Long id) {
         return eventRepository.findById(id).orElse(null);
     }
 }

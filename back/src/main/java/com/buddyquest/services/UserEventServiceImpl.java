@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class UserEventServiceImpl implements UserEventService{
+public class UserEventServiceImpl implements BaseService<UserEvent, Long>{
     private UserEventRepository userEventRepository;
 
     @Autowired
@@ -16,17 +16,17 @@ public class UserEventServiceImpl implements UserEventService{
     }
 
     @Override
-    public void createUserEvent(UserEvent userEvent) {
+    public void create(UserEvent userEvent) {
         userEventRepository.save(userEvent);
     }
 
     @Override
-    public void removeUserEvent(Long id) {
+    public void remove(Long id) {
         userEventRepository.deleteById(id);
     }
 
     @Override
-    public void updateUserEvent(UserEvent userEvent) {
+    public void update(UserEvent userEvent) {
         userEventRepository.save(userEvent);
     }
 
@@ -36,7 +36,7 @@ public class UserEventServiceImpl implements UserEventService{
     }
 
     @Override
-    public UserEvent findUserEvent(Long id) {
+    public UserEvent findById(Long id) {
         return userEventRepository.findById(id).orElse(null);
     }
 }

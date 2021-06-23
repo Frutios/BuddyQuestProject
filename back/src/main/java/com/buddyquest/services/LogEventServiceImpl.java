@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class LogEventServiceImpl implements LogEventService{
+public class LogEventServiceImpl implements BaseService<LogEvent, Long>{
     private LogEventRepository logEventRepository;
 
     @Autowired
@@ -16,17 +16,17 @@ public class LogEventServiceImpl implements LogEventService{
     }
 
     @Override
-    public void createLogEvent(LogEvent logEvent) {
+    public void create(LogEvent logEvent) {
         logEventRepository.save(logEvent);
     }
 
     @Override
-    public void removeLogEvent(Long id) {
+    public void remove(Long id) {
         logEventRepository.deleteById(id);
     }
 
     @Override
-    public void updateLogEvent(LogEvent logEvent) {
+    public void update(LogEvent logEvent) {
         logEventRepository.save(logEvent);
     }
 
@@ -36,7 +36,7 @@ public class LogEventServiceImpl implements LogEventService{
     }
 
     @Override
-    public LogEvent findLogEvent(Long id) {
+    public LogEvent findById(Long id) {
         return logEventRepository.findById(id).orElse(null);
     }
 }

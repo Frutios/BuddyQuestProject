@@ -1,12 +1,12 @@
 package com.buddyquest.controllers;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import com.buddyquest.models.User;
-import com.buddyquest.services.UserService;
 
+import com.buddyquest.services.BaseService;
+import com.buddyquest.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class UserController {
 
 	@Autowired
-    private UserService userService;
+    private BaseService<User, Long> userService;
 
 
 
@@ -27,7 +27,7 @@ public class UserController {
 	public String user(HttpServletRequest req, Model model) {
 		String sId = req.getParameter("id");
 		Long lId = Long.parseLong(sId);
-		User user = userService.findUser(lId);
+		User user = userService.findById(lId);
 		model.addAttribute("User", user);
 		return "users";
 	}
@@ -59,7 +59,7 @@ public class UserController {
 			newUser.setPassword(password);
 			newUser.setPseudonym(pseudonym);
 			//user.setLocalisation(localisationId);
-			userService.createUser(newUser);
+			userService.create(newUser);
 
 		} catch (Exception e) {
 

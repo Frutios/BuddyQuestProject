@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class SportServiceImpl implements SportService {
+public class SportServiceImpl implements BaseService<Sport, Long> {
     private SportRepository sportRepository;
 
     @Autowired
@@ -17,17 +17,17 @@ public class SportServiceImpl implements SportService {
     }
 
     @Override
-    public void createSport(Sport sport) {
+    public void create(Sport sport) {
         sportRepository.save(sport);
     }
 
     @Override
-    public void removeSport(Long id) {
+    public void remove(Long id) {
         sportRepository.deleteById(id);
     }
 
     @Override
-    public void updateSport(Sport sport) {
+    public void update(Sport sport) {
         sportRepository.save(sport);
     }
 
@@ -37,7 +37,7 @@ public class SportServiceImpl implements SportService {
     }
 
     @Override
-    public Sport findSport(Long id) {
+    public Sport findById(Long id) {
         return sportRepository.findById(id).orElse(null);
     }
 }

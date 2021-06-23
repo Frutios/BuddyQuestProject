@@ -3,3 +3,5 @@
 target/
 .vscode
 /out
+back/src/main/resources/application.properties
+

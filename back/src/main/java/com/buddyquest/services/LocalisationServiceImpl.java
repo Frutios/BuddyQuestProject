@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class LocalisationServiceImpl implements LocalisationService {
+public class LocalisationServiceImpl implements BaseService<Localisation, Long> {
     private LocalisationRepository localisationRepository;
 
     @Autowired
@@ -16,17 +16,17 @@ public class LocalisationServiceImpl implements LocalisationService {
     }
 
     @Override
-    public void createLocalisation(Localisation localisation) {
+    public void create(Localisation localisation) {
         localisationRepository.save(localisation);
     }
 
     @Override
-    public void removeLocalisation(Long id) {
+    public void remove(Long id) {
         localisationRepository.deleteById(id);
     }
 
     @Override
-    public void updateLocalisation(Localisation localisation) {
+    public void update(Localisation localisation) {
         localisationRepository.save(localisation);
     }
 
@@ -36,7 +36,7 @@ public class LocalisationServiceImpl implements LocalisationService {
     }
 
     @Override
-    public Localisation findLocalisation(Long id) {
+    public Localisation findById(Long id) {
         return localisationRepository.findById(id).orElse(null);
     }
 }

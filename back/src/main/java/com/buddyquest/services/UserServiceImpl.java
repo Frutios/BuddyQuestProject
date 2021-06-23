@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements BaseService<User, Long>{
 
     private UserRepository userRepository;
 
@@ -19,17 +19,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void createUser(User user) {
+    public void create(User user) {
         userRepository.save(user);
     }
 
     @Override
-    public void removeUser(Long id) {
+    public void remove(Long id) {
         userRepository.deleteById(id);
     }
 
     @Override
-    public void updateUser(User user) {
+    public void update(User user) {
         userRepository.save(user);
     }
 
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User findUser(Long id) {
+    public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 

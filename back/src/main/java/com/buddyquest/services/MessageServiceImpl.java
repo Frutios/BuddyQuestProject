@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements BaseService<Message, Long>{
     private MessageRepository messageRepository;
 
     @Autowired
@@ -16,17 +16,17 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public void createMessage(Message message) {
+    public void create(Message message) {
         messageRepository.save(message);
     }
 
     @Override
-    public void removeMessage(Long id) {
+    public void remove(Long id) {
         messageRepository.deleteById(id);
     }
 
     @Override
-    public void updateMessage(Message message) {
+    public void update(Message message) {
         messageRepository.save(message);
     }
 
@@ -36,7 +36,7 @@ public class MessageServiceImpl implements MessageService{
     }
 
     @Override
-    public Message findMessage(Long id) {
+    public Message findById(Long id) {
         return messageRepository.findById(id).orElse(null);
     }
 }
