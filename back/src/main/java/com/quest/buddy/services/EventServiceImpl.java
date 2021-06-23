@@ -6,7 +6,6 @@ import com.quest.buddy.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service("EventService")
 public class EventServiceImpl implements EventService {

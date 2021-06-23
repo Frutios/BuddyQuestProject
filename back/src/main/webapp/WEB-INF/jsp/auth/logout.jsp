@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>CarEE | Logout</title>
+    <title>Buddy Quest</title>
 
     <meta charset="utf-8">
     <!--[if IE]>
