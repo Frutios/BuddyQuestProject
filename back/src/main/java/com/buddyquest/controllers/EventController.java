@@ -12,7 +12,7 @@ import java.util.List;
 @Controller
 public class EventController {
     @Autowired
-    private BaseService<> eventService;
+    private BaseService<Event,Long> eventService;
 
     @GetMapping("/listevent")
     public List<Event> allEvent(Model model) {

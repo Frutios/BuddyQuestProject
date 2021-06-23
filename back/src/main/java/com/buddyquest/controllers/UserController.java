@@ -23,7 +23,7 @@ public class UserController {
 
 
 
-	@GetMapping("/users")
+	@GetMapping("/api/users")
 	public String user(HttpServletRequest req, Model model) {
 		String sId = req.getParameter("id");
 		Long lId = Long.parseLong(sId);
@@ -31,14 +31,14 @@ public class UserController {
 		model.addAttribute("User", user);
 		return "users";
 	}
-	@GetMapping("/listuser")
+	@GetMapping("/api/listUser")
 	public List<User> allUser(Model model) {
 		List<User> listUser = userService.getAll();
 		model.addAttribute("listUser",listUser);
 		return listUser;
 	}
 
-	@PostMapping("/addUser")
+	@PostMapping("/api/addUser")
 	public String addUser(HttpServletRequest req) {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");

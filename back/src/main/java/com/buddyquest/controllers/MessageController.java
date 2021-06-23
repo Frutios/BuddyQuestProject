@@ -1,5 +1,7 @@
 package com.buddyquest.controllers;
 
+import com.buddyquest.models.Message;
+import com.buddyquest.services.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -7,5 +9,5 @@ import org.springframework.stereotype.Controller;
 public class MessageController {
 
     @Autowired
-    private MessageService messageService;
+    private BaseService<Message, Long> messageService;
 }
