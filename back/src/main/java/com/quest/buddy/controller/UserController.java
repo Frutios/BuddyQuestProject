@@ -1,5 +1,6 @@
 package com.quest.buddy.controller;
 
+import com.quest.buddy.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,41 +12,52 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.quest.buddy.services.UserService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 
 @Controller
 public class UserController {
 
     @Autowired
-    UserService carService;
+    UserService userService;
 
-    @PostMapping("/auth/add-user")
-    public String addCar(HttpServletRequest req) {
-        // String carName = req.getParameter("carName");
-        // String carDescription = req.getParameter("carDescription");
-        // String priceStr = req.getParameter("carPrice");
-        // String categoryIdStr = req.getParameter("carCategory");
+    @PostMapping("/add-user")
+    public void addUser(HttpServletRequest req) {
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+        String inscriptionDateStr = req.getParameter("inscriptionDate");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+        String pseudonym = req.getParameter("pseudonym");
+        String phone = req.getParameter("phone");
 
-        // Category category = null;
-        // try {
-        //     Long categoryId = Long.parseLong(categoryIdStr);
-        //     category = categoryService.fetchSpecificCategory(categoryId);
-        // } catch (NumberFormatException e) {
-        //     // TODO : handle error
-        // }
 
-        // Float price;
-        // try {
-        //     price = Float.parseFloat(priceStr);
-        //     Car newCar = new Car(carName, carDescription, price);
-        //     newCar.setCategory(category);
-        //     carService.createCar(newCar);
+        LocalDate inscriptionDate = null;
+        try {
+            inscriptionDate = LocalDate.parse(inscriptionDateStr);
+        } catch (DateTimeParseException e) {
+            e.printStackTrace();
+        }
 
-        // } catch (NumberFormatException e) {
-        //     // TODO : handle error
-        // }
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setInscriptionDate(inscriptionDate);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setPseudonym(pseudonym);
+        user.setPhone(phone);
 
-        return "redirect:/list-car";
+        userService.create(user);
     }
+
+    @GetMapping("/display-user-form")
+    public String displayUserForm(){
+
+        return "adduser";
+    }
+
 
     @PostMapping("/auth/delete-car")
     public String deleteCar(@RequestParam("id") Long idParam) {
