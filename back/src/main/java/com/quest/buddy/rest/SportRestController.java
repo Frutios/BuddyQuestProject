@@ -31,7 +31,9 @@ public class SportRestController {
     public ResponseEntity<Iterable<Sport>> getAll() {
 
         Iterable<Sport> sports = sportService.getAll();
-        CheckError();
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<Iterable<Sport>>(sports,HttpStatus.OK);
         
@@ -40,14 +42,18 @@ public class SportRestController {
     @GetMapping(value = "/api/sports/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Sport> getById(@PathVariable("id") long id) {
         Sport sportFound = sportService.findById(id);
-        CheckError();
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(sportFound,HttpStatus.OK);
     }
 
     @PostMapping(value = "/api/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Sport> create(@RequestBody Sport sportToCreate) {
         sportService.create(sportToCreate);
-        CheckError();
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
         
         return new ResponseEntity<>(sportToCreate,HttpStatus.OK);
     }
@@ -55,7 +61,9 @@ public class SportRestController {
     @PutMapping(value = "/api/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@RequestBody Sport sportToUpdate) {
         sportService.update(sportToUpdate);
-        CheckError();
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -63,20 +71,23 @@ public class SportRestController {
     @DeleteMapping(value = "/api/sports/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> remove(@PathVariable("id") long id) {
         sportService.remove(id);
-        CheckError();
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    public ResponseEntity<Void> CheckError(){
+    public boolean hasErrors(){
         HashMap<String,String> errors = sportService.getErrors();
 
+        boolean errorsFound = false;
         if(!errors.isEmpty())
         {
             errors.clear();
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            errorsFound = true;
         }
-        return null;
+        return errorsFound;
     }
 
 }
