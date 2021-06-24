@@ -9,7 +9,7 @@ public class HomeController {
 
     @GetMapping({"/"})
     public String displayHomePage(Model model) {
-        return "/views/home";
+        return "views/home";
     }
 
 }

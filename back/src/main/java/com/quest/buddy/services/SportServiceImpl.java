@@ -84,6 +84,19 @@ public class SportServiceImpl implements SportService {
 
     }
 
+    public Sport findByName(String name){
+        
+        Sport sport = null;
+
+        try {
+            sport = sportRepository.findByName(name);
+        } catch (Exception e) {
+            errorService.AddError("Sport", "Error getting sport with name " + name );
+        }
+        
+        return sport;
+    }
+
     public boolean exist(String name){
 
         boolean sportExist = false;

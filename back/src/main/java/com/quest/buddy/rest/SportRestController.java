@@ -45,6 +45,7 @@ public class SportRestController {
         return new ResponseEntity<>(sportFound,HttpStatus.OK);
     }
 
+
     @PostMapping(value = "/api/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Sport> create(@RequestBody Sport sportToCreate) {
         sportService.create(sportToCreate);
@@ -84,6 +85,8 @@ public class SportRestController {
         }
         return new ResponseEntity<Iterable<MySport>>(sport.getMyUsers(),HttpStatus.OK);
     }
+
+    
 
     public boolean hasErrors(){
         HashMap<String,String> errors = sportService.getErrors();

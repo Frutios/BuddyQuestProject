@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.quest.buddy.models.Sport;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SportRepository extends CrudRepository<Sport, Long> {
     
-    @Autowired
-    public List<Sport> findByName(String name);
+    @Query("SELECT s FROM Sport s WHERE s.name = (:name)")
+        public Sport findByName(@Param("name") String name);
 }
