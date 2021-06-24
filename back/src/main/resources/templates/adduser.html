@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>Inscrivez vous !</title>
+</head>
+<body>
+    <h1>Inscription</h1>
+
+    <p>Formulaire d'inscription</p>
+    <form action="${pageContext.request.contextPath}/add-user" method="post">
+
+        <label for="firstName">Prénom : </label>
+        <input type="text" name="firstName" id="firstName">
+
+        <label for="lastName">Nom : </label>
+        <input type="text" name="lastName" id="lastName">
+
+        <label for="inscriptionDate">Date d'inscription : </label>
+        <input type="date" name="inscriptionDate" id="inscriptionDate">
+
+        <label for="email">Nom : </label>
+        <input type="text" name="email" id="email">
+
+        <label for="password">Nom : </label>
+        <input type="text" name="password" id="password">
+
+        <label for="pseudonym">Nom : </label>
+        <input type="text" name="pseudonym" id="pseudonym">
+
+        <label for="phone">Nom : </label>
+        <input type="text" name="phone" id="phone">
+
+        <input type="submit" value="inscription">
+    </form>
+
+</body>
+</html>
