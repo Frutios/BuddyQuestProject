@@ -1,10 +1,14 @@
 package com.quest.buddy.models;
 
 import javax.persistence.*;
+
+import org.springframework.context.annotation.Lazy;
+
 import java.util.List;
 
 @Entity
 @Table(name = "sport")
+@Lazy
 public class Sport {
 
     @Id
@@ -18,7 +22,8 @@ public class Sport {
     private List<Event> events;
 
     @OneToMany(mappedBy = "sport")
-    private List<MySport> mySports;
+    @Lazy
+    private List<MySport> myUsers;
 
 
     public Sport() {
@@ -48,11 +53,11 @@ public class Sport {
         this.events = events;
     }
 
-    public List<MySport> getMySports() {
-        return mySports;
+    public List<MySport> getMyUsers() {
+        return myUsers;
     }
 
-    public void setMySports(List<MySport> mySports) {
-        this.mySports = mySports;
+    public void setMyUsers(List<MySport> myUsers) {
+        this.myUsers = myUsers;
     }
 }

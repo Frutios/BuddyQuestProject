@@ -10,7 +10,7 @@ public class UserController {
 
     @GetMapping({"/users"})
     public String displayHomePage(Model model) {
-        return "home";
+        return "users";
     }
 
 }

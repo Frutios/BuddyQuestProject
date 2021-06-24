@@ -1,6 +1,5 @@
 package com.quest.buddy.rest;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
+import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.services.SportServiceImpl;
 
@@ -23,9 +23,6 @@ public class SportRestController {
 
     @Autowired
     SportServiceImpl sportService;
-
-    @Autowired
-    
 
     @GetMapping(value = "/api/sports", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<Sport>> getAll() {
@@ -61,6 +58,7 @@ public class SportRestController {
     @PutMapping(value = "/api/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(@RequestBody Sport sportToUpdate) {
         sportService.update(sportToUpdate);
+        
         if(hasErrors()){
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
         }
@@ -78,6 +76,15 @@ public class SportRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/api/sports/{id}/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Iterable<MySport>> getUsersFromSport(@PathVariable("id") long id) {
+        Sport sport = sportService.findById(id);
+        if(hasErrors()){
+            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Iterable<MySport>>(sport.getMyUsers(),HttpStatus.OK);
+    }
+
     public boolean hasErrors(){
         HashMap<String,String> errors = sportService.getErrors();
 
@@ -89,5 +96,7 @@ public class SportRestController {
         }
         return errorsFound;
     }
+
+
 
 }

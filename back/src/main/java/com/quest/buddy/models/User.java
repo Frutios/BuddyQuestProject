@@ -1,6 +1,9 @@
 package com.quest.buddy.models;
 
 import javax.persistence.*;
+
+import org.springframework.context.annotation.Lazy;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,10 +43,16 @@ public class User {
     private Localisation localisation;
 
     @OneToMany(mappedBy = "user")
+    @Lazy
     private List<Event> events;
 
     @OneToMany(mappedBy = "message")
+    @Lazy
     private List<Message> messages;
+
+    @OneToMany(mappedBy = "user")
+    @Lazy
+    private List<MySport> mySports;
 
     public User(){
 
