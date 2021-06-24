@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SportController {
 
-    @GetMapping({"/sports",})
+    @GetMapping("/sports")
     public String displayHomePage(Model model) {
         return "sports";
     }
