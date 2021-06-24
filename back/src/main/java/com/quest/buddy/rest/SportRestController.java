@@ -75,6 +75,7 @@ public class SportRestController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    /*
 
     @GetMapping(value = "/api/sports/{id}/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Iterable<MySport>> getUsersFromSport(@PathVariable("id") long id) {
@@ -84,6 +85,8 @@ public class SportRestController {
         }
         return new ResponseEntity<Iterable<MySport>>(sport.getMyUsers(),HttpStatus.OK);
     }
+
+     */
 
     public boolean hasErrors(){
         HashMap<String,String> errors = sportService.getErrors();

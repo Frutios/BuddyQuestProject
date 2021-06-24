@@ -42,6 +42,7 @@ public class User {
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
+    /*
     @OneToMany(mappedBy = "user")
     @Lazy
     private List<Event> events;
@@ -53,7 +54,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     @Lazy
     private List<MySport> mySports;
-
+*/
     public User(){
 
     }
@@ -140,7 +141,7 @@ public class User {
     public void setLocalisation(Localisation localisation) {
         this.localisation = localisation;
     }
-
+/*
     public List<Event> getEvents() {
         return events;
     }
@@ -156,4 +157,6 @@ public class User {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
+ */
 }

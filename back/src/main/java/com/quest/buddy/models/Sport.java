@@ -18,13 +18,13 @@ public class Sport {
     @Column(name = "name", length = 10, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "sport")
+   /* @OneToMany(mappedBy = "sport")
     private List<Event> events;
 
     @OneToMany(mappedBy = "sport")
     @Lazy
     private List<MySport> myUsers;
-
+  */
 
     public Sport() {
     }
@@ -44,7 +44,7 @@ public class Sport {
     public void setName(String name) {
         this.name = name;
     }
-
+/*
     public List<Event> getEvents() {
         return events;
     }
@@ -60,4 +60,6 @@ public class Sport {
     public void setMyUsers(List<MySport> myUsers) {
         this.myUsers = myUsers;
     }
+
+ */
 }
