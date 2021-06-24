@@ -2,8 +2,11 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 
+import org.springframework.context.annotation.Lazy;
+
 @Entity
 @Table(name = "mySport")
+@Lazy
 public class MySport {
 
     @Id
