@@ -32,9 +32,4 @@ public class SportController {
         return "views/sportDetails";
     }
 
-    @GetMapping("/sports")
-    public String displayHomePage(Model model) {
-        return "sports";
-    }
-
 }
