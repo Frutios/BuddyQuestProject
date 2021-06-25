@@ -30,7 +30,7 @@ public class SportController {
     public String displaySport(@RequestParam("id") Long id, Model model) {
         model.addAttribute("sport", sportService.findById(id));
         return "views/sportDetails";
-
+    }
 
     @GetMapping("/sports")
     public String displayHomePage(Model model) {
