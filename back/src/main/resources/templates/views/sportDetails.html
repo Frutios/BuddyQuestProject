@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF8" />
+        <title>Détails du sport <span th:text="${sport.name}"></span></title>
+        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    </head>
+    <body>
+        <!-- <div class="container">
+            <div class="row">
+                <div class="alert alert-primary" role="alert">
+                    <h3 style="align-items: center;">Sports</h3>
+                  </div>
+            </div>
+
+            <div class="row">
+                <input class="form-control" type="text" placeholder="Rechercher">
+            </div>
+            <div class="row d-flex justify-content-center" style="margin-top: 10px; "  >
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;margin-left: 10px;" th:each="sport : ${sports}">
+                        <div class="card-header"><span th:text="${sport.name}"></span></div>
+                        <div class="card-body">
+                        <p class="card-text">Détails sur le sport, nombre d'évènements</p>
+                        <p class="card-text">Détails sur le sport, nombre de participants</p>
+
+                        <button type="button" class="btn btn-success"><a th:href="@{'/sports/' + ${sport.id}}">Modifier</a></button>
+                        <button type="button" class="btn btn-danger">Supprimer</button>
+                    </div>
+                    </div>
+            </div>
+             -->
+        </div>
+
+        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    </body>
+</html>

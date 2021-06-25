@@ -2,7 +2,6 @@ package com.quest.buddy.services;
 
 import java.util.HashMap;
 
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service("ErrorService")
