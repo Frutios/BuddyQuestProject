@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF8" />
+    <title>Event</title>
+    <!-- CSS only -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/dist/css/bootstrap.min.css} "/>
+    <!-- JavaScript Bundle with Popper -->
+</head>
+<body>
+<div class="container">
+
+    <h2 class="h1-responsive font-weight-bold text-center my-4">My Event</h2>
+
+    <form  action="#"  th:action="@{/eventadd}" th:object="${event}" method="post">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for='title' class="form-label"> Title: </label>
+                    <input type='text' class="form-control" name='title' id='title'>
+                </div>
+                <div class="mb-3">
+                    <label for='nbPartnerMax' class="form-label"> Number of participants: </label>
+                    <input type='text' class="form-control" name='nbPartnerMax' id='nbPartnerMax'>
+                </div>
+                <div class="mb-3">
+                    <label for="dateEvent">Date Star :</label>
+                    <input id="dateEvent" type="datetime-local" name="startTime" >
+                </div>
+
+                <div class="mb-3">
+                    <label for='endTime' class="form-label"> End Time: </label>
+                    <input type='text' class="form-control" name='endTime' id='endTime'>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label"> Detail: </label>
+                    <input type='text' class="form-control" name='description' id='description'>
+                </div>
+                <div class="mb-3">
+                    <label for="ageMin" class="form-label"> Age Min: </label>
+                    <input type='text' class="form-control" name='ageMin' id='ageMin'>
+                </div>
+                <div class="mb-3">
+                    <label for="ageMax" class="form-label"> Age Max: </label>
+                    <input type='text' class="form-control" name='ageMax' id='ageMax'>
+                </div>
+                <div class="mb-3">
+                    <label >Select Localisation</label>
+                    <select class="form-control" name="localisation" required>
+                        <option th:each="loca : ${listLocalisation}"
+                                th:value="${loca.id}"
+                                th:text="${loca.city}"  />
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="place" class="form-label"> Place: </label>
+                    <input type='text' class="form-control" name='place' id='place'>
+                </div>
+                <div class="mb-3">
+                    <label for="genderSelect">Select Gender</label>
+                    <select class="form-control" required name="flatGender" id="genderSelect">
+                        <option th:each="gender : ${listGender}"
+                                th:value="${gender.id}"
+                                th:text="${gender.name}"/>
+                    </select>
+                </div>
+                <p><input type="submit" value="Submit" /></p>
+            </div>
+           <div class="col-md-6">
+               <!--     <div class="mb-3">
+                       <label>Select Sport</label>
+                       <th:block th:each="sport : ${listSport}" >
+                           <div class="form-check">
+                               <input class="form-check-input" type="checkbox" name="sportIdaa" th:value="${sport.id}"/>
+                               <label class="form-check-label" th:text="${sport.name}"></label>
+                           </div>
+                       </th:block>
+                   </div>-->
+                   <div class="mb-3">
+                       <label>Select Sport</label>
+                       <th:block th:each="sport : ${listSport}" >
+                           <div class="form-check">
+                               <input class="form-check-input" type="radio" name="sport" th:value="${sport.id}"/>
+                               <label class="form-check-label" th:text="${sport.name}"></label>
+                           </div>
+                       </th:block>
+                   </div>
+               </div>
+           </div>
+       </form>
+
+   </div>
+   <script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+   <script th:src="@{/webjars/popper.js/1.16.1/dist/umd/popper.min.js}"></script>
+   <script th:src="@{/webjars/bootstrap/4.6.0/dist/js/bootstrap.min.js}"></script>
+   </body>
+   </html>

@@ -49,7 +49,7 @@ public class Localisation {
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.country = country + "/" + this.city;
     }
 
     public String getCity() {
