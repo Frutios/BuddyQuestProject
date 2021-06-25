@@ -1,5 +1,7 @@
 package com.quest.buddy.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
@@ -18,23 +20,24 @@ public class Event {
     @Column(name = "urlImage", length = 200)
     private String urlImage;
 
-    @Column(name = "nbPartnerMax", nullable = false)
+    @Column(name = "nbPartnerMax")
     private int nbPartnerMax;
 
     @ManyToOne
     @JoinColumn(name = "sportId", referencedColumnName = "id")
     private Sport sport;
 
-    @Column(name = "startTime", nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "startTime")
     private LocalDateTime startTime;
 
-    @Column(name = "endTime", nullable = false)
+    @Column(name = "endTime")
     private LocalDateTime endTime;
 
-    @Column(name = "place", nullable = false)
+    @Column(name = "place")
     private String place;
 
-    @Column(name = "flatGender", nullable = false)
+    @Column(name = "flatGender")
     private byte flatGender;
 
     @Column(name = "ageMax")
@@ -47,10 +50,10 @@ public class Event {
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state")
     private byte state;
 
     @ManyToOne

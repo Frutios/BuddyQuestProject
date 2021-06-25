@@ -18,6 +18,7 @@ public class Sport implements BaseModel<SportDto> {
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
+
     @Column(name = "description", length = 500)
     private String description;
 
@@ -29,7 +30,6 @@ public class Sport implements BaseModel<SportDto> {
 
     @OneToMany(mappedBy = "sport")
     private List<MySport> myUsers;
-
 
     public Sport() {
     }
@@ -81,6 +81,7 @@ public class Sport implements BaseModel<SportDto> {
     public void setMyUsers(List<MySport> myUsers) {
         this.myUsers = myUsers;
     }
+
 
     @Override
     public SportDto toDto(){

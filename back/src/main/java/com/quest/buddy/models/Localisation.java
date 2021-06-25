@@ -23,12 +23,15 @@ public class Localisation {
     @Column(name = "latitude", nullable = false)
     private float latitude;
 
+    /*
     @OneToMany(mappedBy = "localisation")
     private List<User> participants;
 
     @OneToMany(mappedBy = "localisation")
     private List<Event> events;
 
+
+     */
 
     public Localisation() {
     }
@@ -46,7 +49,7 @@ public class Localisation {
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.country = country + "/" + this.city;
     }
 
     public String getCity() {
@@ -72,7 +75,7 @@ public class Localisation {
     public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
-
+/*
     public List<User> getParticipants() {
         return participants;
     }
@@ -88,4 +91,6 @@ public class Localisation {
     public void setEvents(List<Event> events) {
         this.events = events;
     }
+
+ */
 }

@@ -16,8 +16,7 @@ import com.quest.buddy.services.UserService;
 @Controller
 public class UserController {
 
-    @Autowired
-    UserService userService;
+
 
     @PostMapping("/add-user")
     public void addUser(@ModelAttribute User user,  Model model) {
@@ -40,6 +39,7 @@ public class UserController {
         
         return "views/userlist";
     }
+
 
 
     

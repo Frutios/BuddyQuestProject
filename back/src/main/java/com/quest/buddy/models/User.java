@@ -54,6 +54,7 @@ public class User {
     @Lazy
     private List<MySport> mySports;
 
+
     public User() {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
@@ -161,6 +162,7 @@ public class User {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+
 
     public List<MySport> getMySports() {
         return mySports;

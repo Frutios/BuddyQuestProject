@@ -112,8 +112,6 @@ public class SportRestController {
         return new ResponseEntity<Iterable<MySport>>(sport.getMyUsers(),HttpStatus.OK);
     }
 
-    
-
     public boolean hasErrors(){
         HashMap<String,String> errors = sportService.getErrors();
 
