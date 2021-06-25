@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.quest.buddy.services.UserService;
+import com.quest.buddy.services.UserServiceImpl;
 
 
 
 @Controller
 public class UserController {
 
-
+    @Autowired
+    UserServiceImpl userService;
 
     @PostMapping("/add-user")
     public void addUser(@ModelAttribute User user,  Model model) {
