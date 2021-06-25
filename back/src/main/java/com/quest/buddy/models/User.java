@@ -5,8 +5,9 @@ import javax.persistence.*;
 import org.springframework.context.annotation.Lazy;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
-
 
 @Entity
 @Table(name = "user")
@@ -16,14 +17,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "firstName", length = 20, nullable = false )
+    @Column(name = "firstName", length = 20, nullable = false)
     private String firstName;
 
     @Column(name = "lastName", length = 20, nullable = false)
     private String lastName;
 
     @Column(name = "inscriptionDate", nullable = false)
-    private LocalDate inscriptionDate;
+    private LocalDateTime inscriptionDate;
 
     @Column(name = "email", length = 30, nullable = false)
     private String email;
@@ -34,7 +35,6 @@ public class User {
     @Column(name = "pseudonym", length = 30, nullable = false)
     private String pseudonym;
 
-
     @Column(name = "phone", length = 10)
     private String phone;
 
@@ -42,7 +42,6 @@ public class User {
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
-    /*
     @OneToMany(mappedBy = "user")
     @Lazy
     private List<Event> events;
@@ -54,20 +53,26 @@ public class User {
     @OneToMany(mappedBy = "user")
     @Lazy
     private List<MySport> mySports;
-*/
-    public User(){
 
+
+    public User() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
+        this.inscriptionDate = fromDateAndTime;
     }
 
-    public User(String firstName, String lastName, LocalDate inscriptionDate, String email, String password, String pseudonym, String phone, Localisation localisation) {
+    public User(String firstName, String lastName, String email, String password, String pseudonym, String phone,
+            Localisation localisation) {
+        this();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.inscriptionDate = inscriptionDate;
         this.email = email;
         this.password = password;
         this.pseudonym = pseudonym;
         this.phone = phone;
         this.localisation = localisation;
+        
     }
 
     public Long getId() {
@@ -94,11 +99,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public LocalDate getInscriptionDate() {
+    public LocalDateTime getInscriptionDate() {
         return inscriptionDate;
     }
 
-    public void setInscriptionDate(LocalDate inscriptionDate) {
+    public void setInscriptionDate(LocalDateTime inscriptionDate) {
         this.inscriptionDate = inscriptionDate;
     }
 
@@ -141,7 +146,7 @@ public class User {
     public void setLocalisation(Localisation localisation) {
         this.localisation = localisation;
     }
-/*
+
     public List<Event> getEvents() {
         return events;
     }
@@ -158,5 +163,12 @@ public class User {
         this.messages = messages;
     }
 
- */
+
+    public List<MySport> getMySports() {
+        return mySports;
+    }
+
+    public void setMySports(List<MySport> mySports) {
+        this.mySports = mySports;
+    }
 }
