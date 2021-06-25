@@ -9,7 +9,7 @@ public class SportController {
 
     @GetMapping({"/sports",})
     public String displayHomePage(Model model) {
-        return "sports";
+        return "views/sports";
     }
 
 }

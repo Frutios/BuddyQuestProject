@@ -15,8 +15,7 @@
 	<description>buddyquest</description>
 	<properties>
 		<java.version>16</java.version>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
+        <start-class>com.quest.buddy.BackApplication</start-class>
 	</properties>
 	<dependencies>
         <dependency>

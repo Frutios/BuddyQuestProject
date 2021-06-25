@@ -6,7 +6,6 @@ import com.quest.buddy.repository.UserEventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service("UserEventService")
 public class UserEventServiceImpl implements UserEventService{
     @Autowired
@@ -36,4 +35,5 @@ public class UserEventServiceImpl implements UserEventService{
     public UserEvent findById(Long id) {
         return userEventRepository.findById(id).orElse(null);
     }
+    
 }
