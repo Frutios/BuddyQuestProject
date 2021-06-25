@@ -1,6 +1,8 @@
 package com.quest.buddy.services;
 
 
+import java.util.HashMap;
+
 import com.quest.buddy.models.User;
 import com.quest.buddy.repository.UserRepository;
 
@@ -12,6 +14,9 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ErrorServiceImp errorService;
 
     @Override
     public void create(User user) {
@@ -37,6 +42,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    public HashMap<String,String> getErrors(){
+        return errorService.getErrors();
     }
 
 }
