@@ -15,8 +15,14 @@ public class SportController {
     private SportServiceImpl sportService;
 
     @GetMapping({"/sports"})
-    public String displaySports(Model model) {
+    public String displaySports(Model model,String filter) {
+       
+       if(filter!= null && !filter.equals("")){
+        model.addAttribute("sports", sportService.findSportsByKeyword(filter));
+       }else
+       {
         model.addAttribute("sports", sportService.getAll());
+       }
         return "views/sports";
     }
 

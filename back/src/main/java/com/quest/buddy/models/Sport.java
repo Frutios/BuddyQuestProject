@@ -2,27 +2,32 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 
-import org.springframework.context.annotation.Lazy;
+import com.googlecode.jmapper.JMapper;
+import com.quest.buddy.dtos.SportDto;
 
 import java.util.List;
 
 @Entity
 @Table(name = "sport")
-@Lazy
-public class Sport {
+public class Sport implements BaseModel<SportDto> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", length = 10, nullable = false)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
+
+    @Column(name = "description", length = 500)
+    private String description;
+
+    @Column(name = "icon", length = 500)
+    private String icon;
 
     @OneToMany(mappedBy = "sport")
     private List<Event> events;
 
     @OneToMany(mappedBy = "sport")
-    @Lazy
     private List<MySport> myUsers;
 
 
@@ -35,6 +40,22 @@ public class Sport {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getName() {
@@ -60,4 +81,13 @@ public class Sport {
     public void setMyUsers(List<MySport> myUsers) {
         this.myUsers = myUsers;
     }
+
+    @Override
+    public SportDto toDto(){
+        JMapper<SportDto, Sport> sportMapper = new JMapper<>(SportDto.class, Sport.class);
+        
+        SportDto sportDto = sportMapper.getDestination(this);
+        return sportDto;
+    }
+
 }

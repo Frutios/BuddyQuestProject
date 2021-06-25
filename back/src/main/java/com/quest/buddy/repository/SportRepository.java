@@ -1,6 +1,7 @@
 package com.quest.buddy.repository;
 
 
+
 import java.util.List;
 
 import com.quest.buddy.models.Sport;
@@ -15,4 +16,7 @@ public interface SportRepository extends CrudRepository<Sport, Long> {
     
     @Query("SELECT s FROM Sport s WHERE s.name = (:name)")
         public Sport findByName(@Param("name") String name);
+
+    @Query(value="SELECT * FROM Sport s WHERE s.name like %:filter% or s.description like %:filter%",nativeQuery=true)
+    public Iterable<Sport> findSportsByKeyword(@Param("filter") String name);
 }
