@@ -52,7 +52,6 @@ public class EventController {
     }
     @PostMapping("/eventadd")
         public String createEvent(@ModelAttribute Event event, Model model) {
-        String ntitle = event.getTitle();
         return "/auth/eventadd";
     }
 }

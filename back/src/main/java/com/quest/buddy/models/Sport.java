@@ -5,8 +5,6 @@ import javax.persistence.*;
 import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.SportDto;
 
-import java.util.List;
-
 @Entity
 @Table(name = "sport")
 public class Sport implements BaseModel<SportDto> {
@@ -24,12 +22,6 @@ public class Sport implements BaseModel<SportDto> {
 
     @Column(name = "icon", length = 500)
     private String icon;
-
-    @OneToMany(mappedBy = "sport")
-    private List<Event> events;
-
-    @OneToMany(mappedBy = "sport")
-    private List<MySport> myUsers;
 
     public Sport() {
     }
@@ -65,23 +57,6 @@ public class Sport implements BaseModel<SportDto> {
     public void setName(String name) {
         this.name = name;
     }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public List<MySport> getMyUsers() {
-        return myUsers;
-    }
-
-    public void setMyUsers(List<MySport> myUsers) {
-        this.myUsers = myUsers;
-    }
-
 
     @Override
     public SportDto toDto(){

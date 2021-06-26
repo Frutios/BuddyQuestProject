@@ -2,16 +2,17 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 
-import org.springframework.context.annotation.Lazy;
+import com.googlecode.jmapper.JMapper;
+import com.quest.buddy.dtos.UserDto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.List;
+
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements BaseModel<UserDto> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,18 +42,6 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
-
-    @OneToMany(mappedBy = "user")
-    @Lazy
-    private List<Event> events;
-
-    @OneToMany(mappedBy = "message")
-    @Lazy
-    private List<Message> messages;
-
-    @OneToMany(mappedBy = "user")
-    @Lazy
-    private List<MySport> mySports;
 
 
     public User() {
@@ -147,28 +136,11 @@ public class User {
         this.localisation = localisation;
     }
 
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
-
-    public List<MySport> getMySports() {
-        return mySports;
-    }
-
-    public void setMySports(List<MySport> mySports) {
-        this.mySports = mySports;
+    @Override
+    public UserDto toDto(){
+        JMapper<UserDto, User> userMapper = new JMapper<>(UserDto.class, User.class);
+        
+        UserDto userDto = userMapper.getDestination(this);
+        return userDto;
     }
 }

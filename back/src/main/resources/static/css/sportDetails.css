@@ -1,0 +1,21 @@
+.mainSport{
+  display: flex;
+  font-family: 'Montserrat'; 
+  gap: 10px;
+}
+
+.sportCard{
+  width: 300px;
+  display: flex;
+  flex-flow: column;
+}
+
+.sportDetails{
+  flex-grow: 1;
+}
+
+.sportEntities{
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+}

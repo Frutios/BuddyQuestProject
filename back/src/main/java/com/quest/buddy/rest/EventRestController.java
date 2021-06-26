@@ -1,9 +1,7 @@
 package com.quest.buddy.rest;
 
 import com.quest.buddy.models.Event;
-import com.quest.buddy.models.Sport;
 import com.quest.buddy.services.EventServiceImpl;
-import com.quest.buddy.services.SportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
