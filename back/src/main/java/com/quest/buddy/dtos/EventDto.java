@@ -26,7 +26,7 @@ public class EventDto implements BaseDto<Event> {
     }
 
     public String getDescription() {
-        return title;
+        return description;
     }
 
     public void setDescription(String description) {

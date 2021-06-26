@@ -25,17 +25,15 @@
                 </div>
             </div>
             
-            <div class="sportDetails">
-                <h3>Détails</h3>
+            <div class="eventDetails">
+                <h3>Evénements</h3>
                 <div class="sportEvents">
-                    <div class="sportCard" th:each="event : ${events}">
-                        <div class="sportCard-image">
-                        </div>
-                        <div class="sportCard-body">
-                            <div class="sportCard-title">
+                    <div class="eventCard" th:each="event : ${events}">
+                        <div class="eventCard-body">
+                            <div class="eventCard-title">
                                 <h3 th:text="${event.title}" />
                             </div>
-                            <div class="sportCard-description">
+                            <div class="eventCard-description">
                                 <h3 th:text="${event.description}" />
                             </div>
                         </div>

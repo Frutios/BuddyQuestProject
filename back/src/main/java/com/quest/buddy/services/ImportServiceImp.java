@@ -71,26 +71,49 @@ public class ImportServiceImp implements ImportService {
     }
 
     public void seedEvents() {
-       Event firstEvent = new Event();
        Sport soccer = sportService.findByName("Soccer");
+       Sport basketBall = sportService.findByName("BasketBall");
        User romain = userService.findById(1L);
 
        LocalDate currentDate = LocalDate.now();
        LocalTime currentTime = LocalTime.now();
        LocalDateTime dateDebut = LocalDateTime.of(currentDate, currentTime);
 
+       Event soccerBarman = new Event();
+       soccerBarman.setAgeMax((byte) 99);
+       soccerBarman.setAgeMin((byte) 18);
+       soccerBarman.setDescription("Les barmans de la place plume sont invités à un soccer géant!");
+       soccerBarman.setNbPartnerMax(10);
+       soccerBarman.setSport(soccer);
+       soccerBarman.setPlace("Place plume");
+       soccerBarman.setTitle("Match de foot des barmans");
+       soccerBarman.setStartTime(dateDebut);
+       soccerBarman.setUser(romain);   
+       eventService.create(soccerBarman);
 
-       firstEvent.setAgeMax((byte) 99);
-       firstEvent.setAgeMin((byte) 18);
-       firstEvent.setDescription("Description first event");
-       firstEvent.setNbPartnerMax(10);
-       firstEvent.setSport(soccer);
-       firstEvent.setPlace("Place plume");
-       firstEvent.setTitle("Du sport entouré de bars");
-       firstEvent.setStartTime(dateDebut);
-       firstEvent.setUser(romain);
-        
-       eventService.create(firstEvent);
+       Event soccerBoss = new Event();
+       soccerBoss.setAgeMax((byte) 99);
+       soccerBoss.setAgeMin((byte) 18);
+       soccerBoss.setDescription("Les patrons de bars se retrouvent place plume pour savoir qui a la plus grosse");
+       soccerBoss.setNbPartnerMax(10);
+       soccerBoss.setSport(soccer);
+       soccerBoss.setPlace("Place plume");
+       soccerBoss.setTitle("Match de foot des patrons");
+       soccerBoss.setStartTime(dateDebut);
+       soccerBoss.setUser(romain);   
+       eventService.create(soccerBoss);
+
+       Event nbaATours = new Event();
+       nbaATours.setAgeMax((byte) 99);
+       nbaATours.setAgeMin((byte) 18);
+       nbaATours.setDescription("Les joueurs NBA débarquent à Tours, viens montrer ton skill");
+       nbaATours.setNbPartnerMax(10);
+       nbaATours.setSport(basketBall);
+       nbaATours.setPlace("Tours Nord");
+       nbaATours.setTitle("Viens jouer avec des joueurs de NBA");
+       nbaATours.setStartTime(dateDebut);
+       nbaATours.setUser(romain);   
+       eventService.create(nbaATours);
     }
 
     @Override
