@@ -17,16 +17,25 @@
                     <p  th:text="${sport.name}" />
                 </div>
                 <div class="sportDescription">
-                    <p  th:text="${sport.description}" />
+                    <form action="#"  method="POST" th:object="${sport}">
+                        <div>
+                          <input type="checkbox" th:field="*{active}" >
+                          <label for="updateActive">Création d'évènements ?</label>
+                        </div>
+                        <div>
+                          <button type="submit">Mettre à jour</button>
+                        </div>
+                      </form>
                 </div>
-                <div class="sportEntities">
-                    <button>Evenements</button>
-                    <button>Utilisateurs</button>
-                </div>
+               
             </div>
             
             <div class="eventDetails">
-                <h3>Evénements</h3>
+                <div class="sportEntities">
+                    <button>Evenements</button>
+                    <button>Utilisateurs</button>
+                    <button>Localisation</button>
+                </div>
                 <div class="sportEvents">
                     <div class="eventCard" th:each="event : ${events}">
                         <div class="eventCard-body">

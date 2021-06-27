@@ -54,3 +54,14 @@
 .eventCard-description{
   font-size: 0.7em;
 }
+
+.eventDetails{
+  display: flex;
+  flex-flow: column wrap;
+  gap: 10px;
+}
+
+.sportEntities{
+  display: flex;
+  flex-flow: row wrap;
+}

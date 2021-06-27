@@ -84,3 +84,11 @@ input[type=text] {
   gap: 5px;
   min-width: 15vw;
 }
+
+.sportActive{
+  background-color:aliceblue;
+}
+
+.sportInactive{
+  background-color:#e63946;
+}
