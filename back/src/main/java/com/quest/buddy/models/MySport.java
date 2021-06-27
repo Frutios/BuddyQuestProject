@@ -21,6 +21,10 @@ public class MySport {
     @JoinColumn(name = "sportId", referencedColumnName = "id")
     private Sport sport;
 
+    @Column(name ="level",nullable = false)
+    private Long level = 0L;
+    
+
     public MySport() {
     }
 
@@ -46,5 +50,13 @@ public class MySport {
 
     public void setSport(Sport sport) {
         this.sport = sport;
+    }
+
+    public Long getLevel() {
+        return level;
+    }
+
+    public void setLevel(Long level) {
+        this.level = level;
     }
 }

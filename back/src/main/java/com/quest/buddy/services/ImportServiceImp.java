@@ -8,6 +8,7 @@ import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.quest.buddy.dtos.DecathlonSports;
 import com.quest.buddy.models.Event;
+import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.models.User;
 
@@ -27,6 +28,9 @@ public class ImportServiceImp implements ImportService {
     @Autowired
     EventServiceImpl eventService;
 
+    @Autowired 
+    MySportServiceImpl mySportService;
+
 
     @Override
     public void importDecathlon(DecathlonSports sports) {
@@ -41,6 +45,27 @@ public class ImportServiceImp implements ImportService {
             sportService.create(newSport);
             
         });
+
+    }
+
+    public void seedSportUsers(){
+        Sport soccer = sportService.findById(1L);
+        Sport basketBall = sportService.findById(2L);
+        User romain = userService.findById(1L);
+
+        MySport romainsoccer = new MySport();
+        romainsoccer.setSport(soccer);
+        romainsoccer.setUser(romain);
+        romainsoccer.setLevel(30L);
+        mySportService.create(romainsoccer);
+
+        MySport romainBasketBall = new MySport();
+        romainsoccer.setSport(basketBall);
+        romainsoccer.setUser(romain);
+        romainsoccer.setLevel(30L);
+        mySportService.create(romainBasketBall);
+
+
 
     }
 
@@ -69,6 +94,8 @@ public class ImportServiceImp implements ImportService {
 
        userService.create(romain);
     }
+
+
 
     public void seedEvents() {
        Sport soccer = sportService.findById(1L);
@@ -121,6 +148,7 @@ public class ImportServiceImp implements ImportService {
         seedSports();
         seedUsers();
         seedEvents();  
+        seedSportUsers();
     }
     
 }

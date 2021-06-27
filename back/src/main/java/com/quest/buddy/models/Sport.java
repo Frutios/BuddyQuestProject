@@ -31,6 +31,9 @@ public class Sport implements BaseModel<SportDto> {
     @Formula("(select count(e.id) from Event e where e.sport_id = id)")
     private Long nbEvents;
 
+    @Formula("(select count(s.id) from my_sport s where s.sport_id = id)")
+    private Long nbUsers;
+
     public Sport() {
     }
 
@@ -81,7 +84,12 @@ public class Sport implements BaseModel<SportDto> {
     public void setNbEvents(Long nbEvents) {
         this.nbEvents = nbEvents;
     }
-
+    public Long getNbUsers() {
+        return nbUsers;
+    }
+    public void setNbUsers(Long nbUsers) {
+        this.nbUsers = nbUsers;
+    }
     @Override
     public SportDto toDto(){
         JMapper<SportDto, Sport> sportMapper = new JMapper<>(SportDto.class, Sport.class);
