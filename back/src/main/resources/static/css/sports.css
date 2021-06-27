@@ -99,3 +99,24 @@ input[type=text] {
   background-color: #0077b6;
   color:white;
 }
+
+.sportCard-nbUsers{
+  display: flex;
+  justify-content: center;
+  background-color: #2a9d8f;
+  color:white;
+}
+
+.sport-details{
+  display: flex;
+  justify-content: space-around;
+  background-color: #86bbd8;
+}
+
+.sport-details-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap:10px;
+  font-size: 0.6;
+}

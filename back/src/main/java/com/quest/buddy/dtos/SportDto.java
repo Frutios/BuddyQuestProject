@@ -25,6 +25,9 @@ public class SportDto implements BaseDto<Sport> {
     @JMap
     private Long nbEvents ;
 
+    @JMap
+    private Long nbUsers ;
+
     
     public SportDto() {
     }
@@ -69,7 +72,14 @@ public class SportDto implements BaseDto<Sport> {
     public void setNbEvents(Long nbEvents) {
         this.nbEvents = nbEvents;
     }
-    
+
+    public Long getNbUsers() {
+        return nbUsers;
+    }
+    public void setNbUsers(Long nbUsers) {
+        this.nbUsers = nbUsers;
+    }
+
     @Override
     public Sport toSource(){
         JMapper<Sport, SportDto> sportMapper = new JMapper<>(Sport.class, SportDto.class);

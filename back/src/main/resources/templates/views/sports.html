@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -26,10 +27,14 @@
                 <div class="sportCard-image "th:classappend="${sport.active} ? sportActive : sportInactive">
                    <a th:href="@{/sports/details(id=${sport.id})}"><img th:src="${sport.icon}"/></a> 
                 </div>
-                <div class="sportCard-nbEvents">
-                    <p th:if="${sport.nbEvents > 0}" th:text="${sport.nbEvents + ' Evenements'}"/>
-                    <p th:unless="${sport.nbEvents > 0}">Aucun évènement</p>
 
+                <div class="sport-details">
+                    <div class="sport-details-item">
+                        <i class="fa fa-users fa-sm"></i> <p th:text="${sport.nbUsers}"/>
+                    </div>
+                    <div class="sport-details-item">
+                        <i class="fa fa-calendar fa-sm"></i><p th:text="${sport.nbEvents}"/>
+                    </div>
                 </div>
                 <div class="sportCard-body">
                     <div class="sportCard-title">

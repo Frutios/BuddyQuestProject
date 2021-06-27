@@ -102,7 +102,7 @@ public class SportServiceImpl implements SportService {
 
         boolean sportExist = false;
         try {
-            sportExist = sportRepository.findByName(name) != null;
+            sportExist = sportRepository.findByName(name).size() >0;
         } catch (Exception e) {
             errorService.AddError("Sport", "Error while finding sport with name " + name );
         }
