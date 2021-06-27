@@ -49,6 +49,7 @@ input[type=text] {
     position: relative;/*2*/
     overflow: hidden;/*3*/
   }
+
 .sportCard-image img {
     width: 50%;/*4*/
       /*5 - Méthode de centrage en fonction de la taille de l'image */
@@ -61,6 +62,20 @@ input[type=text] {
     transition-duration: .3s;
     transition-timing-function: ease;
   }
+
+  .sportCard-image i {
+      /*5 - Méthode de centrage en fonction de la taille de l'image */
+    position: absolute;
+    color: #0082C3;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+      /*7 - Transition */
+    transition-property: filter width; 
+    transition-duration: .3s;
+    transition-timing-function: ease;
+  }
+
 
 .sportCard-body {
   text-align:center;  /*1*/
@@ -118,5 +133,5 @@ input[type=text] {
   align-items: center;
   justify-content: center;
   gap:10px;
-  font-size: 0.6;
+  font-size: 0.8em;
 }
