@@ -2,7 +2,11 @@ package com.quest.buddy.services;
 
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.User;
 import com.quest.buddy.repository.UserRepository;
 
@@ -46,6 +50,14 @@ public class UserServiceImpl implements UserService{
 
     public HashMap<String,String> getErrors(){
         return errorService.getErrors();
+    }
+
+    public static Iterable<UserDto> toListDto(Iterable<User> users ){
+        List<UserDto> usersDto=StreamSupport.stream(users.spliterator(), false)
+        .map(event ->event.toDto())
+        .collect(Collectors.toList());
+
+        return usersDto;
     }
 
 }

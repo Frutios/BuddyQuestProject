@@ -1,0 +1,86 @@
+.sportMain{
+    display: flex;
+    flex-flow:row ;
+    gap: 10px;
+    font-family: 'Montserrat'; 
+}
+
+.sportsContainer{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap:5px;
+
+}
+
+.sportCard{
+    width: 200px;
+    margin: 0px auto; /*2*/
+    background-color: white; /*3*/
+    box-shadow: 0px 5px 20px #999; /*4*/
+    border-radius: 10px;
+    transition: transform .2s; /* Animation */
+
+}
+
+input[type=text] {
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.sportCard:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  z-index: 8;
+}
+
+.sportCard a { /*5*/
+    color: #333; 
+    text-decoration: none;
+}
+
+.sportCard:hover .card-image img { /*6*/
+    width: 160%;
+    filter: grayscale(0);
+}
+
+.sportCard-image {
+    height: 80px;/*1*/
+    position: relative;/*2*/
+    overflow: hidden;/*3*/
+  }
+.sportCard-image img {
+    width: 50%;/*4*/
+      /*5 - Méthode de centrage en fonction de la taille de l'image */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+      /*7 - Transition */
+    transition-property: filter width; 
+    transition-duration: .3s;
+    transition-timing-function: ease;
+  }
+
+.sportCard-body {
+  text-align:center;  /*1*/
+  height: 300px;
+  padding: 10px; /*2*/
+  box-sizing: border-box; /*3*/
+
+}
+
+.sportCard-title{
+  font-size: 1.1em;
+}
+
+.sportCard-description{
+  font-size: 0.7em;
+}
+
+.filters{
+  display: flex;
+  flex-flow: column wrap;
+  gap: 5px;
+  min-width: 15vw;
+}

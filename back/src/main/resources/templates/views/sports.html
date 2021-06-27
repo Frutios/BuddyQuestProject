@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF8" />
-        <title>Sports</title>
-        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
-    </head>
-    <body >
 
+<head>
+    <meta charset="UTF8" />
+    <title>Sports</title>
 
-                <form th:action:"@{/sports}" method="GET" class="row" style="padding:30px">
-                    <input class="form-control" type="text" name="filter" placeholder="Recherche par mot clé">
-                    <button type="submit" class="btn btn-primary">Filtrer</button>
-                </form>
+    <!-- CSS Resources/Static/Css/style.css-->
+    <link rel="stylesheet" th:href="@{/css/sports.css}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
-            <div class="row d-flex justify-content-center" style="margin-top: 10px; "  >
-                    <div class="card text-white bg-primary mb-3" style="width: 18rem;margin-left: 5px;" th:each="sport : ${sports}" >
-                        <img class="card-img-top" th:src="${sport.icon}" style="height: 100px;" >
-                        <div class="card-header"><span th:text="${sport.name}"></span></div>
-                        <div class="card-body">
-                        <p class="card-text"><span th:text="${sport.description}"></span></p>
-                       
-                       
+</head>
+
+<body>
+    <div class="sportMain">
+        <form action="#" th:action:"@{/sports}" method="GET" th:object="${filters}" class="filters">
+            <input class="form-control" type="text" th:field="*{name}"  placeholder="Nom">
+            <input class="form-control" type="text" th:field="*{description}"  placeholder="Description">
+            <button class="buttonSubmit" type="submit">Filtrer</button>
+        </form>
+
+        <div class="sportsContainer">
+            <div class="sportCard" th:each="sport : ${sports}">
+                <div class="sportCard-image">
+                   <a th:href="@{/sports/details(id=${sport.id})}"><img th:src="${sport.icon}"/></a> 
+                </div>
+                <div class="sportCard-body">
+                    <div class="sportCard-title">
+                        <h3 th:text="${sport.name}" />
                     </div>
-                    <div class="card-footer bg-transparent " style="display:flex;justify-content: space-between;">
-                        <button type="button" class="btn "><a th:href="@{'/sportDetails?' + ${sport.id}}">Modifier</a></button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+                    <div class="sportCard-description">
+                        <p th:text="${sport.description}" />
                     </div>
-                    </div>
+                </div>
             </div>
-            
+        </div>
+    </div>
+</body>
 
-            
-
-        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
-    </body>
 </html>

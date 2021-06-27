@@ -1,7 +1,7 @@
 package com.quest.buddy.services;
 
+import com.quest.buddy.dtos.EventDto;
 import com.quest.buddy.models.Event;
-import com.quest.buddy.models.Sport;
 import com.quest.buddy.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 
 @Service("EventService")
@@ -85,7 +87,7 @@ public class EventServiceImpl implements EventService {
 
             boolean existTitle = false;
             try {
-                existTitle = eventRepository.findEventByTitle(title).isEmpty();
+                existTitle = !eventRepository.findEventByTitle(title).isEmpty();
             } catch (Exception e) {
                 errorService.AddError("Event", "Error while finding event with title " + title );
             }
@@ -105,5 +107,17 @@ public class EventServiceImpl implements EventService {
 
     public HashMap<String,String> getErrors(){
         return errorService.getErrors();
+    }
+
+    public static Iterable<EventDto> toListDto(Iterable<Event> events ){
+
+        Iterable<EventDto> eventsDto = null;
+        if(events != null){
+            eventsDto=StreamSupport.stream(events.spliterator(), false)
+            .map(event ->event.toDto())
+            .collect(Collectors.toList());
+        }
+       
+        return eventsDto;
     }
 }

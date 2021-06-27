@@ -1,11 +1,15 @@
 package com.quest.buddy.controller;
 
+import com.quest.buddy.dtos.SportDto;
+import com.quest.buddy.dtos.SportFilters;
+import com.quest.buddy.models.Sport;
 import com.quest.buddy.services.SportServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -15,20 +19,34 @@ public class SportController {
     private SportServiceImpl sportService;
 
     @GetMapping({"/sports"})
-    public String displaySports(Model model,String filter) {
+    public String displaySports(@ModelAttribute("filters") SportFilters sportFilters,Model model,String filter) {
+    
+       Iterable<SportDto> sports;
        
-       if(filter!= null && !filter.equals("")){
-        model.addAttribute("sports", sportService.findSportsByKeyword(filter));
+       if(sportFilters!= null  && sportFilters.getName() != null && !sportFilters.getName().equals("")){
+        sports = sportService.getSportsByKeyWord(sportFilters.getName());
        }else
        {
-        model.addAttribute("sports", sportService.getAll());
+        sports = sportService.getAllDto();
        }
+       model.addAttribute("sports",sports);
+       
+       if(sportFilters == null){
+        sportFilters = new SportFilters();
+       }
+       model.addAttribute("filters",sportFilters);
+
         return "views/sports";
     }
-
-    @GetMapping({"/sportDetails"})
+    
+    @GetMapping({"/sports/details"})
     public String displaySport(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("sport", sportService.findById(id));
+
+        Sport sport = sportService.findById(id);
+
+        model.addAttribute("sport", sport.toDto());
+        model.addAttribute("events", sportService.getEventsForSport(id));
+        // model.addAttribute("users", sportService.getUsersForSport(id));
         return "views/sportDetails";
     }
 

@@ -1,0 +1,56 @@
+.mainSport{
+  display: flex;
+  font-family: 'Montserrat'; 
+  gap: 10px;
+}
+
+.sportCard{
+  width: 300px;
+  display: flex;
+  flex-flow: column;
+}
+
+.sportDetails{
+  flex-grow: 1;
+}
+
+.sportEntities{
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+}
+
+.sportEvents{
+  display: flex;
+  gap: 10px;
+}
+
+.eventCard{
+  width: 200px;
+  margin: 0px auto; /*2*/
+  background-color: white; /*3*/
+  box-shadow: 0px 5px 20px #999; /*4*/
+  border-radius: 10px;
+  transition: transform .2s; /* Animation */
+}
+
+.eventCard:hover {
+  transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  z-index: 8;
+}
+
+.eventCard-body {
+  text-align:center;  /*1*/
+  height: 300px;
+  padding: 10px; /*2*/
+  box-sizing: border-box; /*3*/
+
+}
+
+.eventCard-title{
+  font-size: 1.1em;
+}
+
+.eventCard-description{
+  font-size: 0.7em;
+}

@@ -2,37 +2,47 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF8" />
-        <title>Détails du sport <span th:text="${sport.name}"></span></title>
-        <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+        <title th:text="${sport.name}" />
+
+            <!-- CSS Resources/Static/Css/style.css-->
+            <link rel="stylesheet" th:href="@{/css/sportDetails.css}" />  
     </head>
     <body>
-        <!-- <div class="container">
-            <div class="row">
-                <div class="alert alert-primary" role="alert">
-                    <h3 style="align-items: center;">Sports</h3>
-                  </div>
+        <div class="mainSport">
+            <div class="sportCard">
+                <div class="sportIcon">
+                    <img th:src="${sport.icon}"/>
+                </div>
+                <div class="sportTitle">
+                    <p  th:text="${sport.name}" />
+                </div>
+                <div class="sportDescription">
+                    <p  th:text="${sport.description}" />
+                </div>
+                <div class="sportEntities">
+                    <button>Evenements</button>
+                    <button>Utilisateurs</button>
+                </div>
             </div>
-
-            <div class="row">
-                <input class="form-control" type="text" placeholder="Rechercher">
-            </div>
-            <div class="row d-flex justify-content-center" style="margin-top: 10px; "  >
-                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;margin-left: 10px;" th:each="sport : ${sports}">
-                        <div class="card-header"><span th:text="${sport.name}"></span></div>
-                        <div class="card-body">
-                        <p class="card-text">Détails sur le sport, nombre d'évènements</p>
-                        <p class="card-text">Détails sur le sport, nombre de participants</p>
-
-                        <button type="button" class="btn btn-success"><a th:href="@{'/sports/' + ${sport.id}}">Modifier</a></button>
-                        <button type="button" class="btn btn-danger">Supprimer</button>
+            
+            <div class="eventDetails">
+                <h3>Evénements</h3>
+                <div class="sportEvents">
+                    <div class="eventCard" th:each="event : ${events}">
+                        <div class="eventCard-body">
+                            <div class="eventCard-title">
+                                <h3 th:text="${event.title}" />
+                            </div>
+                            <div class="eventCard-description">
+                                <h3 th:text="${event.description}" />
+                            </div>
+                        </div>
                     </div>
-                    </div>
+                </div>
+                <div class="sportEvents">
+                
+                </div>
             </div>
-             -->
         </div>
-
-        <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
     </body>
 </html>
