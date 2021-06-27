@@ -21,9 +21,14 @@ public class SportDto implements BaseDto<Sport> {
 
     @JMap
     private Boolean active;
+
+    @JMap
+    private Long nbEvents ;
+
     
     public SportDto() {
     }
+    
     public Long getId() {
         return id;
     }
@@ -56,6 +61,13 @@ public class SportDto implements BaseDto<Sport> {
     }
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Long getNbEvents() {
+        return nbEvents;
+    }
+    public void setNbEvents(Long nbEvents) {
+        this.nbEvents = nbEvents;
     }
     
     @Override

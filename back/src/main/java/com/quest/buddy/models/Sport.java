@@ -5,6 +5,8 @@ import javax.persistence.*;
 import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.SportDto;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 @Table(name = "sport")
 public class Sport implements BaseModel<SportDto> {
@@ -25,6 +27,9 @@ public class Sport implements BaseModel<SportDto> {
 
     @Column(name ="active", nullable = false)
     private Boolean active = true;
+
+    @Formula("(select count(e.id) from Event e where e.sport_id = id)")
+    private Long nbEvents;
 
     public Sport() {
     }
@@ -67,6 +72,14 @@ public class Sport implements BaseModel<SportDto> {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Long getNbEvents() {
+        return nbEvents;
+    }
+
+    public void setNbEvents(Long nbEvents) {
+        this.nbEvents = nbEvents;
     }
 
     @Override

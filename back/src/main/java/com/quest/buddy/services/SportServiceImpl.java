@@ -24,7 +24,6 @@ public class SportServiceImpl implements SportService {
     @Autowired
     private ErrorServiceImp errorService;
 
-
     @Override
     public void remove(Long id) {
 
@@ -98,18 +97,6 @@ public class SportServiceImpl implements SportService {
 
     }
 
-    public Sport findByName(String name){
-        
-        Sport sport = null;
-
-        try {
-            sport = sportRepository.findByName(name);
-        } catch (Exception e) {
-            errorService.AddError("Sport", "Error getting sport with name " + name );
-        }
-        
-        return sport;
-    }
 
     public boolean exist(String name){
 
@@ -170,11 +157,11 @@ public class SportServiceImpl implements SportService {
     }
 
     @Override
-    public Iterable<SportDto> getSportsByKeyWord(String filter) {
+    public Iterable<SportDto> findByName(String name) {
        
         Iterable<Sport> sports;
 
-        sports = sportRepository.findSportsByKeyword(filter);
+        sports = sportRepository.findByName(name);
 
         return toListDto(sports);
     }

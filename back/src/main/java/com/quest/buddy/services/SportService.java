@@ -10,8 +10,7 @@ import com.quest.buddy.models.Sport;
 public interface SportService extends BaseService<Sport,Long> {
     
     public SportDto create(SportDto sportDto);
-    public Iterable<SportDto> getAllDto();
-    public Iterable<SportDto> getSportsByKeyWord(String filter);
+    public Iterable<SportDto> findByName(String name);
     public Iterable<EventDto> getEventsForSport(Long sportId);
     public Iterable<UserDto> getUsersForSport(Long sportId);
 
