@@ -1,57 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF8" />
-        <title th:text="${sport.name}" />
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout">
 
-            <!-- CSS Resources/Static/Css/style.css-->
-            <link rel="stylesheet" th:href="@{/css/sportDetails.css}" />  
-    </head>
-    <body>
-        <div class="mainSport">
-            <div class="sportCard">
-                <div class="sportIcon">
-                    <img th:src="${sport.icon}"/>
-                </div>
-                <div class="sportTitle">
-                    <p  th:text="${sport.name}" />
-                </div>
-                <div class="sportDescription">
-                    <form action="#"  method="POST" th:object="${sport}">
-                        <div>
-                          <input type="checkbox" th:field="*{active}" >
-                          <label for="updateActive">Création d'évènements ?</label>
-                        </div>
-                        <div>
-                          <button type="submit">Mettre à jour</button>
-                        </div>
-                      </form>
-                </div>
-               
+<head>
+    <title>Sports</title>
+
+    <!-- CSS Resources/Static/Css/style.css-->
+    <link rel="stylesheet" th:href="@{/css/sportDetails.css}" />  
+</head>
+
+<body>
+    <div class="mainSport">
+        <div class="sportCard">
+            <div class="sportIcon">
+                <img th:src="${sport.icon}"/>
             </div>
-            
-            <div class="eventDetails">
-                <div class="sportEntities">
-                    <button>Evenements</button>
-                    <button>Utilisateurs</button>
-                    <button>Localisation</button>
-                </div>
-                <div class="sportEvents">
-                    <div class="eventCard" th:each="event : ${events}">
-                        <div class="eventCard-body">
-                            <div class="eventCard-title">
-                                <h3 th:text="${event.title}" />
-                            </div>
-                            <div class="eventCard-description">
-                                <h3 th:text="${event.description}" />
-                            </div>
+            <div class="sportTitle">
+                <p  th:text="${sport.name}" />
+            </div>
+            <div class="sportDescription">
+                <form action="#"  method="POST" th:object="${sport}">
+                    <div>
+                      <input type="checkbox" th:field="*{active}" >
+                      <label for="updateActive">Création d'évènements ?</label>
+                    </div>
+                    <div>
+                      <button type="submit">Mettre à jour</button>
+                    </div>
+                  </form>
+            </div>
+           
+        </div>
+        
+        <div class="eventDetails">
+            <div class="sportEntities">
+                <button>Evenements</button>
+                <button>Utilisateurs</button>
+                <button>Localisation</button>
+            </div>
+            <div class="sportEvents">
+                <div class="eventCard" th:each="event : ${events}">
+                    <div class="eventCard-body">
+                        <div class="eventCard-title">
+                            <h3 th:text="${event.title}" />
+                        </div>
+                        <div class="eventCard-description">
+                            <h3 th:text="${event.description}" />
                         </div>
                     </div>
                 </div>
-                <div class="sportEvents">
-                
-                </div>
+            </div>
+            <div class="sportEvents">
+            
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
