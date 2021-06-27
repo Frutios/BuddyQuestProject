@@ -71,8 +71,8 @@ public class ImportServiceImp implements ImportService {
     }
 
     public void seedEvents() {
-       Sport soccer = sportService.findByName("Soccer");
-       Sport basketBall = sportService.findByName("BasketBall");
+       Sport soccer = sportService.findById(1L);
+       Sport basketBall = sportService.findById(2L);
        User romain = userService.findById(1L);
 
        LocalDate currentDate = LocalDate.now();

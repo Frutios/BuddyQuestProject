@@ -92,3 +92,10 @@ input[type=text] {
 .sportInactive{
   background-color:#e63946;
 }
+
+.sportCard-nbEvents{
+  display: flex;
+  justify-content: center;
+  background-color: #0077b6;
+  color:white;
+}

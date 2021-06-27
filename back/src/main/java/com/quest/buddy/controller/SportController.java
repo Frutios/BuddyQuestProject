@@ -25,7 +25,7 @@ public class SportController {
        Iterable<SportDto> sports;
        
        if(sportFilters!= null  && sportFilters.getName() != null && !sportFilters.getName().equals("")){
-        sports = sportService.getSportsByKeyWord(sportFilters.getName());
+        sports = sportService.findByName(sportFilters.getName());
        }else
        {
         sports = sportService.getAllDto();
