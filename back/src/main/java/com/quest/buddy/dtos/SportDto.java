@@ -4,6 +4,7 @@ import com.googlecode.jmapper.JMapper;
 import com.googlecode.jmapper.annotations.JMap;
 import com.quest.buddy.models.Sport;
 
+
 public class SportDto implements BaseDto<Sport> {
 
     @JMap
@@ -17,6 +18,9 @@ public class SportDto implements BaseDto<Sport> {
 
     @JMap
     private String icon;
+
+    @JMap
+    private Boolean active;
     
     public SportDto() {
     }
@@ -45,6 +49,13 @@ public class SportDto implements BaseDto<Sport> {
     }
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+    public void setActive(Boolean active) {
+        this.active = active;
     }
     
     @Override

@@ -23,6 +23,9 @@ public class Sport implements BaseModel<SportDto> {
     @Column(name = "icon", length = 500)
     private String icon;
 
+    @Column(name ="active", nullable = false)
+    private Boolean active = true;
+
     public Sport() {
     }
 
@@ -56,6 +59,14 @@ public class Sport implements BaseModel<SportDto> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     @Override

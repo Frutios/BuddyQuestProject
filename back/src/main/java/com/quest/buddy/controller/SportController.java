@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -47,6 +48,20 @@ public class SportController {
         model.addAttribute("sport", sport.toDto());
         model.addAttribute("events", sportService.getEventsForSport(id));
         // model.addAttribute("users", sportService.getUsersForSport(id));
+        return "views/sportDetails";
+    }
+
+    @PostMapping({"/sports/details"})
+    public String updateSport(@RequestParam("id") Long id,@ModelAttribute("sport") SportDto sportModel,Model model) {
+
+        Sport sport = sportService.findById(sportModel.getId());
+        sport.setActive(sportModel.getActive());
+
+        sportService.update(sport);
+
+        model.addAttribute("sport", sport.toDto());
+        model.addAttribute("events", sportService.getEventsForSport(id));
+        model.addAttribute("users", sportService.getUsersForSport(id));
         return "views/sportDetails";
     }
 
