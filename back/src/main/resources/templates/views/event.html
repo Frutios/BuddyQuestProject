@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layouts/_layout">
 
 <head>
     <meta charset="UTF8" />
     <title>Event</title>
 </head>
-<body>
+
 <div layout:fragment="content">
     <div class="content-header">
         <div class="container-fluid">
@@ -55,17 +56,19 @@
                             <h3 class="card-title text-bold" th:text="${event.title}"> </h3>
                             </br>
                             <div class="user-block">
-                                <img class="img-circle img-bordered-sm" th:src="${event.user.getUrlAvatar()}" alt="user image">
+                                <img class="img-circle img-bordered-sm" th:src="${event.user.getUrlAvatar()}"
+                                    alt="user image">
                                 <span class="username">
-                                      <a href="#" th:text="${event.user.getFirstName()}"></a>
-                                    </span>
-                                <span class="description" th:text="${event.dateEventCreate}">Publié - 18h00 Aujourd'hui</span>
+                                    <a href="#" th:text="${event.user.getFirstName()}"></a>
+                                </span>
+                                <span class="description" th:text="${event.dateEventCreate}">Publié - 18h00
+                                    Aujourd'hui</span>
                             </div>
 
 
-                            <p class="card-text" th:text="${event.description}"/>
+                            <p class="card-text" th:text="${event.description}" />
 
-                            <p class="text-muted" th:text="${event.getStartTime()}">15 July 2021        10h00 ->11h30</p>
+                            <p class="text-muted" th:text="${event.getStartTime()}">15 July 2021 10h00 ->11h30</p>
                             <a href="#" class="card-link">
                                 <i class="fas fa-heart mr-1 text-red"></i>
                                 67
@@ -79,9 +82,6 @@
                     </div>
                 </div>
 
-
-
-
             </div>
 
             <!-- /.row -->
@@ -92,11 +92,7 @@
 </div>
 <!-- /.content -->
 
-
-
-
-
-
 </div>
-</body>
+
+
 </html>

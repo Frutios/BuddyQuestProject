@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layouts/_layout">
 
 <head>
     <title>Sports</title>
@@ -7,51 +8,47 @@
     <!-- CSS Resources/Static/Css/style.css-->
     <link rel="stylesheet" th:href="@{/css/sports.css}" />
 </head>
+<div layout:fragment="content">
+    <div class="sportMain">
+        <form action="#" th:action:"@{/sports}" method="GET" th:object="${filters}" class="filters">
+            <input class="form-control" type="text" th:field="*{name}" placeholder="Nom">
+            <input class="form-control" type="text" th:field="*{description}" placeholder="Description">
+            <button class="buttonSubmit" type="submit">Filtrer</button>
+        </form>
 
-<body>
-    <div layout:fragment="content">
-        <div class="sportMain">
-            <form action="#" th:action:"@{/sports}" method="GET" th:object="${filters}" class="filters">
-                <input class="form-control" type="text" th:field="*{name}" placeholder="Nom">
-                <input class="form-control" type="text" th:field="*{description}" placeholder="Description">
-                <button class="buttonSubmit" type="submit">Filtrer</button>
-            </form>
+        <div class="sportsContainer">
+            <div class="sportCard" th:each="sport : ${sports}">
+                <div class="sportCard-image " th:classappend="${sport.active} ? sportActive : sportInactive">
+                    <a th:href="@{/sports/details(id=${sport.id})}"
+                        style="display: flex;justify-content: center;align-items: center;">
+                        <img th:if="${sport.icon != null}" th:src="${sport.icon}" />
+                        <i th:if="${sport.icon == null}" class="fa fa-times fa-3x "></i>
+                    </a>
+                </div>
 
-            <div class="sportsContainer">
-                <div class="sportCard" th:each="sport : ${sports}">
-                    <div class="sportCard-image " th:classappend="${sport.active} ? sportActive : sportInactive">
-                        <a th:href="@{/sports/details(id=${sport.id})}"
-                            style="display: flex;justify-content: center;align-items: center;">
-                            <img th:if="${sport.icon != null}" th:src="${sport.icon}" />
-                            <i th:if="${sport.icon == null}" class="fa fa-times fa-3x "></i>
-                        </a>
+                <div class="sport-details">
+                    <div class="sport-details-item">
+                        <i class="fa fa-users fa-sm"></i>
+                        <p th:text="${sport.nbUsers}" />
+                    </div>
+                    <div class="sport-details-item">
+                        <i class="fa fa-calendar fa-sm"></i>
+                        <p th:text="${sport.nbEvents}" />
+                    </div>
+                </div>
+                <div class="sportCard-body">
+                    <div class="sportCard-title">
+                        <h3 th:text="${sport.name}" />
+                    </div>
+                    <div class="sportCard-description">
+                        <p th:text="${sport.description}" />
                     </div>
 
-                    <div class="sport-details">
-                        <div class="sport-details-item">
-                            <i class="fa fa-users fa-sm"></i>
-                            <p th:text="${sport.nbUsers}" />
-                        </div>
-                        <div class="sport-details-item">
-                            <i class="fa fa-calendar fa-sm"></i>
-                            <p th:text="${sport.nbEvents}" />
-                        </div>
-                    </div>
-                    <div class="sportCard-body">
-                        <div class="sportCard-title">
-                            <h3 th:text="${sport.name}" />
-                        </div>
-                        <div class="sportCard-description">
-                            <p th:text="${sport.description}" />
-                        </div>
-
-                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-</body>
+</div>
 
 </html>
