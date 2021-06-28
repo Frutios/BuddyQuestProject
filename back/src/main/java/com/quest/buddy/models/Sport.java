@@ -5,7 +5,7 @@ import javax.persistence.*;
 import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.SportDto;
 
-import java.util.List;
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table(name = "sport")
@@ -25,11 +25,14 @@ public class Sport implements BaseModel<SportDto> {
     @Column(name = "icon", length = 500)
     private String icon;
 
-    @OneToMany(mappedBy = "sport")
-    private List<Event> events;
+    @Column(name ="active", nullable = false)
+    private Boolean active = true;
 
-    @OneToMany(mappedBy = "sport")
-    private List<MySport> myUsers;
+    @Formula("(select count(e.id) from Event e where e.sport_id = id)")
+    private Long nbEvents;
+
+    @Formula("(select count(s.id) from my_sport s where s.sport_id = id)")
+    private Long nbUsers;
 
     public Sport() {
     }
@@ -66,23 +69,27 @@ public class Sport implements BaseModel<SportDto> {
         this.name = name;
     }
 
-    public List<Event> getEvents() {
-        return events;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setEvents(List<Event> events) {
-        this.events = events;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public List<MySport> getMyUsers() {
-        return myUsers;
+    public Long getNbEvents() {
+        return nbEvents;
     }
 
-    public void setMyUsers(List<MySport> myUsers) {
-        this.myUsers = myUsers;
+    public void setNbEvents(Long nbEvents) {
+        this.nbEvents = nbEvents;
     }
-
-
+    public Long getNbUsers() {
+        return nbUsers;
+    }
+    public void setNbUsers(Long nbUsers) {
+        this.nbUsers = nbUsers;
+    }
     @Override
     public SportDto toDto(){
         JMapper<SportDto, Sport> sportMapper = new JMapper<>(SportDto.class, Sport.class);

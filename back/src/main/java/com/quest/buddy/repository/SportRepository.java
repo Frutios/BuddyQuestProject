@@ -1,9 +1,10 @@
 package com.quest.buddy.repository;
 
 
-
 import java.util.List;
 
+import com.quest.buddy.dtos.EventDto;
+import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.Sport;
 
 import org.springframework.data.jpa.repository.Query;
@@ -13,10 +14,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SportRepository extends CrudRepository<Sport, Long> {
-    
-    @Query("SELECT s FROM Sport s WHERE s.name = (:name)")
-        public Sport findByName(@Param("name") String name);
+        
+    public List<Sport> findByName(String name);
 
-    @Query(value="SELECT * FROM Sport s WHERE s.name like %:filter% or s.description like %:filter%",nativeQuery=true)
-    public Iterable<Sport> findSportsByKeyword(@Param("filter") String name);
+    // @Query("select new com.example.IdsOnly(t.id, t.otherId) from TestTable t where t.creationDate > ?1 and t.type in (?2)")
+    @Query("SELECT new com.quest.buddy.dtos.EventDto(e.title,e.description) FROM Event e WHERE e.sport.id = :sportId")
+    public Iterable<EventDto> findEvents(@Param("sportId") Long sportId);
+   
+    @Query(value="SELECT * FROM User u WHERE u.sport_id = :sportId",nativeQuery=true)
+    public Iterable<UserDto> findUsers(@Param("sportId") Long sportId);
+
+    
 }

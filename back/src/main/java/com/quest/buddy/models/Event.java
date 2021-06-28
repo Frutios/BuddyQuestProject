@@ -3,12 +3,14 @@ package com.quest.buddy.models;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.*;
+
+import com.googlecode.jmapper.JMapper;
+import com.quest.buddy.dtos.EventDto;
 
 @Entity
 @Table(name = "event")
-public class Event {
+public class Event implements BaseModel<EventDto> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,16 +59,18 @@ public class Event {
     private byte state;
 
     @ManyToOne
-    @JoinColumn(name = "localisationId", referencedColumnName = "id")
+    @JoinColumn(name = "localisation_Id", referencedColumnName = "id")
     private Localisation localisation;
 
-    /*
+
+   
     @OneToMany(mappedBy = "event")
     private List<LogEvent> logEvents;
 
     @OneToMany(mappedBy = "event")
     private List<Message> messages;
-*/
+
+
     public Event() {
     }
 
@@ -189,7 +193,8 @@ public class Event {
     public void setLocalisation(Localisation localisation) {
         this.localisation = localisation;
     }
-/*
+
+
     public List<LogEvent> getLogEvents() {
         return logEvents;
     }
@@ -202,9 +207,14 @@ public class Event {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
+
+    @Override
+    public EventDto toDto(){
+        JMapper<EventDto, Event> eventMapper = new JMapper<>(EventDto.class, Event.class);
+        
+        EventDto eventDto = eventMapper.getDestination(this);
+        return eventDto;
     }
-    */
+
 
 }

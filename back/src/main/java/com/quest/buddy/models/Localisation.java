@@ -1,7 +1,6 @@
 package com.quest.buddy.models;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "localisation")
@@ -23,15 +22,6 @@ public class Localisation {
     @Column(name = "latitude", nullable = false)
     private float latitude;
 
-    /*
-    @OneToMany(mappedBy = "localisation")
-    private List<User> participants;
-
-    @OneToMany(mappedBy = "localisation")
-    private List<Event> events;
-
-
-     */
 
     public Localisation() {
     }

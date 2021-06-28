@@ -1,0 +1,14 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div class="sportEvents">
+    <div class="eventCard" th:each="user : ${users}">
+        <div class="eventCard-body">
+            <div class="eventCard-title">
+                <h3 th:text="${user.firstName}" />
+            </div>
+            <div class="eventCard-description">
+                <h3 th:text="${user.lastName}" />
+            </div>
+        </div>
+    </div>
+</div>
+</html>

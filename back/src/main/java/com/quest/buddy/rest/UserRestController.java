@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.User;
 import com.quest.buddy.services.UserServiceImpl;
 
@@ -74,15 +73,6 @@ public class UserRestController {
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @GetMapping(value = "/api/users/{id}/sports", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<MySport>> getSportsFromUsers(@PathVariable("id") long id) {
-        User user = userService.findById(id);
-        if(hasErrors()){
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<Iterable<MySport>>(user.getMySports(),HttpStatus.OK);
     }
 
     public boolean hasErrors(){
