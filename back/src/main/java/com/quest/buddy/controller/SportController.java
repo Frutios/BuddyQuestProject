@@ -4,9 +4,7 @@ import java.util.Arrays;
 
 import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.dtos.SportFilters;
-import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Sport;
-import com.quest.buddy.services.MySportService;
 import com.quest.buddy.services.MySportServiceImpl;
 import com.quest.buddy.services.SportServiceImpl;
 

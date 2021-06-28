@@ -3,55 +3,46 @@
 <html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <meta charset="UTF8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet"
-        type="text/css" />
-    <link rel="stylesheet" th:href="@{/css/navigation.css}" />
-
-    <div layout::fragment="head">
-        <div id="navbar">
-            <a href="#home">Accueil</a>
-            <div>
-                <a th:href="@{/sports}">Sports</a>
-                <a th:href="@{/events}">Evenements</a>
-                <a th:href="@{/users}">Utilisateurs</a>
-            </div>
-          
-        </div>
-    </div>
+  <meta charset="UTF8" />
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!--tailwindcss -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 </head>
 
-  <div layout::fragment="content" style="margin-top: 20px;">
+<div class="hold-transition sidebar-mini">
+  <div class="wrapper">
+      <div th:replace="fragments/header :: header"></div>
 
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper border-radius-xl mt-1">
+          <!-- Content Header (Page header) -->
+          <!-- /.content-header -->
+
+          <!-- Main content -->
+          <div layout:fragment="content" style="margin-top: 20px;">
+
+          </div>
+          <!-- /.content -->
+      </div>
+      <!-- /.content-wrapper -->
+
+      <!-- Footer -->
+      <div th:replace="fragments/footer :: footer"></div>
+
+  </div>
+
+  <!-- jQuery -->
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/dist/js/adminlte.min.js}"></script>
 </div>
-
-<script type="text/javascript">
-    // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
-
-// Get the navbar
-var navbar = document.getElementById("navbar");
-
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
-
-// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-    navbar.classList.add("sticky")
-  } else {
-    navbar.classList.remove("sticky");
-  }
-}
-</script>
-
-
-
-
-
-
 
 </html>
