@@ -1,65 +1,102 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/_layout">
 
 <head>
     <meta charset="UTF8" />
     <title>Event</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
-    <!--tailwindcss -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
 </head>
-
-<div class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        <div th:replace="fragments/header :: header"></div>
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper border-radius-xl mt-1"
-            style="background-image: url(./img/fond3.jpg);width:auto;height: auto;background-size: 100% ; background-position-y: 50%">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Starter Page</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Starter Page</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
-
-            <!-- Main content -->
-            <div layout::fragment="content" style="margin-top: 20px;">
-
-            </div>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-
-        <!-- Footer -->
-        <div th:replace="fragments/footer :: footer"></div>
-
-
+<body>
+<div layout:fragment="content">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">List Event</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Starter Page</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- cart -->
+                <div class="col-lg-4" th:each="event : ${listEvent}">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <div class="card-tools">
+                                <div class="card-tools">
+                                    <a href="#" class="card-link text-purple">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </a>
+                                    <a href="#" class="card-link text-fuchsia">
+                                        <i class="fas fa-comments"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
 
-    <!-- jQuery -->
-    <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-    <!-- Bootstrap 4 -->
-    <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-    <!-- AdminLTE App -->
-    <script th:src="@{/dist/js/adminlte.min.js}"></script>
+
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-bold" th:text="${event.title}"> </h3>
+                            </br>
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" th:src="${event.user.getUrlAvatar()}" alt="user image">
+                                <span class="username">
+                                      <a href="#" th:text="${event.user.getFirstName()}"></a>
+                                    </span>
+                                <span class="description" th:text="${event.dateEventCreate}">Publié - 18h00 Aujourd'hui</span>
+                            </div>
+
+
+                            <p class="card-text" th:text="${event.description}"/>
+
+                            <p class="text-muted" th:text="${event.getStartTime()}">15 July 2021        10h00 ->11h30</p>
+                            <a href="#" class="card-link">
+                                <i class="fas fa-heart mr-1 text-red"></i>
+                                67
+                            </a>
+                            <a href="#" style="margin-left:4.25rem">
+                                <small class="badge badge-warning"><i class="far fa-clock"></i> partners</small>
+                            </a>
+
+                            <a href="#" class="card-link text-fuchsia btn-sm float-right">JOIN--></a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+
 </div>
+<!-- /.content -->
 
+
+
+
+
+
+</div>
+</body>
 </html>

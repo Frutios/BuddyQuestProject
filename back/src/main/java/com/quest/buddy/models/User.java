@@ -39,6 +39,9 @@ public class User implements BaseModel<UserDto> {
     @Column(name = "phone", length = 10)
     private String phone;
 
+    @Column(name = "urlAvatar", length = 50)
+    private String urlAvatar;
+
     @ManyToOne
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
@@ -49,6 +52,7 @@ public class User implements BaseModel<UserDto> {
         LocalTime currentTime = LocalTime.now();
         LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
         this.inscriptionDate = fromDateAndTime;
+        urlAvatar="/img/avatar.png";
     }
 
     public User(String firstName, String lastName, String email, String password, String pseudonym, String phone,
@@ -134,6 +138,14 @@ public class User implements BaseModel<UserDto> {
 
     public void setLocalisation(Localisation localisation) {
         this.localisation = localisation;
+    }
+
+    public String getUrlAvatar() {
+        return urlAvatar;
+    }
+
+    public void setUrlAvatar(String urlAvatar) {
+        this.urlAvatar = urlAvatar;
     }
 
     @Override

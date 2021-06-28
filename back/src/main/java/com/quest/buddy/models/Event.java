@@ -31,6 +31,9 @@ public class Event implements BaseModel<EventDto> {
     @JoinColumn(name = "sportId", referencedColumnName = "id")
     private Sport sport;
 
+    @Column(name = "dateEventCreate")
+    private LocalDateTime dateEventCreate;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "startTime")
     private LocalDateTime startTime;
@@ -63,15 +66,6 @@ public class Event implements BaseModel<EventDto> {
     @ManyToOne
     @JoinColumn(name = "localisation_Id", referencedColumnName = "id")
     private Localisation localisation;
-
-
-   
-    @OneToMany(mappedBy = "event")
-    private List<LogEvent> logEvents;
-
-    @OneToMany(mappedBy = "event")
-    private List<Message> messages;
-
 
     public Event() {
     }
@@ -196,19 +190,13 @@ public class Event implements BaseModel<EventDto> {
         this.localisation = localisation;
     }
 
-
-    public List<LogEvent> getLogEvents() {
-        return logEvents;
+    public LocalDateTime getDateEventCreate() {
+        return dateEventCreate;
     }
 
-    public void setLogEvents(List<LogEvent> logEvents) {
-        this.logEvents = logEvents;
+    public void setDateEventCreate(LocalDateTime dateEventCreate) {
+        this.dateEventCreate = dateEventCreate;
     }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
 
     @Override
     public EventDto toDto(){
