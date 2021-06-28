@@ -20,10 +20,11 @@ public class UserController {
     UserServiceImpl userService;
 
     @PostMapping("/add-user")
-    public void addUser(@ModelAttribute User user,  Model model) {
+    public String addUser(@ModelAttribute User user,  Model model) {
         model.addAttribute("user", user);
         userService.create(user);
         
+        return "views/userlist";
     }
 
     @GetMapping("/register")
