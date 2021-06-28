@@ -55,4 +55,10 @@ public class EventController {
         String ntitle = event.getTitle();
         return "/auth/eventadd";
     }
+
+    @PostMapping("/event")
+    public String resercheEvent(String filtre) {
+        String ntitle = filtre;
+        return "redirect:/event";
+    }
 }

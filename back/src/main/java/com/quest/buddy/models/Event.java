@@ -60,12 +60,13 @@ public class Event {
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
+    /*
     @OneToMany(mappedBy = "event")
     private List<LogEvent> logEvents;
 
     @OneToMany(mappedBy = "event")
     private List<Message> messages;
-
+*/
     public Event() {
     }
 
@@ -188,7 +189,7 @@ public class Event {
     public void setLocalisation(Localisation localisation) {
         this.localisation = localisation;
     }
-
+/*
     public List<LogEvent> getLogEvents() {
         return logEvents;
     }
@@ -204,4 +205,6 @@ public class Event {
     public void setMessages(List<Message> messages) {
         this.messages = messages;
     }
+    */
+
 }
