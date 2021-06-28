@@ -1,31 +1,25 @@
 package com.quest.buddy.dtos;
 
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.annotations.JMap;
+
 import com.quest.buddy.models.Sport;
+
+import org.modelmapper.ModelMapper;
 
 
 public class SportDto implements BaseDto<Sport> {
 
-    @JMap
     private Long id;
 
-    @JMap
     private String name;
 
-    @JMap
     private String description;
 
-    @JMap
     private String icon;
 
-    @JMap
     private Boolean active;
 
-    @JMap
     private Long nbEvents ;
 
-    @JMap
     private Long nbUsers ;
 
     
@@ -82,10 +76,9 @@ public class SportDto implements BaseDto<Sport> {
 
     @Override
     public Sport toSource(){
-        JMapper<Sport, SportDto> sportMapper = new JMapper<>(Sport.class, SportDto.class);
-
-        Sport sport = sportMapper.getDestination(this); 
-        return sport; 
+        ModelMapper modelMapper = new ModelMapper();
+        Sport sport = modelMapper.map(this, Sport.class);
+        return sport;
     }
     
 }

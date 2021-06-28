@@ -3,9 +3,8 @@ package com.quest.buddy.services;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.quest.buddy.dtos.DecathlonSports;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.MySport;

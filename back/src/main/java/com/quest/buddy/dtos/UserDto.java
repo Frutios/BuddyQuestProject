@@ -1,13 +1,11 @@
 package com.quest.buddy.dtos;
 
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.annotations.JMap;
 import com.quest.buddy.models.User;
 
+import org.modelmapper.ModelMapper;
+
 public class UserDto implements BaseDto<User> {
-    @JMap
     private String firstName;
-    @JMap
     private String lastName;
 
 
@@ -25,10 +23,9 @@ public class UserDto implements BaseDto<User> {
     }
     @Override
     public User toSource(){
-        JMapper<User, UserDto> eventMapper = new JMapper<>(User.class, UserDto.class);
-
-        User sport = eventMapper.getDestination(this); 
-        return sport; 
+        ModelMapper modelMapper = new ModelMapper();
+        User user = modelMapper.map(this, User.class);
+        return user;
     }
 
     

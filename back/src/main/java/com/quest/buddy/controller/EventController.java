@@ -1,7 +1,5 @@
 package com.quest.buddy.controller;
 
-import com.quest.buddy.dtos.EventDto;
-import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.Gender;

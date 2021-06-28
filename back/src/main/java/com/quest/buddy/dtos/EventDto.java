@@ -1,15 +1,13 @@
 package com.quest.buddy.dtos;
 
-import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.annotations.JMap;
 import com.quest.buddy.models.Event;
 
+import org.modelmapper.ModelMapper;
+
 public class EventDto implements BaseDto<Event> {
-    
-    @JMap
+
     private String title;
 
-    @JMap
     private String description;
 
     public EventDto(String title, String description) {
@@ -34,11 +32,10 @@ public class EventDto implements BaseDto<Event> {
     }
 
     @Override
-    public Event toSource(){
-        JMapper<Event, EventDto> eventMapper = new JMapper<>(Event.class, EventDto.class);
-
-        Event sport = eventMapper.getDestination(this); 
-        return sport; 
+    public Event toSource() {
+        ModelMapper modelMapper = new ModelMapper();
+        Event event = modelMapper.map(this, Event.class);
+        return event;
     }
 
 }

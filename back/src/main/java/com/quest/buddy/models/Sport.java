@@ -2,10 +2,10 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 
-import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.SportDto;
 
 import org.hibernate.annotations.Formula;
+import org.modelmapper.ModelMapper;
 
 @Entity
 @Table(name = "sport")
@@ -92,9 +92,8 @@ public class Sport implements BaseModel<SportDto> {
     }
     @Override
     public SportDto toDto(){
-        JMapper<SportDto, Sport> sportMapper = new JMapper<>(SportDto.class, Sport.class);
-        
-        SportDto sportDto = sportMapper.getDestination(this);
+        ModelMapper modelMapper = new ModelMapper();
+        SportDto sportDto = modelMapper.map(this, SportDto.class);
         return sportDto;
     }
 

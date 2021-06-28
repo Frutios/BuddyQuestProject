@@ -1,13 +1,12 @@
 package com.quest.buddy.models;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.persistence.*;
 
-import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.EventDto;
 
 @Entity
@@ -200,9 +199,8 @@ public class Event implements BaseModel<EventDto> {
 
     @Override
     public EventDto toDto(){
-        JMapper<EventDto, Event> eventMapper = new JMapper<>(EventDto.class, Event.class);
-        
-        EventDto eventDto = eventMapper.getDestination(this);
+        ModelMapper modelMapper = new ModelMapper();
+        EventDto eventDto = modelMapper.map(this, EventDto.class);
         return eventDto;
     }
 

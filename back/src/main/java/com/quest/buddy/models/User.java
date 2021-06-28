@@ -2,8 +2,9 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 
-import com.googlecode.jmapper.JMapper;
 import com.quest.buddy.dtos.UserDto;
+
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -150,9 +151,8 @@ public class User implements BaseModel<UserDto> {
 
     @Override
     public UserDto toDto(){
-        JMapper<UserDto, User> userMapper = new JMapper<>(UserDto.class, User.class);
-        
-        UserDto userDto = userMapper.getDestination(this);
+        ModelMapper modelMapper = new ModelMapper();
+        UserDto userDto = modelMapper.map(this, UserDto.class);
         return userDto;
     }
 }
