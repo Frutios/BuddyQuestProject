@@ -7,7 +7,6 @@ import java.util.stream.StreamSupport;
 import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
-import com.quest.buddy.models.User;
 import com.quest.buddy.repository.MySportRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

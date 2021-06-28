@@ -57,7 +57,6 @@ public class EventController {
 
     @PostMapping("/event")
     public String resercheEvent(String filtre) {
-        String ntitle = filtre;
         return "redirect:/event";
     }
 }
