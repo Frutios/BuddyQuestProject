@@ -54,4 +54,10 @@ public class EventController {
         public String createEvent(@ModelAttribute Event event, Model model) {
         return "/auth/eventadd";
     }
+
+    @PostMapping("/event")
+    public String resercheEvent(String filtre) {
+        String ntitle = filtre;
+        return "redirect:/event";
+    }
 }

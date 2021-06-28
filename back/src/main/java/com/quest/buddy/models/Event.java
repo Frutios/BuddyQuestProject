@@ -63,6 +63,14 @@ public class Event implements BaseModel<EventDto> {
     private Localisation localisation;
 
 
+   
+    @OneToMany(mappedBy = "event")
+    private List<LogEvent> logEvents;
+
+    @OneToMany(mappedBy = "event")
+    private List<Message> messages;
+
+
     public Event() {
     }
 
@@ -187,6 +195,19 @@ public class Event implements BaseModel<EventDto> {
     }
 
 
+    public List<LogEvent> getLogEvents() {
+        return logEvents;
+    }
+
+    public void setLogEvents(List<LogEvent> logEvents) {
+        this.logEvents = logEvents;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+
     @Override
     public EventDto toDto(){
         JMapper<EventDto, Event> eventMapper = new JMapper<>(EventDto.class, Event.class);
@@ -194,4 +215,6 @@ public class Event implements BaseModel<EventDto> {
         EventDto eventDto = eventMapper.getDestination(this);
         return eventDto;
     }
+
+
 }
