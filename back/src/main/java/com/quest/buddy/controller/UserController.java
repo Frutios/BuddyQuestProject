@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
 
-    @PostMapping("/add-user")
+    @PostMapping("/adduser")
     public String addUser(@ModelAttribute User user,  Model model) {
         model.addAttribute("user", user);
         userService.create(user);
@@ -31,7 +31,7 @@ public class UserController {
     public String displayUserForm(Model model){
         model.addAttribute("user", new User());
 
-        return "views/adduser";
+        return "views/useradd";
     }
 
     
