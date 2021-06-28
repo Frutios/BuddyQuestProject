@@ -1,13 +1,16 @@
 package com.quest.buddy.services;
 
 import com.quest.buddy.dtos.EventDto;
+import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.Event;
+import com.quest.buddy.models.Sport;
 import com.quest.buddy.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -67,11 +70,21 @@ public class EventServiceImpl implements EventService {
         try {
             event = eventRepository.findAll();
         } catch (Exception e) {
-            errorService.AddError("Event", "Error getting sports" );
+            errorService.AddError("Event", "Error getting Event" );
         }
         return event;
     }
+    public Iterable<EventDto> getAllDto() {
 
+        Iterable<Event> event = null;
+        try {
+            event = eventRepository.findAll();
+        } catch (Exception e) {
+            errorService.AddError("Event", "Error getting Event" );
+        }
+
+        return toListDto(event);
+    }
     @Override
     public Event findById(Long id) {
         Event event = null;
@@ -110,14 +123,10 @@ public class EventServiceImpl implements EventService {
     }
 
     public static Iterable<EventDto> toListDto(Iterable<Event> events ){
+        List<EventDto> eventDtos=StreamSupport.stream(events.spliterator(), false)
+                .map(event ->event.toDto())
+                .collect(Collectors.toList());
 
-        Iterable<EventDto> eventsDto = null;
-        if(events != null){
-            eventsDto=StreamSupport.stream(events.spliterator(), false)
-            .map(event ->event.toDto())
-            .collect(Collectors.toList());
-        }
-       
-        return eventsDto;
+        return eventDtos;
     }
 }

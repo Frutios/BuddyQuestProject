@@ -1,5 +1,7 @@
 package com.quest.buddy.controller;
 
+import com.quest.buddy.dtos.EventDto;
+import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.Gender;
@@ -34,8 +36,7 @@ public class EventController {
 
     @GetMapping("/event")
     public String displayEvent(Model model) {
-        model.addAttribute("event", new Event());
-       Iterable<Event> listEvent= eventService.getAll();
+        Iterable<Event> listEvent= eventService.getAll();
         model.addAttribute("listEvent",listEvent);
         return "/views/event";
     }
