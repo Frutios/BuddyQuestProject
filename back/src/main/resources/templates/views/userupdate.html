@@ -1,0 +1,28 @@
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="layouts/_layout"
+>
+  <head>
+    <title>Mes informations</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <h1>Mes informations</h1>
+
+      <p>Changez vos informations</p>
+      <form th:action="@{update?id=}+${user.id}" th:object="${user}" method="post">
+        <label for="firstName">Prénom : </label>
+        <input type="text" name="firstName" id="firstName" th:value="${user.firstName}" />
+
+        <label for="lastName">Nom : </label>
+        <input type="text" name="lastName" id="lastName" th:value="${user.lastName}" />
+
+        <label for="phone">Numéro de téléphone : </label>
+        <input type="text" name="phone" id="phone" th:value="${user.phone}" />
+
+        <input type="submit" value="Mettre à jour" />
+      </form>
+    </div>
+  </body>
+</html>
