@@ -1,9 +1,20 @@
 package com.quest.buddy.controller;
 
+
 import com.quest.buddy.dtos.EventDto;
 import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.*;
 import com.quest.buddy.services.*;
+
+import com.quest.buddy.models.Event;
+import com.quest.buddy.models.Localisation;
+import com.quest.buddy.models.Gender;
+import com.quest.buddy.models.Sport;
+import com.quest.buddy.services.EventServiceImpl;
+import com.quest.buddy.services.LocalisationServiceImpl;
+import com.quest.buddy.services.GenderServiceImpl;
+import com.quest.buddy.services.SportServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

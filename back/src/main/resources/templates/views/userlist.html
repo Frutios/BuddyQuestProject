@@ -6,7 +6,6 @@
   <head>
     <title>Liste des utilisateurs</title>
   </head>
-  <body>
     <div layout:fragment="content">
       <h1>Liste des utilisateurs</h1>
 
@@ -18,9 +17,17 @@
           <td th:text="${user.email}"></td>
           <td th:text="${user.pseudonym}"></td>
           <td th:text="${user.phone}"></td>
-          <td><a th:href="@{'/users/update?id=' + ${user.id}}"><i class="far fa-edit"></i></a></td>
+          <td>
+            <a th:href="@{'/users/update?id=' + ${user.id}}"
+              ><i class="far fa-edit"></i
+            ></a>
+          </td>
+          <td>
+            <a style="color: rgb(255, 0, 0);" th:href="@{users/delete/{id}(id=${user.id})}">
+              <i class="far fa-trash-alt"></i>
+            </a>
+          </td>
         </tr>
       </table>
     </div>
-  </body>
 </html>

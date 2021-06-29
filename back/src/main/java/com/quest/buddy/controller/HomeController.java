@@ -8,7 +8,7 @@ public class HomeController {
 
     @GetMapping({"/"})
     public String displayHomePage() {
-        return "views/event";
+        return "views/home";
 
     }
 

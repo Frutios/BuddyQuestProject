@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.quest.buddy.services.UserServiceImpl;
@@ -54,17 +55,23 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateUser(@RequestParam(name = "id") Long id, @ModelAttribute("user") User user, Model model ) {
+    public String updateUser(@RequestParam(name = "id") Long id, User user, Model model ) {
         
-        User userDatabase = userService.findById(user.getId());
+        User userToUpdate = userService.findById(id);
 
-        userDatabase.setFirstName(user.getFirstName());
-        userDatabase.setLastName(user.getLastName());
-        userDatabase.setPhone(user.getPhone());
+        userToUpdate.setFirstName(user.getFirstName());
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setPhone(user.getPhone());
 
-        userService.update(userDatabase);
+        userService.update(userToUpdate);
 
         return "redirect:userlist";
+    }
+
+    @GetMapping("/delete/{id}")
+    public void deleteUser(Model model, @PathVariable("id") Long id){
+        userService.remove(id);
+        
     }
     
 }

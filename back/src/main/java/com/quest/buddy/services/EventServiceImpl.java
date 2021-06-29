@@ -1,9 +1,7 @@
 package com.quest.buddy.services;
 
 import com.quest.buddy.dtos.EventDto;
-import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.Event;
-import com.quest.buddy.models.Sport;
 import com.quest.buddy.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
