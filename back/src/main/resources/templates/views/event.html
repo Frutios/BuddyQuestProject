@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Starter Page</li>
+                        <li class="breadcrumb-item active">Event</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,9 +26,10 @@
     <!-- Main content -->
     <div class="content">
         <div class="container-fluid">
-            <div class="row">
+
+            <div class="row" >
                 <!-- cart -->
-                <div class="col-lg-4" th:each="event : ${listEvent}">
+                <div class="col-lg-4" th:id="'remov-id' + ${event.id}"  th:each="event : ${listEvent}">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
                             <div class="card-tools">
@@ -42,7 +43,7 @@
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
                                     </button>
-                                    <button type="button" class="btn btn-tool" data-card-widget="remove">
+                                    <button type="button" class="btn btn-tool" th:onclick="|removeCard('${event.id}')|">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
@@ -57,24 +58,24 @@
                             <div class="user-block">
                                 <img class="img-circle img-bordered-sm" th:src="${event.user.getUrlAvatar()}" alt="user image">
                                 <span class="username">
-                                      <a href="#" th:text="${event.user.getFirstName()}"></a>
-                                    </span>
-                                <span class="description" th:text="${event.dateEventCreate}">Publié - 18h00 Aujourd'hui</span>
+                                     <a href="#" th:text="${event.user.getFullName()}"></a>
+                                   </span>
+                                <span class="description" th:text="${event.getInfoDateEventCreate}"></span>
                             </div>
 
 
                             <p class="card-text" th:text="${event.description}"/>
 
-                            <p class="text-muted" th:text="${event.getStartTime()}">15 July 2021        10h00 ->11h30</p>
+                            <p class="text-muted" th:text="${event.getInfoDateEvent()}"/>
                             <a href="#" class="card-link">
                                 <i class="fas fa-heart mr-1 text-red"></i>
                                 67
                             </a>
                             <a href="#" style="margin-left:4.25rem">
-                                <small class="badge badge-warning"><i class="far fa-clock"></i> partners</small>
+                                <small class="badge badge-warning" th:text="${event.getInfoNroPartner()}"><i class="far fa-clock"></i></small>
                             </a>
 
-                            <a href="#" class="card-link text-fuchsia btn-sm float-right">JOIN--></a>
+                            <a th:href="@{/userevent(id=${event.id})}" class="card-link text-fuchsia btn-sm float-right">JOIN--></a>
                         </div>
                     </div>
                 </div>
@@ -92,11 +93,13 @@
 </div>
 <!-- /.content -->
 
-
-
-
-
-
 </div>
+<script type="text/javascript"  >
+    function removeCard(id) {
+        var parentDOM = document.getElementById("remov-id"+id);
+        parentDOM.remove()
+        return false;
+    }
+</script>
 </body>
 </html>

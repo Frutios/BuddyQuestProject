@@ -2,6 +2,8 @@ package com.quest.buddy.models;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "userEvent")
@@ -23,6 +25,12 @@ public class UserEvent {
     private LocalDate inscription;
 
     public UserEvent() {
+    }
+
+    public UserEvent(User user, Event event) {
+        this.user = user;
+        this.event = event;
+        this.inscription =LocalDate.now();;
     }
 
     public Long getId() {
@@ -55,5 +63,10 @@ public class UserEvent {
 
     public void setInscription(LocalDate inscription) {
         this.inscription = inscription;
+    }
+
+    public String getInfoDateInscription(){
+        //create if par today
+        return "Publié - " + this.inscription.toString() ;
     }
 }

@@ -198,10 +198,24 @@ public class Event implements BaseModel<EventDto> {
         this.dateEventCreate = dateEventCreate;
     }
 
+    public String getInfoDateEventCreate(){
+        //create if par today
+        return "Publié - " + this.dateEventCreate.toLocalDate().toString() + " "+this.dateEventCreate.toLocalTime().toString() ;
+    }
+    public String getInfoDateEvent(){
+        //15 July 2021        10h00 ->11h30
+        String dateFormatStart,dateFormatEnd ;
+        dateFormatStart =this.startTime.toLocalDate().toString() +" " + this.startTime.toLocalTime().toString() ;
+        dateFormatEnd=this.endTime.toLocalDate().toString() +" "+this.endTime.toLocalTime().toString();
+        return  dateFormatStart +" --> "+dateFormatEnd;
+    }
+    public String getInfoNroPartner(){
+        return this.nbPartnerMax + " Partners";
+    }
     @Override
     public EventDto toDto(){
         JMapper<EventDto, Event> eventMapper = new JMapper<>(EventDto.class, Event.class);
-        
+
         EventDto eventDto = eventMapper.getDestination(this);
         return eventDto;
     }
