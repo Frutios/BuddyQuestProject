@@ -43,6 +43,9 @@ public class User implements BaseModel<UserDto> {
     @Column(name = "urlAvatar", length = 50)
     private String urlAvatar;
 
+    @Column(name = "description", length = 250)
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
@@ -57,7 +60,7 @@ public class User implements BaseModel<UserDto> {
     }
 
     public User(String firstName, String lastName, String email, String password, String pseudonym, String phone,
-            Localisation localisation) {
+                Localisation localisation) {
         this();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -66,7 +69,7 @@ public class User implements BaseModel<UserDto> {
         this.pseudonym = pseudonym;
         this.phone = phone;
         this.localisation = localisation;
-        
+
     }
 
     public Long getId() {
@@ -141,12 +144,23 @@ public class User implements BaseModel<UserDto> {
         this.localisation = localisation;
     }
 
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
     public String getUrlAvatar() {
         return urlAvatar;
     }
 
     public void setUrlAvatar(String urlAvatar) {
         this.urlAvatar = urlAvatar;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
