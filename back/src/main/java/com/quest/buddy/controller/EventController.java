@@ -3,6 +3,7 @@ package com.quest.buddy.controller;
 
 import com.quest.buddy.dtos.EventDto;
 import com.quest.buddy.dtos.SportDto;
+import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.*;
 import com.quest.buddy.services.*;
 
@@ -48,7 +49,7 @@ public class EventController {
     @GetMapping("/event")
     public String displayEvent(HttpServletRequest req,Model model) {
 
-        User user = userService.findById(2l);
+        UserDto user = userService.findById(2l);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
 
