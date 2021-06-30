@@ -10,6 +10,16 @@
       <h1>Liste des utilisateurs</h1>
 
       <table>
+        <thead>
+          <tr>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Date d'inscription</th>
+            <th>Email</th>
+            <th>Pseudo</th>
+            <th>Téléphone</th>
+          </tr>
+        </thead>
         <tr th:each="user : ${users}">
           <td th:text="${user.firstName}"></td>
           <td th:text="${user.lastName}"></td>
