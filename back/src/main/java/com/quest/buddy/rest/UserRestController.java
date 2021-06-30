@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
-import com.quest.buddy.models.User;
+import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.services.UserServiceImpl;
 
 @RestController
@@ -24,19 +24,19 @@ public class UserRestController {
     UserServiceImpl userService;
 
     @GetMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Iterable<User>> getAll() {
+    public ResponseEntity<Iterable<UserDto>> getAll() {
 
-        Iterable<User> users = userService.getAll();
+        Iterable<UserDto> users = userService.getAll();
         if (hasErrors()){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<Iterable<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<Iterable<UserDto>>(users, HttpStatus.OK);
     }
 
     @GetMapping(value = "/api/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getById(@PathVariable("id") long id) {
-        User userFound = userService.findById(id);
+    public ResponseEntity<UserDto> getById(@PathVariable("id") long id) {
+        UserDto userFound = userService.findById(id);
         if(hasErrors()){
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
@@ -45,7 +45,7 @@ public class UserRestController {
     }
 
     @PostMapping(value = "/api/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> create(@RequestBody User userToCreate) {
+    public ResponseEntity<UserDto> create(@RequestBody UserDto userToCreate) {
         userService.create(userToCreate);
         if(hasErrors()){
             return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
@@ -55,7 +55,7 @@ public class UserRestController {
     }
 
     @PutMapping(value = "/api/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> update(@RequestBody User userToUpdate) {
+    public ResponseEntity<Void> update(@RequestBody UserDto userToUpdate) {
         userService.update(userToUpdate);
         
         if(hasErrors()){

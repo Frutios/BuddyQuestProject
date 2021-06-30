@@ -1,15 +1,13 @@
 package com.quest.buddy.controller;
 
-import com.quest.buddy.models.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import com.quest.buddy.dtos.UserDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.quest.buddy.services.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,16 +22,17 @@ public class UserController {
     UserServiceImpl userService;
 
     @PostMapping("/add")
-    public String addUser(@ModelAttribute User user,  Model model) {
-        model.addAttribute("user", user);
-        userService.create(user);
+    public String addUser(@ModelAttribute("user") UserDto userModel,  Model model) {
         
-        return "views/userlist";
+        userService.create(userModel);
+        
+        return "redirect:/users";
     }
 
     @GetMapping("/register")
     public String displayUserForm(Model model){
-        model.addAttribute("user", new User());
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
 
         return "views/useradd";
     }
@@ -41,7 +40,11 @@ public class UserController {
     
     @GetMapping("")
     public String displayUserList(Model model){
-        model.addAttribute("users", userService.getAll());
+        Iterable<UserDto> users;
+
+        users = userService.getAll();
+
+        model.addAttribute("users", users);
         
         return "views/userlist";
     }
@@ -49,29 +52,26 @@ public class UserController {
     @GetMapping("/update")
     public String displayUpdateUser(@RequestParam(name = "id") Long id, Model model){
 
-        model.addAttribute("user", userService.findById(id));
+        UserDto userDto = userService.findById(id);
+
+        model.addAttribute("user", userDto);
 
         return "views/userupdate";
     }
 
     @PostMapping("/update")
-    public String updateUser(@RequestParam(name = "id") Long id, User user, Model model ) {
-        
-        User userToUpdate = userService.findById(id);
+    public String updateUser(@RequestParam(name = "id") Long id,  @ModelAttribute("user") UserDto userModel, Model model ) {
+        userService.update(userModel);
 
-        userToUpdate.setFirstName(user.getFirstName());
-        userToUpdate.setLastName(user.getLastName());
-        userToUpdate.setPhone(user.getPhone());
-
-        userService.update(userToUpdate);
-
-        return "redirect:userlist";
+        return "redirect:/users";
     }
 
     @GetMapping("/delete/{id}")
-    public void deleteUser(Model model, @PathVariable("id") Long id){
+    public String deleteUser(Model model, @PathVariable("id") Long id){
         userService.remove(id);
         
+        return "redirect:/users";
+
     }
     
 }

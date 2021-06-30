@@ -1,20 +1,16 @@
 package com.quest.buddy.dtos;
 
-import java.time.LocalDateTime;
-
 import com.quest.buddy.models.User;
 
 import org.modelmapper.ModelMapper;
 
-public class UserDto implements BaseDto<User> {
+public class UserUpdateDto implements BaseDto<User>{
+
     private Long id;
     private String firstName;
     private String lastName;
     private String phone;
     private String pseudonym;
-    private String password;
-    private String email;
-    private LocalDateTime inscriptionDate;
 
     public Long getId() {
         return id;
@@ -54,30 +50,6 @@ public class UserDto implements BaseDto<User> {
     public void setPseudonym(String pseudonym){
         this.pseudonym = pseudonym;
     }
-    
-    public String getPassword(){
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail(){
-        return email;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
-    }
-
-    public LocalDateTime getInscriptionDate(){
-        return inscriptionDate;
-    }
-
-    public void setInscriptionDate(LocalDateTime inscriptionDate){
-        this.inscriptionDate = inscriptionDate;
-    }
 
     @Override
     public User toSource(){
@@ -85,6 +57,5 @@ public class UserDto implements BaseDto<User> {
         User user = modelMapper.map(this, User.class);
         return user;
     }
-
     
 }

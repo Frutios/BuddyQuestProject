@@ -10,6 +10,7 @@ import com.quest.buddy.models.Event;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.models.User;
+import com.quest.buddy.dtos.UserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,7 +83,7 @@ public class ImportServiceImp implements ImportService {
     }
 
     public void seedUsers() {
-       User romain = new User();
+       UserDto romain = new UserDto();
 
        romain.setFirstName("Romain");
        romain.setLastName("Tortevois");

@@ -23,8 +23,8 @@ public class UserServiceImpl implements UserService{
     private ErrorServiceImp errorService;
 
     @Override
-    public void create(User user) {
-        userRepository.save(user);
+    public void create(UserDto userDto) {
+        userRepository.save(userDto.toSource());
     }
 
     @Override
@@ -33,19 +33,33 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void update(User user) {
+    public void update(UserDto userDto) {
+        User user = findById(userDto.getId()).toSource();
+
+        user.setFirstName(userDto.getFirstName());
+        user.setLastName(userDto.getLastName());
+        user.setPhone(userDto.getPhone());
+        user.setPseudonym(userDto.getPseudonym());
+      
         userRepository.save(user);
     }
 
     @Override
-    public Iterable<User> getAll() {
-        
-        return userRepository.findAll();
+    public Iterable<UserDto> getAll() {
+        Iterable<User> users = null;
+        try {
+            users = userRepository.findAll();
+        } catch (Exception e) {
+            errorService.AddError("User", "Error getting users");
+        }
+        return toListDto(users);
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    public UserDto findById(Long id) {
+        User user = userRepository.findById(id).get();
+
+        return user.toDto();
     }
 
     public HashMap<String,String> getErrors(){
@@ -54,7 +68,7 @@ public class UserServiceImpl implements UserService{
 
     public static Iterable<UserDto> toListDto(Iterable<User> users ){
         List<UserDto> usersDto=StreamSupport.stream(users.spliterator(), false)
-        .map(event ->event.toDto())
+        .map(user ->user.toDto())
         .collect(Collectors.toList());
 
         return usersDto;
