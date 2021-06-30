@@ -1,6 +1,8 @@
 package com.quest.buddy.dtos;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import com.quest.buddy.models.User;
 
@@ -15,6 +17,15 @@ public class UserDto implements BaseDto<User> {
     private String password;
     private String email;
     private LocalDateTime inscriptionDate;
+    private String urlAvatar;
+
+    public UserDto() {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
+        this.inscriptionDate = fromDateAndTime;
+        urlAvatar="/img/avatar.png";
+    }
 
     public Long getId() {
         return id;
@@ -29,6 +40,13 @@ public class UserDto implements BaseDto<User> {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+    public String getUrlAvatar() {
+        return urlAvatar;
+    }
+
+    public void setUrlAvatar(String urlAvatar) {
+        this.urlAvatar = urlAvatar;
     }
 
     public String getLastName() {

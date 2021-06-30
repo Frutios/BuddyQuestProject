@@ -6,10 +6,7 @@ import com.quest.buddy.dtos.UserDto;
 
 import org.modelmapper.ModelMapper;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-
 
 @Entity
 @Table(name = "user")
@@ -49,28 +46,6 @@ public class User implements BaseModel<UserDto> {
     @ManyToOne
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
-
-
-    public User() {
-        LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        LocalDateTime fromDateAndTime = LocalDateTime.of(currentDate, currentTime);
-        this.inscriptionDate = fromDateAndTime;
-        urlAvatar="/img/avatar.png";
-    }
-
-    public User(String firstName, String lastName, String email, String password, String pseudonym, String phone,
-                Localisation localisation) {
-        this();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.pseudonym = pseudonym;
-        this.phone = phone;
-        this.localisation = localisation;
-
-    }
 
 
     public Long getId() {
