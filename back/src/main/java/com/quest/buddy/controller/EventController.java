@@ -1,10 +1,7 @@
 package com.quest.buddy.controller;
 
 
-import com.quest.buddy.dtos.EventDto;
-import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.dtos.UserDto;
-import com.quest.buddy.models.*;
 import com.quest.buddy.services.*;
 
 import com.quest.buddy.models.Event;

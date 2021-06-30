@@ -1,6 +1,5 @@
 package com.quest.buddy.controller;
 
-import com.quest.buddy.dtos.SportDto;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.User;
 import com.quest.buddy.models.UserEvent;
@@ -41,7 +40,6 @@ public class UserEventController {
     }
     @PostMapping("/userevent")
     public String displayUserEvent(HttpServletRequest req,@ModelAttribute("event") Event event,Model model) {
-        String message;
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         user.setId(user.getId());
@@ -59,7 +57,6 @@ public class UserEventController {
                 userEventService.create(userEvent);
             }
 
-            message ="Registered user successfully";
         }catch (Exception e){
 
         }
