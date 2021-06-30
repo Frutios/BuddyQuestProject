@@ -72,6 +72,7 @@ public class User implements BaseModel<UserDto> {
 
     }
 
+
     public Long getId() {
         return id;
     }
