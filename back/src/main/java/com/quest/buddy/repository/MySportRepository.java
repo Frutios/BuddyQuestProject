@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MySportRepository extends CrudRepository<MySport, Long> {
     public List<MySport> findBySport(Sport sport);
+    public Iterable<MySport> findMySportsByUserId(Long userId);
 }

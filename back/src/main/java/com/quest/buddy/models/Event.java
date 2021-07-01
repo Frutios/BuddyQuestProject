@@ -56,7 +56,7 @@ public class Event implements BaseModel<EventDto> {
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
-    @Column(name = "description")
+    @Column(name = "description" , length = 300)
     private String description;
 
     @Column(name = "state")

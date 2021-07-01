@@ -1,18 +1,15 @@
 package com.quest.buddy.controller;
-
-
+import com.quest.buddy.dtos.EventDto;
+import com.quest.buddy.models.*;
 import com.quest.buddy.dtos.UserDto;
-import com.quest.buddy.services.*;
 
+import com.quest.buddy.services.*;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.Gender;
-import com.quest.buddy.models.Sport;
 import com.quest.buddy.services.EventServiceImpl;
 import com.quest.buddy.services.LocalisationServiceImpl;
 import com.quest.buddy.services.GenderServiceImpl;
-import com.quest.buddy.services.SportServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +28,7 @@ public class EventController {
     private EventServiceImpl eventService;
 
     @Autowired
-    private SportServiceImpl sportService;
+    private MySportServiceImpl mySportService;
 
     @Autowired
     private LocalisationServiceImpl localisationService;
@@ -43,7 +40,7 @@ public class EventController {
     private UserServiceImpl userService;
 
 
-    @GetMapping("/event")
+    @GetMapping("/")
     public String displayEvent(HttpServletRequest req,Model model) {
 
         UserDto user = userService.findById(2l);
@@ -55,24 +52,47 @@ public class EventController {
         model.addAttribute("listEvent",listEvent);
         return "/views/event";
     }
+    @PostMapping("/")
+    public String resercheEvent(String filtre) {
+        return "redirect:/";
+    }
+
+
 
     @GetMapping("/eventadd")
-    public String event(Model model) {
-        Iterable<Sport> listSport= sportService.getAll();
+    public String event(HttpServletRequest req,Model model) {
+        User user = userService.findById(2l);
+        HttpSession session = req.getSession();
+        session.setAttribute("user", user);
+
+        Iterable<MySport> listMySport= mySportService.findMySportByUserId(user.getId());
         Iterable<Localisation> listLocalisation= localisationService.getAll();
         List<Gender> listGender = sexeService.getAll();
-        model.addAttribute("listSport",listSport);
+        model.addAttribute("listMySport",listMySport);
         model.addAttribute("listLocalisation",listLocalisation);
         model.addAttribute("listGender",listGender);
         return "/auth/eventadd";
     }
     @PostMapping("/eventadd")
-        public String createEvent(@ModelAttribute Event event, Model model) {
-        return "/auth/eventadd";
+        public String createEvent(HttpServletRequest req,@ModelAttribute EventDto eventDto) {
+
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+
+        eventDto.setUserId(user.getId());
+        eventDto.setSportId(1l);
+
+        Event event = eventDto.modelMapperCreate(eventDto);
+
+        try{
+            eventService.create(event);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "redirect:/eventadd";
+
     }
 
-    @PostMapping("/event")
-    public String resercheEvent(String filtre) {
-        return "redirect:/event";
-    }
+
 }

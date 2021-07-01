@@ -17,7 +17,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3" method="post" action="#" th:action="@{/event}">
+    <form class="form-inline ml-3" method="post" action="#" th:action="@{/}">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" name="filtre" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -157,13 +157,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{'/event'}" class="nav-link">
+                            <a th:href="@{'/'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Liste des évènements</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{'/addevent'}" class="nav-link">
+                            <a th:href="@{'/eventadd'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Créer évènement</p>
                             </a>
