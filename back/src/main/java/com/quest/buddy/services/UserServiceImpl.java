@@ -61,7 +61,11 @@ public class UserServiceImpl implements UserService{
 
         return user.toDto();
     }
+    public User findByUserId(Long id) {
+        User user = userRepository.findById(id).orElse(null);
 
+        return user;
+    }
     public HashMap<String,String> getErrors(){
         return errorService.getErrors();
     }

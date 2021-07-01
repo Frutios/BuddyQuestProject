@@ -43,7 +43,7 @@ public class EventController {
     @GetMapping("/")
     public String displayEvent(HttpServletRequest req,Model model) {
 
-        UserDto user = userService.findById(2l);
+        User user = userService.findByUserId(2l);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
 
@@ -61,9 +61,8 @@ public class EventController {
 
     @GetMapping("/eventadd")
     public String event(HttpServletRequest req,Model model) {
-        User user = userService.findById(2l);
         HttpSession session = req.getSession();
-        session.setAttribute("user", user);
+        User user = (User)session.getAttribute("user");
 
         Iterable<MySport> listMySport= mySportService.findMySportByUserId(user.getId());
         Iterable<Localisation> listLocalisation= localisationService.getAll();
@@ -78,10 +77,7 @@ public class EventController {
 
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
-
         eventDto.setUserId(user.getId());
-        eventDto.setSportId(1l);
-
         Event event = eventDto.modelMapperCreate(eventDto);
 
         try{
