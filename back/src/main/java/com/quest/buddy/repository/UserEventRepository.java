@@ -1,7 +1,6 @@
 package com.quest.buddy.repository;
 
 
-import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.UserEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

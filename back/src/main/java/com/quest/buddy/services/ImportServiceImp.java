@@ -9,7 +9,7 @@ import com.quest.buddy.dtos.DecathlonSports;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
-import com.quest.buddy.models.User;
+import com.quest.buddy.dtos.UserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,17 +50,17 @@ public class ImportServiceImp implements ImportService {
     public void seedSportUsers(){
         Sport soccer = sportService.findById(1L);
         Sport basketBall = sportService.findById(2L);
-        User romain = userService.findById(1L);
+        UserDto romain = userService.findById(1L);
 
         MySport romainsoccer = new MySport();
         romainsoccer.setSport(soccer);
-        romainsoccer.setUser(romain);
+        romainsoccer.setUser(romain.toSource());
         romainsoccer.setLevel(30L);
         mySportService.create(romainsoccer);
 
         MySport romainBasketBall = new MySport();
         romainsoccer.setSport(basketBall);
-        romainsoccer.setUser(romain);
+        romainsoccer.setUser(romain.toSource());
         romainsoccer.setLevel(30L);
         mySportService.create(romainBasketBall);
 
@@ -82,7 +82,7 @@ public class ImportServiceImp implements ImportService {
     }
 
     public void seedUsers() {
-       User romain = new User();
+       UserDto romain = new UserDto();
 
        romain.setFirstName("Romain");
        romain.setLastName("Tortevois");
@@ -99,7 +99,7 @@ public class ImportServiceImp implements ImportService {
     public void seedEvents() {
        Sport soccer = sportService.findById(1L);
        Sport basketBall = sportService.findById(2L);
-       User romain = userService.findById(1L);
+       UserDto romain = userService.findById(1L);
 
        LocalDate currentDate = LocalDate.now();
        LocalTime currentTime = LocalTime.now();
@@ -114,7 +114,7 @@ public class ImportServiceImp implements ImportService {
        soccerBarman.setPlace("Place plume");
        soccerBarman.setTitle("Match de foot des barmans");
        soccerBarman.setStartTime(dateDebut);
-       soccerBarman.setUser(romain);   
+       soccerBarman.setUser(romain.toSource());   
        eventService.create(soccerBarman);
 
        Event soccerBoss = new Event();
@@ -126,7 +126,7 @@ public class ImportServiceImp implements ImportService {
        soccerBoss.setPlace("Place plume");
        soccerBoss.setTitle("Match de foot des patrons");
        soccerBoss.setStartTime(dateDebut);
-       soccerBoss.setUser(romain);   
+       soccerBoss.setUser(romain.toSource());   
        eventService.create(soccerBoss);
 
        Event nbaATours = new Event();
@@ -138,7 +138,7 @@ public class ImportServiceImp implements ImportService {
        nbaATours.setPlace("Tours Nord");
        nbaATours.setTitle("Viens jouer avec des joueurs de NBA");
        nbaATours.setStartTime(dateDebut);
-       nbaATours.setUser(romain);   
+       nbaATours.setUser(romain.toSource());   
        eventService.create(nbaATours);
     }
 
