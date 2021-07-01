@@ -17,9 +17,7 @@
 </head>
 
 <div layout:fragment="content">
-
-
-            <div class="row" >
+    <div class="row" >
                 <!-- cart -->
                 <div class="col-lg-4" th:id="'remov-id' + ${event.id}"  th:each="event : ${listEvent}">
                     <div class="card card-primary card-outline">
@@ -80,13 +78,6 @@
                 </div>
 
             </div>
-
-
 </div>
 <!-- /.content -->
-
-
-
-
-
 </html>

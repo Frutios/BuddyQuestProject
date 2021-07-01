@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layouts/_layout">
 
-</body>
+<head>
+    <meta charset="UTF8" />
+    <title>Event</title>
+
+    <script type="text/javascript"  >
+        function removeCard(id) {
+            var parentDOM = document.getElementById("remov-id"+id);
+            parentDOM.remove()
+            return false;
+        }
+    </script>
+
+</head>
+
+<div layout:fragment="content">
+    <div class="row" >
+                <!-- cart -->
+                <div class="col-lg-4" th:id="'remov-id' + ${event.id}"  th:each="event : ${listEvent}">
+                    <div class="card card-primary card-outline">
+                        <div class="card-header">
+                            <div class="card-tools">
+                                <div class="card-tools">
+                                    <a href="#" class="card-link text-purple">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </a>
+                                    <a href="#" class="card-link text-fuchsia">
+                                        <i class="fas fa-comments"></i>
+                                    </a>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" th:onclick="|removeCard('${event.id}')|">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title text-bold" th:text="${event.title}"> </h3>
+                            </br>
+                            <div class="user-block">
+                                <img class="img-circle img-bordered-sm" th:src="${event.user.getUrlAvatar()}"
+                                    alt="user image">
+                                <span class="username">
+
+                                     <a href="#" th:text="${event.user.getFullName()}"></a>
+                                   </span>
+                                <span class="description" th:text="${event.getInfoDateEventCreate}"></span>
+
+                                </span>
+
+                            </div>
+
+
+                            <p class="card-text" th:text="${event.description}" />
+
+                            <p class="text-muted" th:text="${event.getInfoDateEvent()}"/>
+
+
+                            <a href="#" class="card-link">
+                                <i class="fas fa-heart mr-1 text-red"></i>
+                                67
+                            </a>
+                            <a href="#" style="margin-left:4.25rem">
+                                <small class="badge badge-warning" th:text="${event.getInfoNroPartner()}"><i class="far fa-clock"></i></small>
+                            </a>
+
+                            <a th:href="@{/userevent(id=${event.id})}" class="card-link text-fuchsia btn-sm float-right">JOIN--></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+</div>
+<!-- /.content -->
 </html>

@@ -53,4 +53,14 @@ public class MySportServiceImpl implements MySportService {
 
         return usersDto;
     }
+
+    public Iterable<MySport> findMySportByUserId(Long userId){
+        Iterable<MySport> mySports = null;
+        try {
+             mySports = mySportRepository.findMySportsByUserId(userId);
+        } catch (Exception e) {
+
+        }
+        return mySports;
+    }
 }

@@ -4,3 +4,4 @@ $(document).ready(function() {
         $form.find('input[type=submit]').click();
     });
 });
+

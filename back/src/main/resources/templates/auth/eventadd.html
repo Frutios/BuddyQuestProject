@@ -1,137 +1,122 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/_layout">
+
 <head>
-    <meta charset="UTF8" />
     <title>Event</title>
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
-    <!--tailwindcss -->
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+    <!-- Date range picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
-<body class="hold-transition sidebar-mini">
-<div class="wrapper">
-    <div th:replace="fragments/header :: header"></div>
+<html>
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper border-radius-xl mt-1" style="background-image: url(./img/fond3.jpg);width:auto;height: auto;background-size: 100% ; background-position-y: 50%">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
+<div layout:fragment="content">
+
+
+    <input type="text" name="datetimes" value="10/24/1984" />
+    <div class="card mt-3">
+        <div class="card-header text-left">
+            <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+        </div>
+        <div class="card-body">
+            <form  action="#"  th:object="${eventDto}" method="post">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Starter Page</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Starter Page</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
+                    <div class="col-md-8">
+                        <div class="mb-3">
+                            <label for='title' class="form-label"> Title: </label>
+                            <input type='text' class="form-control" name='title' id='title'  placeholder="Password" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label >Select City</label>
+                                <select class="form-control" name="localisation_Id">
+                                    <option th:each="loca : ${listLocalisation}"
+                                            th:value="${loca.id}"
+                                            th:text="${loca.city}"  />
+                                </select>
+                            </div>
+                            <div class="col-md-8">
+                                <label> Address: </label>
+                                <input type='text' class="form-control" name='place'>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label> Number of participants: </label>
+                                <input type='text' class="form-control formt" name='nbPartnerMax' maxlength="2" onkeypress="return isNumber(event)" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label>Date Star :</label>
+                                <input  type='text'  class="form-control" name="startTime" />
+                            </div>
+                            <div class="col-md-4">
+                                <label> End Time: </label>
+                                <input type='text' class="form-control" name='endTime' />
+
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label >Select Gender</label>
+                                <select class="form-control" required name="flatGender">
+                                    <option th:each="gender : ${listGender}"
+                                            th:value="${gender.id}"
+                                            th:text="${gender.name}"/>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label> Age Min: </label>
+                                <input type='text' class="form-control" name='ageMin' maxlength="2" onkeypress="return isNumber(event)">
+                            </div>
+                            <div class="col-md-4">
+                                <label> Age Max: </label>
+                                <input type="text" class="form-control" name='ageMax' maxlength="2" onkeypress="return isNumber(event)">
+                            </div>
+                        </div>
+
+                        <label> Detail: </label>
+                        <textarea class="form-control" name='description' rows="2" maxlength="500"></textarea>
+
+                        <!-- /.form group -->
+                        <div class="text-right mt-3">
+                           <input type="submit" value="Submit" class="btn btn-md btn-primary border-radius-sm"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <!--     <div class="mb-3">
+                                <label>Select Sport</label>
+                                <th:block th:each="sport : ${listSport}" >
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="sportIdaa" th:value="${sport.id}"/>
+                                        <label class="form-check-label" th:text="${sport.name}"></label>
+                                    </div>
+                                </th:block>
+                            </div>-->
+                        <div class="mb-3">
+                            <label>Select Sport</label>
+                            <th:block th:each="mySport : ${listMySport}" >
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sport" th:value="${mySport.sport.id}" required/>
+                                    <label class="form-check-label" th:text="${mySport.sport.name}"></label>
+                                </div>
+                            </th:block>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </form>
         </div>
-        <!-- /.content-header -->
 
-        <!-- Main content -->
-        <div class="content">
-            <div class="container-fluid">
-
-    <h2 class="h1-responsive font-weight-bold text-center my-4">My Event</h2>
-
-    <form  action="#"  th:action="@{/eventadd}" th:object="${event}" method="post">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="mb-3">
-                    <label for='title' class="form-label"> Title: </label>
-                    <input type='text' class="form-control" name='title' id='title'>
-                </div>
-                <div class="mb-3">
-                    <label for='nbPartnerMax' class="form-label"> Number of participants: </label>
-                    <input type='text' class="form-control" name='nbPartnerMax' id='nbPartnerMax'>
-                </div>
-                <div class="mb-3">
-                    <label for="dateEvent">Date Star :</label>
-                    <input id="dateEvent" type="datetime-local" name="startTime" >
-                </div>
-
-                <div class="mb-3">
-                    <label for='endTime' class="form-label"> End Time: </label>
-                    <input type='text' class="form-control" name='endTime' id='endTime'>
-                </div>
-                <div class="mb-3">
-                    <label for="description" class="form-label"> Detail: </label>
-                    <input type='text' class="form-control" name='description' id='description'>
-                </div>
-                <div class="mb-3">
-                    <label for="ageMin" class="form-label"> Age Min: </label>
-                    <input type='text' class="form-control" name='ageMin' id='ageMin'>
-                </div>
-                <div class="mb-3">
-                    <label for="ageMax" class="form-label"> Age Max: </label>
-                    <input type='text' class="form-control" name='ageMax' id='ageMax'>
-                </div>
-                <div class="mb-3">
-                    <label >Select Localisation</label>
-                    <select class="form-control" name="localisation" required>
-                        <option th:each="loca : ${listLocalisation}"
-                                th:value="${loca.id}"
-                                th:text="${loca.city}"  />
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="place" class="form-label"> Place: </label>
-                    <input type='text' class="form-control" name='place' id='place'>
-                </div>
-                <div class="mb-3">
-                    <label for="genderSelect">Select Gender</label>
-                    <select class="form-control" required name="flatGender" id="genderSelect">
-                        <option th:each="gender : ${listGender}"
-                                th:value="${gender.id}"
-                                th:text="${gender.name}"/>
-                    </select>
-                </div>
-                <p><input type="submit" value="Submit" /></p>
-            </div>
-           <div class="col-md-6">
-               <!--     <div class="mb-3">
-                       <label>Select Sport</label>
-                       <th:block th:each="sport : ${listSport}" >
-                           <div class="form-check">
-                               <input class="form-check-input" type="checkbox" name="sportIdaa" th:value="${sport.id}"/>
-                               <label class="form-check-label" th:text="${sport.name}"></label>
-                           </div>
-                       </th:block>
-                   </div>-->
-                   <div class="mb-3">
-                       <label>Select Sport</label>
-                       <th:block th:each="sport : ${listSport}" >
-                           <div class="form-check">
-                               <input class="form-check-input" type="radio" name="sport" th:value="${sport.id}"/>
-                               <label class="form-check-label" th:text="${sport.name}"></label>
-                           </div>
-                       </th:block>
-                   </div>
-               </div>
-           </div>
-       </form>
-
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
     </div>
-    <!-- Footer -->
-    <div th:replace="fragments/footer :: footer"></div>
 
-   </div>
-<!-- jQuery -->
-<script th:src="@{/plugins/jquery/jquery.min.js}"></script>
-<!-- Bootstrap 4 -->
-<script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<!-- AdminLTE App -->
-<script th:src="@{/dist/js/adminlte.min.js}"></script>
-   </body>
-   </html>
+
+
+</div>
+<body>
+<!-- Date range picker -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script th:src="@{/js/eventadd.js}"></script>
+</body>
+</html>
