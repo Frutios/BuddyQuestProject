@@ -6,20 +6,22 @@
   <head>
     <title>Liste des utilisateurs</title>
   </head>
-    <div layout:fragment="content">
-      <h1>Liste des utilisateurs</h1>
+  <div layout:fragment="content">
+    <h1>Liste des utilisateurs</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Prénom</th>
-            <th>Nom</th>
-            <th>Date d'inscription</th>
-            <th>Email</th>
-            <th>Pseudo</th>
-            <th>Téléphone</th>
-          </tr>
-        </thead>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-lg-1">Prénom</th>
+          <th class="col-lg-1">Nom</th>
+          <th class="col-lg-2">Date d'inscription</th>
+          <th class="col-lg-2">Email</th>
+          <th class="col-lg-1">Pseudo</th>
+          <th class="col-lg-2">Téléphone</th>
+          <th class="col-lg-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
         <tr th:each="user : ${users}">
           <td th:text="${user.firstName}"></td>
           <td th:text="${user.lastName}"></td>
@@ -31,13 +33,15 @@
             <a th:href="@{'/users/update?id=' + ${user.id}}"
               ><i class="far fa-edit"></i
             ></a>
-          </td>
-          <td>
-            <a style="color: rgb(255, 0, 0);" th:href="@{users/delete/{id}(id=${user.id})}">
+            <a
+              style="color: rgb(255, 0, 0)"
+              th:href="@{users/delete/{id}(id=${user.id})}"
+            >
               <i class="far fa-trash-alt"></i>
             </a>
           </td>
         </tr>
-      </table>
-    </div>
+      </tbody>
+    </table>
+  </div>
 </html>

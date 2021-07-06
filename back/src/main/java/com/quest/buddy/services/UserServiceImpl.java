@@ -1,8 +1,8 @@
 package com.quest.buddy.services;
 
-
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("UserService")
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -24,12 +24,25 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void create(UserDto userDto) {
-        userRepository.save(userDto.toSource());
+        User user = userDto.toSource();
+        if (exist(user.getId())) {
+            errorService.AddError("User", "User already exist");
+        } else {
+            userRepository.save(user);
+        }
     }
 
     @Override
     public void remove(Long id) {
-        userRepository.deleteById(id);
+        if(exist(id)){
+            try {
+                userRepository.deleteById(id);
+            } catch (Exception e) {
+                errorService.AddError("User", "Error deleting user with id " + id );
+            }
+        } else {
+            errorService.AddError("User", "No user with id " + id + " to remove" );
+        }
     }
 
     @Override
@@ -40,8 +53,12 @@ public class UserServiceImpl implements UserService{
         user.setLastName(userDto.getLastName());
         user.setPhone(userDto.getPhone());
         user.setPseudonym(userDto.getPseudonym());
-      
-        userRepository.save(user);
+        user.setDescription(userDto.getDescription());
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            errorService.AddError("User", "Error updating " + user.getFullName() );
+        }
     }
 
     @Override
@@ -61,19 +78,32 @@ public class UserServiceImpl implements UserService{
 
         return user.toDto();
     }
+
     public User findByUserId(Long id) {
         User user = userRepository.findById(id).orElse(null);
 
         return user;
     }
-    public HashMap<String,String> getErrors(){
+
+    public HashMap<String, String> getErrors() {
         return errorService.getErrors();
     }
 
-    public static Iterable<UserDto> toListDto(Iterable<User> users ){
-        List<UserDto> usersDto=StreamSupport.stream(users.spliterator(), false)
-        .map(user ->user.toDto())
-        .collect(Collectors.toList());
+    public boolean exist(Long id) {
+
+        Optional<User> userExist = null;
+        try {
+            userExist = userRepository.findById(id);
+        } catch (Exception e) {
+            errorService.AddError("User", "Error while finding user with id " + id);
+        }
+        return userExist.isPresent();
+
+    }
+
+    public static Iterable<UserDto> toListDto(Iterable<User> users) {
+        List<UserDto> usersDto = StreamSupport.stream(users.spliterator(), false).map(user -> user.toDto())
+                .collect(Collectors.toList());
 
         return usersDto;
     }

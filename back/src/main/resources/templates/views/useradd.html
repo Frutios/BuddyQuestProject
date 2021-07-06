@@ -12,22 +12,25 @@
       <p>Formulaire d'inscription</p>
       <form th:action="@{/users/add}" th:object="${user}" method="post">
         <label for="firstName">Prénom : </label>
-        <input type="text" name="firstName" id="firstName" />
+        <input type="text" name="firstName" id="firstName" minlength="2" maxlength="20" required />
 
         <label for="lastName">Nom : </label>
-        <input type="text" name="lastName" id="lastName" />
+        <input type="text" name="lastName" id="lastName" minlength="2" maxlength="20" required />
 
         <label for="email">Email : </label>
-        <input type="text" name="email" id="email" />
+        <input type="email" name="email" id="email" required />
 
         <label for="password">Mot de passe : </label>
-        <input type="text" name="password" id="password" />
+        <input type="text" name="password" id="password" minlength="8" required />
 
         <label for="pseudonym">Pseudo : </label>
-        <input type="text" name="pseudonym" id="pseudonym" />
+        <input type="text" name="pseudonym" id="pseudonym" minlength="4" maxlength="10" required />
 
         <label for="phone">Numéro de téléphone : </label>
-        <input type="text" name="phone" id="phone" />
+        <input type="text" name="phone" id="phone" minlength="10" maxlength="10" />
+
+        <label for="description">description : </label>
+        <textarea name="description" id="description" cols="40" rows="5" minlength="20" maxlength="250" required></textarea>
 
         <input type="submit" value="inscription" />
       </form>

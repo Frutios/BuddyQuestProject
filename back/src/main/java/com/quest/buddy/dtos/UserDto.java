@@ -18,6 +18,8 @@ public class UserDto implements BaseDto<User> {
     private String email;
     private LocalDateTime inscriptionDate;
     private String urlAvatar;
+    private String description;
+
 
     public UserDto() {
         LocalDate currentDate = LocalDate.now();
@@ -95,6 +97,14 @@ public class UserDto implements BaseDto<User> {
 
     public void setInscriptionDate(LocalDateTime inscriptionDate){
         this.inscriptionDate = inscriptionDate;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

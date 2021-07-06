@@ -1,9 +1,12 @@
 package com.quest.buddy.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.quest.buddy.dtos.UserDto;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
@@ -16,31 +19,44 @@ public class User implements BaseModel<UserDto> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "firstName", length = 20, nullable = false)
+    @Size(min = 2, max = 20)
+    @NotBlank(message = "Le prénom est obligatoire")
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(name = "lastName", length = 20, nullable = false)
+    @Size(min = 2, max = 20) 
+    @NotBlank(message = "Le nom est obligatoire")
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
     @Column(name = "inscriptionDate", nullable = false)
     private LocalDateTime inscriptionDate;
 
-    @Column(name = "email", length = 30, nullable = false)
+    @UniqueElements
+    @NotBlank(message = "L\'email est obligatoire")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", length = 30, nullable = false)
+    @Size(min = 8)
+    @NotBlank(message = "Mot de passe obligatoire")
+    @Column(name = "password", nullable = false)
     private String password;
 
+    @Size(min = 4, max = 10)
+    @NotBlank(message = "Pseudo obligatoire")
     @Column(name = "pseudonym", length = 30, nullable = false)
     private String pseudonym;
 
-    @Column(name = "phone", length = 10)
+    @Size(min = 10, max = 10)
+    @Column(name = "phone")
     private String phone;
 
     @Column(name = "urlAvatar", length = 50)
     private String urlAvatar;
 
-    @Column(name = "description", length = 250)
+    @Size(min = 20, max = 250)
+    @NotBlank(message = "La description est obligatoire")
+    @Column(name = "description", nullable = false)
     private String description;
 
     @ManyToOne
