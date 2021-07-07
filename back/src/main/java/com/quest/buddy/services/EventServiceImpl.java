@@ -2,6 +2,7 @@ package com.quest.buddy.services;
 
 import com.quest.buddy.dtos.EventDto;
 import com.quest.buddy.models.Event;
+import com.quest.buddy.models.User;
 import com.quest.buddy.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,8 +94,29 @@ public class EventServiceImpl implements EventService {
         }
         return event;
     }
+    public Iterable<Event> findEventByUser(User user) {
 
-        public boolean existName(String title){
+        Iterable<Event> event = null;
+        try {
+            event = eventRepository.findEventByUser(user);
+        } catch (Exception e) {
+            errorService.AddError("Event", "Error getting Event" );
+        }
+
+        return event;
+    }
+    public Iterable<Event> findByTitleContaining(String title) {
+
+        Iterable<Event> listEvent = null;
+        try {
+            listEvent = eventRepository.findByTitleContaining(title);
+        } catch (Exception e) {
+            errorService.AddError("Event", "Error getting Event" );
+        }
+
+        return listEvent;
+    }
+    public boolean existName(String title){
 
             boolean existTitle = false;
             try {

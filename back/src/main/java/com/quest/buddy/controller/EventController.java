@@ -52,13 +52,14 @@ public class EventController {
         model.addAttribute("listEvent",listEvent);
         return "/views/event";
     }
-    @PostMapping("/")
-    public String resercheEvent(String filtre) {
-        return "redirect:/";
+
+    @GetMapping("/filtreEvent")
+    public String resercheEvent(String title,Model model) {
+        Iterable<Event> listEvent= eventService.findByTitleContaining(title);
+        model.addAttribute("listEvent",listEvent);
+        return "/views/event";
     }
-
-
-
+    
     @GetMapping("/eventadd")
     public String event(HttpServletRequest req,Model model) {
         HttpSession session = req.getSession();
@@ -72,6 +73,7 @@ public class EventController {
         model.addAttribute("listGender",listGender);
         return "/auth/eventadd";
     }
+
     @PostMapping("/eventadd")
         public String createEvent(HttpServletRequest req,@ModelAttribute EventDto eventDto) {
 
@@ -86,9 +88,117 @@ public class EventController {
             e.printStackTrace();
         }
 
-        return "redirect:/eventadd";
+        return "redirect:/myevent";
+
+    }
+    @GetMapping("/myevent")
+    public String displayMyEvent(HttpServletRequest req,Model model) {
+
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+
+        Iterable<Event> mylistEvent= eventService.findEventByUser(user);
+        model.addAttribute("mylistEvent",mylistEvent);
+        return "/auth/myevent";
+    }
+
+    @GetMapping("/eventDelete")
+    public String myEventDelete(HttpServletRequest req,Model model) {
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+        try{
+           //Trouver id
+            Long eventId = Long.parseLong(req.getParameter("id"));
+            //Delete event
+            eventService.remove(eventId);
+            //list event
+
+        }catch (Exception e){}
+
+        Iterable<Event> mylistEvent= eventService.findEventByUser(user);
+        model.addAttribute("mylistEvent",mylistEvent);
+
+        return "/auth/myevent";
+    }
+
+    @GetMapping("/eventModify")
+    public String myEventModify(HttpServletRequest req,Model model) {
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+        try{
+            //Trouver id
+            Long eventId = Long.parseLong(req.getParameter("id"));
+            Event event = eventService.findById(eventId);
+            //list outres
+            Iterable<MySport> listMySport= mySportService.findMySportByUserId(user.getId());
+            Iterable<Localisation> listLocalisation= localisationService.getAll();
+            List<Gender> listGender = sexeService.getAll();
+            model.addAttribute("listMySport",listMySport);
+            model.addAttribute("listLocalisation",listLocalisation);
+            model.addAttribute("listGender",listGender);
+            model.addAttribute("event",event);
+        }catch (Exception e){}
+        return "/auth/eventUpdate";
+    }
+
+    @PostMapping("/eventModify")
+    public String myEventModify(HttpServletRequest req,@ModelAttribute EventDto eventDto) {
+        Long eventId = Long.parseLong(req.getParameter("id"));
+        Event eventOrig = eventService.findById(eventId);
+        Event eventFinal = eventDto.modelMapperUpdate(eventDto,eventOrig);
+        try{
+            eventService.update(eventFinal);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return "redirect:/myevent";
 
     }
 
+    @GetMapping("/eventFinalize")
+    public String myEventFinalize(HttpServletRequest req,Model model) {
+
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+        try{
+            //Trouver id
+            Long eventId = Long.parseLong(req.getParameter("id"));
+            Event event = eventService.findById(eventId);
+            //Modify state= 2 finalize
+            event.setState((byte)2);
+            //update event
+            eventService.update(event);
+            //list event
+
+        }catch (Exception e){}
+
+        Iterable<Event> mylistEvent= eventService.findEventByUser(user);
+        model.addAttribute("mylistEvent",mylistEvent);
+
+        return "/auth/myevent";
+    }
+    @GetMapping("/eventActive")
+    public String myEventActive(HttpServletRequest req,Model model) {
+
+        HttpSession session = req.getSession();
+        User user = (User)session.getAttribute("user");
+        try{
+            //Trouver id
+            Long eventId = Long.parseLong(req.getParameter("id"));
+            Event event = eventService.findById(eventId);
+            //Modify state= 2 finalize
+            event.setState((byte)1);
+            //update event
+            eventService.update(event);
+            //list event
+
+        }catch (Exception e){}
+
+        Iterable<Event> mylistEvent= eventService.findEventByUser(user);
+        model.addAttribute("mylistEvent",mylistEvent);
+
+        return "/auth/myevent";
+    }
 
 }

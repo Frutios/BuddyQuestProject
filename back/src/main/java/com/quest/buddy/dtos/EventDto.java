@@ -5,13 +5,7 @@ import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.models.User;
-import org.hibernate.validator.constraints.Length;
 import org.modelmapper.ModelMapper;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -30,7 +24,7 @@ public class EventDto implements BaseDto<Event> {
     private String  ageMax;
     private String  ageMin;
     private Long userId;
-    @Length(min=0,max = 300)
+    //@Length(min=0,max = 300)
     private String description;
     private byte state;
     private Long  localisation_Id;
@@ -56,17 +50,13 @@ public class EventDto implements BaseDto<Event> {
         this.urlImage = urlImage;
     }
 
-    public String getNbPartnerMax() {
-        return nbPartnerMax;
-    }
 
-    public void setNbPartnerMax(String nbPartnerMax) { ;
+    public void setNbPartnerMax(String nbPartnerMax) {
         if(nbPartnerMax.trim().isEmpty()){
             this.nbPartnerMax = "0";
         }else{
             this.nbPartnerMax = nbPartnerMax;
         }
-
     }
 
     public Long getSportId() {
@@ -109,9 +99,7 @@ public class EventDto implements BaseDto<Event> {
         this.place = place;
     }
 
-    public byte getFlatGender() {
-        return flatGender;
-    }
+
 
     public void setFlatGender(byte flatGender) {
         this.flatGender = flatGender;
@@ -150,9 +138,6 @@ public class EventDto implements BaseDto<Event> {
         this.userId = userId;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
     public void setDescription(String description) {
         this.description = description.trim();
@@ -166,9 +151,6 @@ public class EventDto implements BaseDto<Event> {
         this.state = state;
     }
 
-    public Long getLocalisation_Id() {
-        return localisation_Id;
-    }
 
     public void setLocalisation_Id(Long localisation_Id) {
         this.localisation_Id = localisation_Id;
@@ -182,27 +164,38 @@ public class EventDto implements BaseDto<Event> {
     }
     public Event modelMapperCreate(EventDto eventDto){
         Event event = new Event();
-        Sport sport = new Sport();
         User user = new User();
+        event.setDateEventCreate(LocalDateTime.now());
+        user.setId(eventDto.userId);
+        event.setUser(user);
+        event = modelMapper(eventDto,event);
+        return event;
+    }
+    public Event modelMapperUpdate(EventDto eventDto,Event eventOri){
+        Event event = modelMapper(eventDto,eventOri);
+        return event;
+    }
+    private Event modelMapper(EventDto eventDto, Event event){
+        Sport sport = new Sport();
         Localisation localisation = new Localisation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         sport.setId(eventDto.sportId);
-        user.setId(eventDto.userId);
         localisation.setId(eventDto.localisation_Id);
         event.setTitle(eventDto.title);
         event.setNbPartnerMax(Integer.parseInt(eventDto.nbPartnerMax) );
         event.setSport(sport);
-        event.setDateEventCreate(LocalDateTime.now());
         event.setStartTime(LocalDateTime.parse(eventDto.startTime,formatter));
         event.setEndTime(LocalDateTime.parse(eventDto.endTime,formatter));
         event.setFlatGender(eventDto.flatGender);
         event.setAgeMin(Byte.parseByte(eventDto.ageMin));
         event.setAgeMax(Byte.parseByte(eventDto.ageMax));
-        event.setUser(user);
         event.setDescription(eventDto.description);
         event.setLocalisation(localisation);
         event.setPlace(eventDto.place);
         event.setUrlImage("");
+
+        event.setState((byte)1);
+        event.setDateEventModify(LocalDateTime.now());
        return event;
     }
 }
