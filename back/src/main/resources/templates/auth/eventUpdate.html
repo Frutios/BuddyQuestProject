@@ -21,7 +21,7 @@
                     <div class="col-md-8">
                         <div class="mb-3">
                             <label for='title' class="form-label"> Title: </label>
-                            <input type='text' class="form-control" name='title' id='title' required>
+                            <input type='text' class="form-control" name='title' id='title' th:value="${event.title}" enabled>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
@@ -29,26 +29,27 @@
                                 <select class="form-control" name="localisation_Id">
                                     <option th:each="loca : ${listLocalisation}"
                                             th:value="${loca.id}"
-                                            th:text="${loca.city}"  />
+                                            th:text="${loca.city}"
+                                            th:selected="${loca.id==event.localisation.id}"/>/>
                                 </select>
                             </div>
                             <div class="col-md-8">
                                 <label> Address: </label>
-                                <input type='text' class="form-control" name='place'>
+                                <input type='text' class="form-control" name='place' th:value="${event.place}">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
                                 <label> Number of participants: </label>
-                                <input type='text' class="form-control formt" name='nbPartnerMax' maxlength="2" onkeypress="return isNumber(event)" required />
+                                <input type='text' class="form-control formt" name='nbPartnerMax' maxlength="2" th:value="${event.nbPartnerMax}"  onkeypress="return isNumber(event)"  required />
                             </div>
                             <div class="col-md-4">
                                 <label>Date Star :</label>
-                                <input  type='text'  class="form-control" name="startTime" />
+                                <input  type='text'  class="form-control" name="startTime" th:value="${event.startTime}"/>
                             </div>
                             <div class="col-md-4">
                                 <label> End Time: </label>
-                                <input type='text' class="form-control" name='endTime' />
+                                <input type='text' class="form-control" name='endTime' th:value="${event.endTime}"/>
 
                             </div>
                         </div>
@@ -58,21 +59,24 @@
                                 <select class="form-control" required name="flatGender">
                                     <option th:each="gender : ${listGender}"
                                             th:value="${gender.id}"
-                                            th:text="${gender.name}"/>
+                                            th:text="${gender.name}"
+                                            th:selected="${gender.id==event.flatGender}"/>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <label> Age Min: </label>
-                                <input type='text' class="form-control" name='ageMin' maxlength="2" onkeypress="return isNumber(event)">
+                                <input type='text' class="form-control" name='ageMin' maxlength="2" th:value="${event.ageMin}" onkeypress="return isNumber(event)">
                             </div>
                             <div class="col-md-4">
                                 <label> Age Max: </label>
-                                <input type="text" class="form-control" name='ageMax' maxlength="2" onkeypress="return isNumber(event)">
+                                <input type="text" class="form-control" name='ageMax' maxlength="2" th:value="${event.ageMax}" onkeypress="return isNumber(event)">
                             </div>
                         </div>
 
                         <label> Detail: </label>
-                        <textarea class="form-control" name='description' rows="2" maxlength="500"></textarea>
+                        <textarea class="form-control" name='description' rows="2" maxlength="500" th:text="${event.description}">
+
+                        </textarea>
 
                         <!-- /.form group -->
                         <div class="text-right mt-3">
@@ -92,9 +96,11 @@
                             </div>-->
                         <div class="mb-3">
                             <label>Select Sport</label>
-                            <th:block th:each="mySport : ${listMySport}" >
+                            <th:block th:each="mySport : ${listMySport}">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="sportId" th:value="${mySport.sport.id}" required/>
+                                    <input class="form-check-input" type="radio" name="sportId"
+                                           th:value="${mySport.sport.id}"
+                                           th:checked="${mySport.sport.id==event.sport.id}" required/>
                                     <label class="form-check-label" th:text="${mySport.sport.name}"></label>
                                 </div>
                             </th:block>

@@ -6,7 +6,7 @@
         "startDate": moment().startOf('hour'),
         "drops": "up",
         locale: {
-            format: 'YYYY-MM-DD hh:mm'
+            format: 'YYYY-MM-DD HH:mm'
         }
     });
     $('input[name="endTime"]').daterangepicker({
@@ -16,7 +16,7 @@
         "startDate": moment().startOf('hour'),
         "drops": "up",
         locale: {
-            format: 'YYYY-MM-DD hh:mm'
+            format: 'YYYY-MM-DD HH:mm'
         }
     });
 
