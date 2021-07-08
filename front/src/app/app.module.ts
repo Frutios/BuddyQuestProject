@@ -6,6 +6,8 @@ import { UsersComponent } from './components/users/users.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventListComponent } from './composants/event-list/event-list.component';
 import { EventAddComponent } from './composants/event-add/event-add.component';
+import { AppRoutingModule } from './app-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { EventAddComponent } from './composants/event-add/event-add.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
