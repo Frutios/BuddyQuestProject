@@ -5,9 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.quest.buddy.dtos.UserDto;
-
 import org.modelmapper.ModelMapper;
-
 import java.time.LocalDateTime;
 
 @Entity
