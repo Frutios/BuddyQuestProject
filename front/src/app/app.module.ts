@@ -10,7 +10,7 @@ import { EventAddComponent } from './composants/event-add/event-add.component';
 @NgModule({
   declarations: [
     AppComponent,
-    UsersComponent
+    UsersComponent,
     EventListComponent,
     EventAddComponent
   ],
