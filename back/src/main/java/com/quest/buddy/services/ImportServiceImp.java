@@ -106,7 +106,16 @@ public class ImportServiceImp implements ImportService {
         tours.setLatitude(10);
         tours.setLongitude(30);
  
-        locali.create(romain);
+        localisationService.create(tours);
+
+        Localisation paris = new Localisation();
+ 
+        paris.setCity("Paris");
+        paris.setCountry("France");
+        paris.setLatitude(10);
+        paris.setLongitude(30);
+ 
+        localisationService.create(paris);
      }
 
     public void seedEvents() {
