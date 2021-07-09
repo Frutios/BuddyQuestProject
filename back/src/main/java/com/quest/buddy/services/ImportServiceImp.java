@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.quest.buddy.dtos.DecathlonSports;
 import com.quest.buddy.models.Event;
+import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.dtos.UserDto;
@@ -29,6 +30,9 @@ public class ImportServiceImp implements ImportService {
 
     @Autowired 
     MySportServiceImpl mySportService;
+
+    @Autowired
+    LocalisationServiceImpl localisationService;
 
 
     @Override
@@ -94,7 +98,16 @@ public class ImportServiceImp implements ImportService {
        userService.create(romain);
     }
 
-
+    public void seedLocalisations() {
+        Localisation tours = new Localisation();
+ 
+        tours.setCity("Tours");
+        tours.setCountry("France");
+        tours.setLatitude(10);
+        tours.setLongitude(30);
+ 
+        locali.create(romain);
+     }
 
     public void seedEvents() {
        Sport soccer = sportService.findById(1L);

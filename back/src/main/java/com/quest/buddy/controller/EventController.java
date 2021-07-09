@@ -1,7 +1,6 @@
 package com.quest.buddy.controller;
 import com.quest.buddy.dtos.EventDto;
 import com.quest.buddy.models.*;
-import com.quest.buddy.dtos.UserDto;
 
 import com.quest.buddy.services.*;
 import com.quest.buddy.models.Event;
@@ -16,12 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping({ "/backoffice/events"})
 public class EventController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class EventController {
     private UserServiceImpl userService;
 
 
-    @GetMapping("/")
+    @GetMapping
     public String displayEvent(HttpServletRequest req,Model model) {
 
         User user = userService.findByUserId(2l);
@@ -52,14 +53,13 @@ public class EventController {
         model.addAttribute("listEvent",listEvent);
         return "/views/event";
     }
-    @PostMapping("/")
+    @PostMapping
     public String resercheEvent(String filtre) {
         return "redirect:/";
     }
 
 
-
-    @GetMapping("/eventadd")
+    @GetMapping("/add")
     public String event(HttpServletRequest req,Model model) {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
@@ -72,7 +72,7 @@ public class EventController {
         model.addAttribute("listGender",listGender);
         return "/auth/eventadd";
     }
-    @PostMapping("/eventadd")
+    @PostMapping("/add")
         public String createEvent(HttpServletRequest req,@ModelAttribute EventDto eventDto) {
 
         HttpSession session = req.getSession();

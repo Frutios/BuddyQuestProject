@@ -17,7 +17,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3" method="post" action="#" th:action="@{/}">
+    <form class="form-inline ml-3" method="post" action="#" th:action="@{/backoffice}">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" name="filtre" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -69,7 +69,7 @@
                     <!-- Message End -->
                 </a>
                 <div class="dropdown-divider"></div>
-                <a th:href="@{'/message'}" class="dropdown-item dropdown-footer">See All Messages</a>
+                <a th:href="@{'/backoffice/message'}" class="dropdown-item dropdown-footer">See All Messages</a>
             </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -91,7 +91,7 @@
 
                 </a>
                 <div class="dropdown-divider"></div>
-                <a th:href="@{'/'}"  class="dropdown-item dropdown-footer">Voir les nouveaux événements</a>
+                <a th:href="@{'/backoffice/events'}"  class="dropdown-item dropdown-footer">Voir les nouveaux événements</a>
             </div>
         </li>
         <li class="nav-item dropdown">
@@ -157,19 +157,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{'/'}" class="nav-link">
+                            <a th:href="@{'/backoffice/events'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Liste des évènements</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{'/eventadd'}" class="nav-link">
+                            <a th:href="@{'/backoffice/events/eventadd'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Créer évènement</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{'/myevent'}"  class="nav-link">
+                            <a th:href="@{'/backoffice/events/myevent'}"  class="nav-link">
                                 <i class="far fa-smile nav-icon"></i>
                                 <p>Mes évènements</p>
                             </a>
@@ -186,13 +186,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{'/users/register'}" class="nav-link">
+                            <a th:href="@{'/backoffice/users/register'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Créer un utilisateur</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a th:href="@{'/users'}"  class="nav-link">
+                            <a th:href="@{'/backoffice/users'}"  class="nav-link">
                                 <i class="far fa-smile nav-icon"></i>
                                 <p>Liste des utilisateurs</p>
                             </a>
@@ -209,7 +209,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a th:href="@{'/sports'}" class="nav-link">
+                            <a th:href="@{'/backoffice/sports'}" class="nav-link">
                                 <i class="far fa-flag nav-icon"></i>
                                 <p>Liste des activités</p>
                             </a>

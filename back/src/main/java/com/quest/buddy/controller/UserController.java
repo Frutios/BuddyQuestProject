@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 
-@RequestMapping({ "/users"})
+@RequestMapping({ "/backoffice/users"})
 @Controller
 public class UserController {
 
