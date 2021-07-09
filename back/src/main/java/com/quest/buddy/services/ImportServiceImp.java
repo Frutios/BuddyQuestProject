@@ -91,9 +91,10 @@ public class ImportServiceImp implements ImportService {
        romain.setFirstName("Romain");
        romain.setLastName("Tortevois");
        romain.setEmail("tortevois.romain@gmail.com");
-       romain.setPassword("root");
-       romain.setPseudonym("rotor");
-       romain.setPhone("09080909");
+       romain.setPassword("aaaaaaaaaaaaaaaaaaaaaaa");
+       romain.setPseudonym("aaaaaaaaaaaaaaaaaa");
+       romain.setPhone("090909090909");
+       romain.setDescription("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
        userService.create(romain);
     }
@@ -102,7 +103,7 @@ public class ImportServiceImp implements ImportService {
         Localisation tours = new Localisation();
  
         tours.setCity("Tours");
-        tours.setCountry("France");
+        tours.setCountry("fr");
         tours.setLatitude(10);
         tours.setLongitude(30);
  
@@ -111,7 +112,7 @@ public class ImportServiceImp implements ImportService {
         Localisation paris = new Localisation();
  
         paris.setCity("Paris");
-        paris.setCountry("France");
+        paris.setCountry("fr");
         paris.setLatitude(10);
         paris.setLongitude(30);
  
@@ -166,6 +167,7 @@ public class ImportServiceImp implements ImportService {
 
     @Override
     public void seedDatabase() {
+        seedLocalisations();
         seedSports();
         seedUsers();
         seedEvents();  

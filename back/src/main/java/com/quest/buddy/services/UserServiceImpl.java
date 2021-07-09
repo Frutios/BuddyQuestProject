@@ -25,7 +25,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void create(UserDto userDto) {
         User user = userDto.toSource();
-        if (exist(user.getId())) {
+
+        if (user.getId() != null && exist(user.getId())) {
             errorService.AddError("User", "User already exist");
         } else {
             userRepository.save(user);

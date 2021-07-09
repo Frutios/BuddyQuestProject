@@ -63,6 +63,10 @@ public class User implements BaseModel<UserDto> {
     @JoinColumn(name = "localisationId", referencedColumnName = "id")
     private Localisation localisation;
 
+    public User(){
+        this.localisation = null;
+    }
+
     public Long getId() {
         return id;
     }
