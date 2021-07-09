@@ -1,7 +1,6 @@
 package com.quest.buddy.security;
 
 import static com.quest.buddy.security.ApplicationUserRole.ADMIN;
-import static com.quest.buddy.security.ApplicationUserRole.SUPERADMIN;
 import static com.quest.buddy.security.ApplicationUserRole.USER;
 
 import java.util.concurrent.TimeUnit;
