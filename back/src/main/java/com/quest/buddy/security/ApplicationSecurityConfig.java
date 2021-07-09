@@ -1,7 +1,6 @@
 package com.quest.buddy.security;
 
 import static com.quest.buddy.security.ApplicationUserRole.ADMIN;
-import static com.quest.buddy.security.ApplicationUserRole.SUPERADMIN;
 import static com.quest.buddy.security.ApplicationUserRole.USER;
 
 import java.util.concurrent.TimeUnit;
@@ -38,8 +37,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/backoffice/**","/api/database/*").hasRole(ADMIN.name())
         .anyRequest().authenticated().and()
         .formLogin()
-        .loginPage("/backoffice/login").permitAll()
-        .defaultSuccessUrl("/backoffice/events",true)
+        // .loginPage("/backoffice/login").permitAll()
+        // .defaultSuccessUrl("/backoffice/events",true)
         .and()
         .rememberMe()
         .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
