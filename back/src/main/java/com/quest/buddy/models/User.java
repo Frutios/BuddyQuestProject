@@ -5,10 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.quest.buddy.dtos.UserDto;
-
-import org.hibernate.validator.constraints.UniqueElements;
 import org.modelmapper.ModelMapper;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,7 +29,6 @@ public class User implements BaseModel<UserDto> {
     @Column(name = "inscriptionDate", nullable = false)
     private LocalDateTime inscriptionDate;
 
-    @UniqueElements
     @NotBlank(message = "L\'email est obligatoire")
     @Column(name = "email", nullable = false)
     private String email;

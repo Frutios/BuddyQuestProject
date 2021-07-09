@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import com.quest.buddy.services.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,8 +26,14 @@ public class UserController {
     public String addUser(@ModelAttribute("user") UserDto userModel,  Model model) {
         
         userService.create(userModel);
+        if(!userService.violations.isEmpty()){
+            model.addAttribute("user", userModel);
+            model.addAttribute("errors", userService.violations);
+            userService.violations.clear();
+        }
         
-        return "redirect:/users";
+        
+        return "views/useradd";
     }
 
     @GetMapping("/register")

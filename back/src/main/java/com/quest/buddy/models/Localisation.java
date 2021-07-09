@@ -39,7 +39,7 @@ public class Localisation {
     }
 
     public void setCountry(String country) {
-        this.country = country + "/" + this.city;
+        this.country = country;
     }
 
     public String getCity() {
@@ -64,6 +64,10 @@ public class Localisation {
 
     public void setLatitude(float latitude) {
         this.latitude = latitude;
+    }
+
+    public String getLocalisationFull(){
+       return this.country + "/" + this.city;
     }
 /*
     public List<User> getParticipants() {

@@ -13,7 +13,7 @@
 
     <div class="card mt-3">
         <div class="card-header text-left">
-            <h3 class="font-weight-bolder text-info text-gradient">Welcome back</h3>
+            <h3 class="font-weight-bolder text-info text-gradient">My Event</h3>
         </div>
         <div class="card-body">
             <form  action="#"  th:object="${eventDto}" method="post">
@@ -21,7 +21,7 @@
                     <div class="col-md-8">
                         <div class="mb-3">
                             <label for='title' class="form-label"> Title: </label>
-                            <input type='text' class="form-control" name='title' id='title'  placeholder="Password" required>
+                            <input type='text' class="form-control" name='title' id='title' required>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-4">
@@ -94,7 +94,7 @@
                             <label>Select Sport</label>
                             <th:block th:each="mySport : ${listMySport}" >
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="sport" th:value="${mySport.sport.id}" required/>
+                                    <input class="form-check-input" type="radio" name="sportId" th:value="${mySport.sport.id}" required/>
                                     <label class="form-check-label" th:text="${mySport.sport.name}"></label>
                                 </div>
                             </th:block>

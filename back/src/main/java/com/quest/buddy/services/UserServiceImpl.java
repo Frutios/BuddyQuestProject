@@ -3,8 +3,12 @@ package com.quest.buddy.services;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 
 import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.models.User;
@@ -22,27 +26,30 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private ErrorServiceImp errorService;
 
+    @Autowired
+    private Validator validator;
+
+    public Set<ConstraintViolation<User>> violations;
+
     @Override
     public void create(UserDto userDto) {
         User user = userDto.toSource();
-
-        if (user.getId() != null && exist(user.getId())) {
-            errorService.AddError("User", "User already exist");
-        } else {
+        violations = validator.validate(user);
+        if (violations.isEmpty()) {
             userRepository.save(user);
         }
     }
 
     @Override
     public void remove(Long id) {
-        if(exist(id)){
+        if (exist(id)) {
             try {
                 userRepository.deleteById(id);
             } catch (Exception e) {
-                errorService.AddError("User", "Error deleting user with id " + id );
+                errorService.AddError("UserRemove", "Error deleting user with id " + id);
             }
         } else {
-            errorService.AddError("User", "No user with id " + id + " to remove" );
+            errorService.AddError("UserNoExist", "No user with id " + id + " to remove");
         }
     }
 
@@ -58,7 +65,7 @@ public class UserServiceImpl implements UserService {
         try {
             userRepository.save(user);
         } catch (Exception e) {
-            errorService.AddError("User", "Error updating " + user.getFullName() );
+            errorService.AddError("UserUpdate", "Error updating " + user.getFullName());
         }
     }
 
@@ -68,7 +75,7 @@ public class UserServiceImpl implements UserService {
         try {
             users = userRepository.findAll();
         } catch (Exception e) {
-            errorService.AddError("User", "Error getting users");
+            errorService.AddError("UserAll", "Error getting users");
         }
         return toListDto(users);
     }
@@ -96,7 +103,10 @@ public class UserServiceImpl implements UserService {
         try {
             userExist = userRepository.findById(id);
         } catch (Exception e) {
-            errorService.AddError("User", "Error while finding user with id " + id);
+            errorService.AddError("UserById", "Error while finding user with id " + id);
+        }
+        if (userExist == null) {
+            return false;
         }
         return userExist.isPresent();
 

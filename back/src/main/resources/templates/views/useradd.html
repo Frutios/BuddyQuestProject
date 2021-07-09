@@ -18,21 +18,25 @@
         <input type="text" name="lastName" id="lastName" minlength="2" maxlength="20" required />
 
         <label for="email">Email : </label>
-        <input type="email" name="email" id="email" required />
+        <input type="email" name="email" id="email" th:field="*{email}" required/>
 
         <label for="password">Mot de passe : </label>
-        <input type="text" name="password" id="password" minlength="8" required />
+        <input type="text" name="password" id="password" minlength="8" required/>
 
         <label for="pseudonym">Pseudo : </label>
         <input type="text" name="pseudonym" id="pseudonym" minlength="4" maxlength="10" required />
 
         <label for="phone">Numéro de téléphone : </label>
-        <input type="text" name="phone" id="phone" minlength="10" maxlength="10" />
+        <input type="tel" name="phone" id="phone" minlength="10" maxlength="10" />
 
         <label for="description">description : </label>
-        <textarea name="description" id="description" cols="40" rows="5" minlength="20" maxlength="250" required></textarea>
+        <textarea name="description" id="description" cols="40" rows="5" minlength="20" maxlength="250" required ></textarea>
 
         <input type="submit" value="inscription" />
       </form>
+
+      <ul th:each=" error : ${errors}"> 
+        <li th:text="${error.message}"></li>
+      </ul>
     </div>
 </html>

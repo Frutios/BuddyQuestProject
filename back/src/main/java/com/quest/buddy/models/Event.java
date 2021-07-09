@@ -26,12 +26,11 @@ public class Event implements BaseModel<EventDto> {
     @Column(name = "nbPartnerMax")
     private int nbPartnerMax;
 
-    @ManyToOne
-    @JoinColumn(name = "sportId", referencedColumnName = "id")
-    private Sport sport;
-
     @Column(name = "dateEventCreate")
     private LocalDateTime dateEventCreate;
+
+    @Column(name = "dateEventModify")
+    private LocalDateTime dateEventModify;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "startTime")
@@ -52,15 +51,19 @@ public class Event implements BaseModel<EventDto> {
     @Column(name = "ageMin")
     private byte ageMin;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "id")
-    private User user;
-
     @Column(name = "description" , length = 300)
     private String description;
 
     @Column(name = "state")
     private byte state;
+
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "sportId", referencedColumnName = "id")
+    private Sport sport;
 
     @ManyToOne
     @JoinColumn(name = "localisation_Id", referencedColumnName = "id")
@@ -195,6 +198,14 @@ public class Event implements BaseModel<EventDto> {
 
     public void setDateEventCreate(LocalDateTime dateEventCreate) {
         this.dateEventCreate = dateEventCreate;
+    }
+
+    public LocalDateTime getDateEventModify() {
+        return dateEventModify;
+    }
+
+    public void setDateEventModify(LocalDateTime dateEventModify) {
+        this.dateEventModify = dateEventModify;
     }
 
     public String getInfoDateEventCreate(){
