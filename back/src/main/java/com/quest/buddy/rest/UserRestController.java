@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.services.UserServiceImpl;
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserRestController {

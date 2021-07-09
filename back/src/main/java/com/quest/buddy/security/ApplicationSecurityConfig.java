@@ -30,10 +30,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
         http
        // .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/","/backoffice", "login", "logout", "/static/**", "/dist/**", "/plugins/**", "/img/**","/css/**", "/js/**", "/plugin/**", "/build/**").permitAll()
+        .antMatchers("/","/backoffice", "/api/**", "login", "logout", "/static/**", "/dist/**", "/plugins/**", "/img/**","/css/**", "/js/**", "/plugin/**", "/build/**").permitAll()
         .antMatchers("/backoffice/**","/api/database/*").hasRole(ADMIN.name())
         .anyRequest().authenticated().and()
         .formLogin()
@@ -42,6 +43,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .rememberMe()
         .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
         .key("trèssecurisé");
+        
+        
     }
 
     @Override
