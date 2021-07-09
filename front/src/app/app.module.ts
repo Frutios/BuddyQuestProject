@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventListComponent } from './composants/event-list/event-list.component';
 import { EventAddComponent } from './composants/event-add/event-add.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     UsersComponent,
     EventListComponent,
-    EventAddComponent
+    EventAddComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

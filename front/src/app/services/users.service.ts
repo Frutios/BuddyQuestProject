@@ -16,4 +16,9 @@ export class UsersService {
   create(user : User): Observable<User>{
     return this.http.post<User>(this.userUrl, user)
   }
+
+  findById(userId: number): Observable<User>{
+    console.log("findById");
+    return this.http.get<User>(this.userUrl + "/" + userId)
+  }
 }
