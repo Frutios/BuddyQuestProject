@@ -11,12 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@RequestMapping({ "/backoffice/userevent"})
 public class UserEventController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class UserEventController {
     @Autowired
     private EventServiceImpl eventService;
 
-    @GetMapping("/userevent")
+    @GetMapping
     public String displayUserEvent(HttpServletRequest req, @RequestParam("id") Long id, Model model) {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
@@ -38,7 +40,7 @@ public class UserEventController {
         model.addAttribute("isExist",isExist);
         return "/auth/eventUser";
     }
-    @PostMapping("/userevent")
+    @PostMapping
     public String displayUserEvent(HttpServletRequest req,@ModelAttribute("event") Event event,Model model) {
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
