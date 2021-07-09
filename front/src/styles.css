@@ -1,1 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback';
+@import 'assets/dashboard/plugins/fontawesome-free/css/all.min.css';
+@import 'assets/dashboard/dist/css/adminlte.min.css';
