@@ -17,7 +17,7 @@ import java.util.HashMap;
 
 import com.quest.buddy.dtos.UserDto;
 import com.quest.buddy.services.UserServiceImpl;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserRestController {
 
@@ -46,7 +46,6 @@ public class UserRestController {
     }
 
     @PostMapping(value = "/api/users", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @CrossOrigin(origins = "http://localhost:4200")
     public ResponseEntity<UserDto> create(@RequestBody UserDto userToCreate) {
         userService.create(userToCreate);
         if(hasErrors()){
