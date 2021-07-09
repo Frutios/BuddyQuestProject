@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="layouts/_layout">
+
+<head>
+    <title>Sports</title>
+
+    <!-- CSS Resources/Static/Css/style.css-->
+    <link rel="stylesheet" th:href="@{/css/sports.css}" />
+</head>
+<div layout:fragment="content">
+    <div style="display: flex;justify-content: center;">
+        <form class="form-signin" method="post" action="/backoffice/login">
+            <h2>Connectez vous afin d'accéder à Buddy Quest</h2>
+            <p>
+                <label for="username">Utilisateur</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </p>
+            <p>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </p>
+            <p>
+                Se rappeler de moi ?
+                <input type="checkbox" id="remember-me" name="remember-me" required>
+            </p>
+            <button type="submit" >Connexion</button>
+        </form>
+       
+    </div>
+
+</div>
+
+</html>

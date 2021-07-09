@@ -1,0 +1,22 @@
+<p>Vos informations personnelles</p>
+      <form (ngSubmit)="onSubmit()" method="post" #userForm="ngForm">
+        <label for="firstName">Prénom : </label>
+        <input type="text" class="form-control" [(ngModel)]="user.firstName" name="firstName" id="firstName" minlength="2" maxlength="20" #firstName="ngModel" required />
+
+        <label for="lastName">Nom : </label>
+        <input type="text" [(ngModel)]="user.lastName" name="lastName" id="lastName" minlength="2" maxlength="20" required #lastName="ngModel" />
+
+        <label for="email">Email : </label>
+        <input type="email" [(ngModel)]="user.email" name="email" id="email" required #email="ngModel" />
+
+        <label for="pseudonym">Pseudo : </label>
+        <input type="text" [(ngModel)]="user.pseudonym" name="pseudonym" id="pseudonym" minlength="4" maxlength="10" required #pseudonym="ngModel"/>
+
+        <label for="phone">Numéro de téléphone : </label>
+        <input type="tel" [(ngModel)]="user.phone" name="phone" id="phone" minlength="10" maxlength="10" #phone="ngModel" />
+
+        <label for="description">description : </label>
+        <textarea [(ngModel)]="user.description" name="description" id="description" cols="40" rows="5" minlength="20" maxlength="250" required #description="ngModel"></textarea>
+
+        <input type="submit" value="inscription" [disabled]="!userForm.form.valid" />
+      </form>

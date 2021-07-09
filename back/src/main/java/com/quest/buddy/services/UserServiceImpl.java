@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void create(UserDto userDto) {
         User user = userDto.toSource();
-         violations = validator.validate(user);
+        violations = validator.validate(user);
         if (violations.isEmpty()) {
             userRepository.save(user);
         }

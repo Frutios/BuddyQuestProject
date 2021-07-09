@@ -1,5 +1,5 @@
 export class User {
-    id!: string;
+    id!: number;
     firstName!: string;
     lastName!: string;
     phone!: string;
@@ -9,4 +9,13 @@ export class User {
     inscritptionDate!: Date;
     urlAvatar!: string;
     description!: string;
+
+  get getId(){
+      return this.id;
+  }
+
+  public set setId(newId: number) {
+    
+    this.id = newId;
+}
 }

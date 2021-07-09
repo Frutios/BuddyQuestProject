@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.quest.buddy.dtos.DecathlonSports;
 import com.quest.buddy.models.Event;
+import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
 import com.quest.buddy.dtos.UserDto;
@@ -29,6 +30,9 @@ public class ImportServiceImp implements ImportService {
 
     @Autowired 
     MySportServiceImpl mySportService;
+
+    @Autowired
+    LocalisationServiceImpl localisationService;
 
 
     @Override
@@ -87,14 +91,33 @@ public class ImportServiceImp implements ImportService {
        romain.setFirstName("Romain");
        romain.setLastName("Tortevois");
        romain.setEmail("tortevois.romain@gmail.com");
-       romain.setPassword("root");
-       romain.setPseudonym("rotor");
-       romain.setPhone("09080909");
+       romain.setPassword("aaaaaaaaaaaaaaaaaaaaaaa");
+       romain.setPseudonym("aaaaaaaaaaaaaaaaaa");
+       romain.setPhone("090909090909");
+       romain.setDescription("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
        userService.create(romain);
     }
 
+    public void seedLocalisations() {
+        Localisation tours = new Localisation();
+ 
+        tours.setCity("Tours");
+        tours.setCountry("fr");
+        tours.setLatitude(10);
+        tours.setLongitude(30);
+ 
+        localisationService.create(tours);
 
+        Localisation paris = new Localisation();
+ 
+        paris.setCity("Paris");
+        paris.setCountry("fr");
+        paris.setLatitude(10);
+        paris.setLongitude(30);
+ 
+        localisationService.create(paris);
+     }
 
     public void seedEvents() {
        Sport soccer = sportService.findById(1L);
@@ -144,6 +167,7 @@ public class ImportServiceImp implements ImportService {
 
     @Override
     public void seedDatabase() {
+        seedLocalisations();
         seedSports();
         seedUsers();
         seedEvents();  
