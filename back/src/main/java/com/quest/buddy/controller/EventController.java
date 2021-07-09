@@ -89,7 +89,7 @@ public class EventController {
             e.printStackTrace();
         }
 
-        return "redirect:/myevent";
+        return "redirect:/backoffice/events/myevent";
 
     }
     @GetMapping("/myevent")
@@ -153,7 +153,7 @@ public class EventController {
             e.printStackTrace();
         }
 
-        return "redirect:/myevent";
+        return "redirect:/backoffice/events/myevent";
 
     }
 

@@ -58,7 +58,7 @@
                 cache: 'default',
             };
 
-            fetch(`/sports/${details}?id=${sportId}`, myInit)
+            fetch(`/backoffice/sports/${details}?id=${sportId}`, myInit)
                 .then(res => res.text())
                 .then(data => {
                     element.insertAdjacentHTML('beforeend',data)

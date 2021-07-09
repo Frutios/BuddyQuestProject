@@ -31,14 +31,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-        .csrf().disable()
+       // .csrf().disable()
         .authorizeRequests()
-        .antMatchers("/","/backoffice/", "login", "logout", "/static/**", "/dist/**", "/plugins/**", "/img/**","/css/**", "/js/**", "/plugin/**", "/build/**").permitAll()
+        .antMatchers("/","/backoffice", "login", "logout", "/static/**", "/dist/**", "/plugins/**", "/img/**","/css/**", "/js/**", "/plugin/**", "/build/**").permitAll()
         .antMatchers("/backoffice/**","/api/database/*").hasRole(ADMIN.name())
         .anyRequest().authenticated().and()
         .formLogin()
-        // .loginPage("/backoffice/login").permitAll()
-        // .defaultSuccessUrl("/backoffice/events",true)
+         .defaultSuccessUrl("/backoffice/events",true)
         .and()
         .rememberMe()
         .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))

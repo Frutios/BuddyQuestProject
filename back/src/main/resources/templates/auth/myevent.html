@@ -54,13 +54,13 @@
 
                             <div th:switch="${event.getState()}">
                                 <div th:case="'1'">
-                                    <a th:href="@{/eventModify(id=${event.id})}" class="card-link text-blue btn-sm">MODIDY</a>
-                                    <a th:href="@{/eventDelete(id=${event.id})}" class="card-link text-red btn-sm ">DELETE</a>
-                                    <a th:href="@{/eventFinalize(id=${event.id})}" class="card-link text-green btn-sm float-right">FINALIZE</a>
+                                    <a th:href="@{/backoffice/events/eventModify(id=${event.id})}" class="card-link text-blue btn-sm">MODIDY</a>
+                                    <a th:href="@{/backoffice/events/eventDelete(id=${event.id})}" class="card-link text-red btn-sm ">DELETE</a>
+                                    <a th:href="@{/backoffice/events/eventFinalize(id=${event.id})}" class="card-link text-green btn-sm float-right">FINALIZE</a>
 
                                 </div>
                                 <div th:case="'2'">
-                                    <a th:href="@{/eventActive(id=${event.id})}" class="card-link text-green btn-sm float-right">ACTIVATE</a>
+                                    <a th:href="@{/backoffice/events/eventActive(id=${event.id})}" class="card-link text-green btn-sm float-right">ACTIVATE</a>
                                 </div>
                             </div >
 

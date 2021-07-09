@@ -10,7 +10,7 @@
 </head>
 <div layout:fragment="content">
     <div class="sportMain">
-        <form action="#" th:action:"@{/sports}" method="GET" th:object="${filters}" class="filters">
+        <form action="#" th:action:"@{/backoffice/sports}" method="GET" th:object="${filters}" class="filters">
             <input class="form-control" type="text" th:field="*{name}" placeholder="Nom">
             <input class="form-control" type="text" th:field="*{description}" placeholder="Description">
             <button class="buttonSubmit" type="submit">Filtrer</button>
@@ -19,7 +19,7 @@
         <div class="sportsContainer">
             <div class="sportCard" th:each="sport : ${sports}">
                 <div class="sportCard-image " th:classappend="${sport.active} ? sportActive : sportInactive">
-                    <a th:href="@{/sports/details(id=${sport.id})}"
+                    <a th:href="@{/backoffice/sports/details(id=${sport.id})}"
                         style="display: flex;justify-content: center;align-items: center;">
                         <img th:if="${sport.icon != null}" th:src="${sport.icon}" />
                         <i th:if="${sport.icon == null}" class="fa fa-times fa-3x "></i>

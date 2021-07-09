@@ -62,6 +62,6 @@ public class UserEventController {
         }catch (Exception e){
 
         }
-        return "redirect:/userevent?id=" +event.getId();
+        return "redirect:/backoffice/userevent?id=" +event.getId();
     }
 }
