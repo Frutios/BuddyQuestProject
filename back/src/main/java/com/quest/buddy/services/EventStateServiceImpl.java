@@ -1,7 +1,6 @@
 package com.quest.buddy.services;
 
 import com.quest.buddy.models.EventState;
-import com.quest.buddy.models.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
