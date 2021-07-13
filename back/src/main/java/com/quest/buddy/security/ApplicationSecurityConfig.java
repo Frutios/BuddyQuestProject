@@ -32,7 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
         http
-       // .csrf().disable()
+        .csrf().disable()
         .authorizeRequests()
         .antMatchers("/","/backoffice", "/api/**", "login", "logout", "/static/**", "/dist/**", "/plugins/**", "/img/**","/css/**", "/js/**", "/plugin/**", "/build/**").permitAll()
         .antMatchers("/backoffice/**","/api/database/*").hasRole(ADMIN.name())
@@ -42,9 +42,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .rememberMe()
         .tokenValiditySeconds((int)TimeUnit.DAYS.toSeconds(21))
-        .key("trèssecurisé");
-        
-        
+        .key("trèssecurisé");    
     }
 
     @Override

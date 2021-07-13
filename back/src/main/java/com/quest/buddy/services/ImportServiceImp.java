@@ -1,20 +1,32 @@
 package com.quest.buddy.services;
 
+
+import java.io.InputStreamReader;
+import java.io.Reader;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Random;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.quest.buddy.dtos.City;
 import com.quest.buddy.dtos.DecathlonSports;
+import com.quest.buddy.dtos.FakeUsers;
 import com.quest.buddy.models.Event;
 import com.quest.buddy.models.Localisation;
 import com.quest.buddy.models.MySport;
 import com.quest.buddy.models.Sport;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 import com.quest.buddy.dtos.UserDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 
 @Service("ImportService")
 public class ImportServiceImp implements ImportService {
@@ -35,7 +47,7 @@ public class ImportServiceImp implements ImportService {
     LocalisationServiceImpl localisationService;
 
 
-    @Override
+
     public void importDecathlon(DecathlonSports sports) {
         
         sports.getData().forEach(decathlonSport -> {
@@ -46,6 +58,26 @@ public class ImportServiceImp implements ImportService {
             newSport.setIcon(decathlonSport.getAttributes().getIcon());
 
             sportService.create(newSport);
+            
+        });
+
+    }
+
+    public void importFakeUsers(FakeUsers fakeUsers) {
+        Lorem lorem = LoremIpsum.getInstance();
+        fakeUsers.getResults().forEach(fakeUser -> {
+            UserDto userDto = new UserDto();
+
+            userDto.setDescription(lorem.getWords(5, 10));
+            userDto.setEmail(fakeUser.getEmail());
+            userDto.setPassword(fakeUser.getEmail());
+            userDto.setFirstName(fakeUser.getName().getFirst());
+            userDto.setLastName(fakeUser.getName().getLast());
+            userDto.setPhone(fakeUser.getPhone().replace("-", "").replace(" ", ""));
+            userDto.setUserName(fakeUser.getName().getFirst() + fakeUser.getName().getLast());
+            userDto.setPseudonym(fakeUser.getName().getFirst());
+            
+            userService.create(userDto);
             
         });
 
@@ -68,8 +100,6 @@ public class ImportServiceImp implements ImportService {
         romainsoccer.setLevel(30L);
         mySportService.create(romainBasketBall);
 
-
-
     }
 
     public void seedSports() {
@@ -86,83 +116,87 @@ public class ImportServiceImp implements ImportService {
     }
 
     public void seedUsers() {
-       UserDto romain = new UserDto();
+       
+        final String uri = "https://randomuser.me/api/?results=1000";
 
-       romain.setFirstName("Romain");
-       romain.setLastName("Tortevois");
-       romain.setEmail("tortevois.romain@gmail.com");
-       romain.setPassword("aaaaaaaaaaaaaaaaaaaaaaa");
-       romain.setPseudonym("aaaaaaaaaaaaaaaaaa");
-       romain.setPhone("090909090909");
-       romain.setDescription("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        RestTemplate restTemplate = new RestTemplate();
+        String jsonData = restTemplate.getForObject(uri, String.class);
 
-       userService.create(romain);
+        Gson gson = new Gson(); // Or use new GsonBuilder().create();
+        FakeUsers fakeUsers = gson.fromJson(jsonData, new TypeToken<FakeUsers>(){}.getType());
+        
+        importFakeUsers(fakeUsers);
+        
     }
+    
+    public void seedLocalisations(){
+        try {
+            Reader reader =  new InputStreamReader(this.getClass()
+            .getResourceAsStream("/cities.json"));
+        
+            // convert JSON file to map
+            List<City> citys = new Gson().fromJson(reader, new TypeToken<List<City>>() {}.getType());
 
-    public void seedLocalisations() {
-        Localisation tours = new Localisation();
- 
-        tours.setCity("Tours");
-        tours.setCountry("fr");
-        tours.setLatitude(10);
-        tours.setLongitude(30);
- 
-        localisationService.create(tours);
+            citys.forEach(city->{
+                Localisation localisation = new Localisation();
+                localisation.setCity(city.name);
+                localisation.setCountry("France");
+                localisation.setLatitude(city.gps_lat);
+                localisation.setLongitude(city.gps_lng);
 
-        Localisation paris = new Localisation();
- 
-        paris.setCity("Paris");
-        paris.setCountry("fr");
-        paris.setLatitude(10);
-        paris.setLongitude(30);
- 
-        localisationService.create(paris);
+                localisationService.create(localisation);
+            });
+        
+            // close reader
+            reader.close();
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
      }
 
+    private int getRandomForEntity(int low, int high){
+        Random entityRandom = new Random();
+        int result = entityRandom.nextInt(high-low) + low;
+        return result;
+    }
+
+    private void generateFakeEvent(){
+        Lorem lorem = LoremIpsum.getInstance();
+
+        var sportId = getRandomForEntity(1,693);
+        Sport sport = sportService.findById((long) sportId);
+        var userId = getRandomForEntity(1,945);
+        UserDto user = userService.findById((long)userId);
+
+        var localisationId = getRandomForEntity(1,34000);
+        Localisation localisation = localisationService.findById((long)localisationId);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDateTime dateDebut = LocalDateTime.of(currentDate, currentTime);
+        LocalDateTime endDate = LocalDateTime.of(currentDate, currentTime).plusHours(5);
+
+        Event event = new Event();
+        event.setAgeMax((byte) 99);
+        event.setAgeMin((byte) 18);
+        event.setDescription(lorem.getWords(5,10));
+        event.setNbPartnerMax(10);
+        event.setSport(sport);
+        event.setDateEventCreate(dateDebut);
+        event.setEndTime(endDate);
+        event.setLocalisation(localisation);
+        event.setPlace(lorem.getWords(4));
+        event.setTitle(lorem.getWords(4));
+        event.setStartTime(dateDebut);
+        event.setUser(user.toSource());   
+        eventService.create(event);
+    }
+
     public void seedEvents() {
-       Sport soccer = sportService.findById(1L);
-       Sport basketBall = sportService.findById(2L);
-       UserDto romain = userService.findById(1L);
-
-       LocalDate currentDate = LocalDate.now();
-       LocalTime currentTime = LocalTime.now();
-       LocalDateTime dateDebut = LocalDateTime.of(currentDate, currentTime);
-
-       Event soccerBarman = new Event();
-       soccerBarman.setAgeMax((byte) 99);
-       soccerBarman.setAgeMin((byte) 18);
-       soccerBarman.setDescription("Les barmans de la place plume sont invités à un soccer géant!");
-       soccerBarman.setNbPartnerMax(10);
-       soccerBarman.setSport(soccer);
-       soccerBarman.setPlace("Place plume");
-       soccerBarman.setTitle("Match de foot des barmans");
-       soccerBarman.setStartTime(dateDebut);
-       soccerBarman.setUser(romain.toSource());   
-       eventService.create(soccerBarman);
-
-       Event soccerBoss = new Event();
-       soccerBoss.setAgeMax((byte) 99);
-       soccerBoss.setAgeMin((byte) 18);
-       soccerBoss.setDescription("Les patrons de bars se retrouvent place plume pour savoir qui a la plus grosse");
-       soccerBoss.setNbPartnerMax(10);
-       soccerBoss.setSport(soccer);
-       soccerBoss.setPlace("Place plume");
-       soccerBoss.setTitle("Match de foot des patrons");
-       soccerBoss.setStartTime(dateDebut);
-       soccerBoss.setUser(romain.toSource());   
-       eventService.create(soccerBoss);
-
-       Event nbaATours = new Event();
-       nbaATours.setAgeMax((byte) 99);
-       nbaATours.setAgeMin((byte) 18);
-       nbaATours.setDescription("Les joueurs NBA débarquent à Tours, viens montrer ton skill");
-       nbaATours.setNbPartnerMax(10);
-       nbaATours.setSport(basketBall);
-       nbaATours.setPlace("Tours Nord");
-       nbaATours.setTitle("Viens jouer avec des joueurs de NBA");
-       nbaATours.setStartTime(dateDebut);
-       nbaATours.setUser(romain.toSource());   
-       eventService.create(nbaATours);
+        for(int i = 0; i <1000; i++){
+            generateFakeEvent();
+        }
     }
 
     @Override

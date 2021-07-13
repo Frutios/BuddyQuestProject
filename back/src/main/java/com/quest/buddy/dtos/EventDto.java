@@ -121,6 +121,10 @@ public class EventDto implements BaseDto<Event> {
         return ageMin;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setAgeMin(String ageMin) {
         if(ageMin.trim().isEmpty()){
             this.ageMin ="0";

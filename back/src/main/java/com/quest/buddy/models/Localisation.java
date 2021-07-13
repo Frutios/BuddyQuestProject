@@ -13,14 +13,14 @@ public class Localisation {
     @Column(name = "country", length = 10, nullable = false)
     private String country;
 
-    @Column(name = "city", length = 10, nullable = false)
+    @Column(name = "city", length = 100, nullable = false)
     private String city;
 
     @Column(name = "longitude", nullable = false)
-    private float longitude;
+    private double longitude;
 
     @Column(name = "latitude", nullable = false)
-    private float latitude;
+    private double latitude;
 
 
     public Localisation() {
@@ -50,41 +50,23 @@ public class Localisation {
         this.city = city;
     }
 
-    public float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
     public String getLocalisationFull(){
        return this.country + "/" + this.city;
     }
-/*
-    public List<User> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
-    }
-
- */
 }

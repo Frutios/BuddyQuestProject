@@ -12,6 +12,7 @@ public class UserDto implements BaseDto<User> {
     private Long id;
     private String firstName;
     private String lastName;
+    private String userName;
     private String phone;
     private String pseudonym;
     private String password;
@@ -105,6 +106,14 @@ public class UserDto implements BaseDto<User> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override

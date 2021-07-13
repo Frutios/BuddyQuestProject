@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 
 @Controller
-@RequestMapping({ "/backoffice/"})
+@RequestMapping({ "/backoffice"})
 @CrossOrigin(origins = "http://localhost:4200")
 public class HomeController {
     @Autowired

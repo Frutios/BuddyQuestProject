@@ -36,7 +36,12 @@ public class UserServiceImpl implements UserService {
         User user = userDto.toSource();
         violations = validator.validate(user);
         if (violations.isEmpty()) {
-            userRepository.save(user);
+            try {
+                userRepository.save(user);
+            } catch (Exception e) {
+               System.out.println(e.toString());
+            }
+            
         }
     }
 
@@ -115,6 +120,19 @@ public class UserServiceImpl implements UserService {
     public static Iterable<UserDto> toListDto(Iterable<User> users) {
         List<UserDto> usersDto = StreamSupport.stream(users.spliterator(), false).map(user -> user.toDto())
                 .collect(Collectors.toList());
+
+        return usersDto;
+    }
+
+    @Override
+    public List<UserDto> findByUserName(String userName) {
+        List<User> users = userRepository.findByUserName(userName);
+        List<UserDto> usersDto = null;
+        if(!users.isEmpty()){
+            usersDto =  StreamSupport.stream(users.spliterator(), false)
+                  .map(user -> user.toDto())
+                  .collect(Collectors.toList());
+        }
 
         return usersDto;
     }

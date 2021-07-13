@@ -26,6 +26,9 @@ public class User implements BaseModel<UserDto> {
     @Column(name = "lastName", nullable = false)
     private String lastName;
 
+    @Column(name = "userName", nullable = false)
+    private String userName;
+
     @Column(name = "inscriptionDate", nullable = false)
     private LocalDateTime inscriptionDate;
 
@@ -38,12 +41,12 @@ public class User implements BaseModel<UserDto> {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Size(min = 4, max = 10)
+    @Size(min = 4, max = 30)
     @NotBlank(message = "Pseudo obligatoire")
     @Column(name = "pseudonym", length = 30, nullable = false)
     private String pseudonym;
 
-    @Size(min = 10, max = 10)
+    @Size(min = 4, max = 12)
     @Column(name = "phone")
     private String phone;
 
@@ -77,6 +80,14 @@ public class User implements BaseModel<UserDto> {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getLastName() {
