@@ -7,36 +7,70 @@
     <title>Inscrivez vous !</title>
   </head>
     <div layout:fragment="content">
-      <h1>Inscription</h1>
+      <div class="card mt-3">
+        <div class="card-header text-left">
+          <h3 class="font-weight-bolder text-info text-gradient">Inscription</h3>
+        </div>
+        <div class="card-body">
 
-      <p>Formulaire d'inscription</p>
+
+
       <form th:action="@{/users/add}" th:object="${user}" method="post">
-        <label for="firstName">Prénom : </label>
-        <input type="text" name="firstName" id="firstName" minlength="2" maxlength="20" required />
+        <div class="row">
+          <div class="col-md-8">
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="firstName"  class="form-label">Prénom : </label>
+                <input type="text" class="form-control" name="firstName" id="firstName" minlength="2" maxlength="20" required />
 
-        <label for="lastName">Nom : </label>
-        <input type="text" name="lastName" id="lastName" minlength="2" maxlength="20" required />
+              </div>
+              <div class="col-md-6">
+                <label for="lastName"  class="form-label">Nom : </label>
+                <input type="text" class="form-control" name="lastName" id="lastName" minlength="2" maxlength="20" required />
 
-        <label for="email">Email : </label>
-        <input type="email" name="email" id="email" th:field="*{email}" required/>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="email"  class="form-label">Email : </label>
+                <input type="email" class="form-control" name="email" id="email" th:field="*{email}" required/>
 
-        <label for="password">Mot de passe : </label>
-        <input type="text" name="password" id="password" minlength="8" required/>
+              </div>
+              <div class="col-md-6">
+                <label for="phone" class="form-label">Numéro de téléphone : </label>
+                <input type="tel" class="form-control" name="phone" id="phone" minlength="10" maxlength="10" />
 
-        <label for="pseudonym">Pseudo : </label>
-        <input type="text" name="pseudonym" id="pseudonym" minlength="4" maxlength="10" required />
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="pseudonym" class="form-label">Pseudo : </label>
+                <input type="text" class="form-control" name="pseudonym" id="pseudonym" minlength="4" maxlength="10" required />
+              </div>
+              <div class="col-md-6">
+                <label for="password" class="form-label">Mot de passe : </label>
+                <input type="password" class="form-control" name="password" id="password" minlength="8" required/>
+              </div>
+            </div>
 
-        <label for="phone">Numéro de téléphone : </label>
-        <input type="tel" name="phone" id="phone" minlength="10" maxlength="10" />
+         <label for="description" class="form-label">description : </label>
+         <textarea name="description" class="form-control" id="description" cols="40" rows="5" minlength="20" maxlength="250" required ></textarea>
 
-        <label for="description">description : </label>
-        <textarea name="description" id="description" cols="40" rows="5" minlength="20" maxlength="250" required ></textarea>
+            <div class="text-right mt-3">
+               <input type="submit" value="inscription" class="btn btn-md btn-primary border-radius-sm"/>
+            </div>
+          </div>
 
-        <input type="submit" value="inscription" />
+            <div class="col-md-4">
+              <label>Select Sport</label>
+            </div>
+
+        </div>
       </form>
-
+        </div>
       <ul th:each=" error : ${errors}"> 
         <li th:text="${error.message}"></li>
       </ul>
+    </div>
     </div>
 </html>

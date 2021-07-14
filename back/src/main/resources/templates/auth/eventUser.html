@@ -31,15 +31,19 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                        <form  action="#" th:object="${event}" method="post"  th:if="${isExist}">
-                                            <!--<a href="#" class="btn btn-md  bg-gradient-primary_flex  border-radius-xl mb-0 me-1 text-white" onclick="smoothToPricing('pricing-soft-ui')">Inscription</a>-->
-                                            <input class="btn btn-md  bg-gradient-danger_flex  border-radius-xl mb-0 me-1 text-white" type="submit" value="Désinscrire" />
-                                        </form>
+                                    <div th:switch="${event.getState()}">
+                                        <div th:case="'1'">
+                                            <form  action="#" th:object="${event}" method="post"  th:if="${isExist}">
+                                                <!--<a href="#" class="btn btn-md  bg-gradient-primary_flex  border-radius-xl mb-0 me-1 text-white" onclick="smoothToPricing('pricing-soft-ui')">Inscription</a>-->
+                                                <input class="btn btn-md  bg-gradient-danger_flex  border-radius-xl mb-0 me-1 text-white" type="submit" value="Désinscrire" />
+                                            </form>
 
                                             <form  action="#" th:object="${event}" method="post" th:unless="${isExist}">
                                             <!--<a href="#" class="btn btn-md  bg-gradient-primary_flex  border-radius-xl mb-0 me-1 text-white" onclick="smoothToPricing('pricing-soft-ui')">Inscription</a>-->
                                                 <input class="btn btn-md  bg-gradient-success_flex  border-radius-xl mb-0 me-1 text-white" type="submit" value="Inscription" />
                                             </form>
+                                        </div>
+                                    </div>
                                  </div>
 
                             </div>

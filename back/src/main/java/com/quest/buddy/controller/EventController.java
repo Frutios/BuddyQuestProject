@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -42,14 +43,21 @@ public class EventController {
 
 
     @GetMapping
-    public String displayEvent(HttpServletRequest req,Model model) {
+    public String displayEvent(HttpServletRequest req,Model model,String title) {
 
         User user = userService.findByUserId(2l);
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
+        Iterable<Event> listEvent =new ArrayList<>();
+
+       //
+        if(title ==null){
+          listEvent= eventService.getAll();
+        }else{
+           listEvent= eventService.findByTitleContaining(title);
+        }
 
 
-        Iterable<Event> listEvent= eventService.getAll();
         model.addAttribute("listEvent",listEvent);
         return "/views/event";
     }
