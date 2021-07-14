@@ -1,4 +1,48 @@
-<ul>
-  <li  *ngFor="let g of listEvent | async">{{ g.title| uppercase }}</li>
-</ul>
 
+<div class="row" >
+  <!-- cart -->
+  <div class="col-lg-4"   *ngFor="let event of events">
+      <!--  <p class="text-muted" th:text="${event.sport.getId()}"/>-->
+      <div class="card card-primary card-outline">
+          <div class="card-header">
+              <a href="#" class="card-link text-purple text-left">
+                 <i class="fas fa-map-marked-alt">{{event.localisation.country}}</i>
+              </a>
+              <!--<a href="#" class="card-link text-fuchsia">
+                  <i class="fas fa-comments"></i>
+              </a>-->
+              <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" th:onclick="|removeCard('${event.id}')|">
+                      <i class="fas fa-times"></i>
+                  </button>
+              </div>
+
+          </div>
+          <div class="card-body">
+              <h3 class="card-title text-bold" >{{event.sport.name}}</h3><br>
+              <h4 class="card-title"> {{event.title}} </h4><br>
+
+              <div class="user-block">
+                  <img class="img-circle img-bordered-sm" src='assets{{event.user.urlAvatar}}' alt="user image">
+                 <span class="username"><a href="#">{{event.user.fullName}}"</a></span>
+                  <span class="description">{{event.infoDateEventCreate}}</span>
+              </div>
+              <p class="card-text" >{{event.description}} </p>
+              <p class="text-muted" >{{event.infoDateEvent}}"</p>
+              <a href="#" class="card-link">
+                  <i class="fas fa-heart mr-1 text-red"></i>
+                  67
+              </a>
+              <a href="#" style="margin-left:4.25rem">
+                  <small class="badge badge-warning">{{event.infoNroPartner}}</small>
+              </a>
+
+              <a href="@{/backoffice/userevent(id=${event.id})}" class="card-link text-fuchsia btn-sm float-right">JOIN--></a>
+          </div>
+      </div>
+  </div>
+
+</div>

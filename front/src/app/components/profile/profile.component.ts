@@ -9,18 +9,18 @@ import { User } from '../users/user';
 })
 export class ProfileComponent implements OnInit {
 
-  user: User = new User;
+ // user: User = new User;
   constructor(private userService: UsersService) { 
-    this.user.setId =1;
+  //  this.user.setId =1;
     console.log("Constructeur profile");
   }
 
   ngOnInit(): void {
     console.log("NgInit profile");
-    this.userService.findById(this.user.getId).subscribe(user => {
+  //  this.userService.findById(this.user.getId).subscribe(user => {
 
-      this.user = user
-    })
+  //    this.user = user
+  //  })
 
   }
 
