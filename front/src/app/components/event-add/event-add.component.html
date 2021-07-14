@@ -1,1 +1,8 @@
 <p>event-add works!</p>
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>title</label>
+    <input type="text" class="form-control" id="title" [(ngModel)]="event.title">
+  </div>
+
+</form>

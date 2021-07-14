@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
 import { Event } from 'src/app/models/event';
 import {EventService} from "../../services/event.service";
 @Component({
@@ -8,15 +7,17 @@ import {EventService} from "../../services/event.service";
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
-  listEvent:Observable<Event[]> | undefined;
+  events: Event[] | undefined;
 
-  reloadData(){
-    this.listEvent =this.eventService.getEventList();
+  getEvents(){
+    this.eventService.getEventList().subscribe(data=>{
+      this.events = data;
+    })
   }
   constructor(private eventService:EventService) { }
 
   ngOnInit(): void {
-    this.reloadData();
+    this.getEvents();
   }
 
 }
